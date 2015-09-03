@@ -1,0 +1,68 @@
+
+<div class="container">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">เพิ่มหมวดเอกสาร</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Category Name :</label>
+                    <div class="col-md-3">
+                        <input type="cate" class="form-control" ng-model="category.cate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input type="submit" class="btn btn-success" value="Save" ng-click="saveCategory()">
+                        <input type="submit" class="btn btn-warning" value="Clear" ng-click="clearData()">
+                    </div>
+                </div>
+            </form>
+        </div>
+         <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">หมวดเอกสารทั้งหมด</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>หมวดเอกสาร</td>
+                                    <td>Action</td>
+                                </tr>  
+                            </thead> 
+                            <tbody ng-repeat="sct in lodeCategory.content">
+                            <td>{{sct.cate}}</td>
+                            <td>
+                                <input type="submit" value="Edit" class="btn btn-info" ng-click="action(sct)">
+                                <input type="submit" value="Delete" class="btn btn-danger" ng-click="deleteCategory(sct)">
+                            </td>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+            </div>
+        </div>
+         <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+        </div>
+    </div>
+    <ul class="pager">
+        <li class="previous"><a href="#/home">หน้าหลัก</a></li>
+    </ul>
+</div>
+
+

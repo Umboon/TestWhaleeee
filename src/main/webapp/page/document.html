@@ -1,0 +1,96 @@
+
+<div class="container" style="margin-top: 50px">
+    <div class="row">
+        <div class="panel panel-danger">
+            <div class="panel-heading" >
+                <h3 class="panel-title">เพิ่มเอกสาร</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span class="necessary">*</span>วันที่เอกสารเข้า : </label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" ng-model="document.dateReceived">
+                            </div> 
+                            <label class="col-md-2 control-label"><span class="necessary">*</span>วันที่ปฏิบัติงาน : </label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" ng-model="document.dateWork">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">หน่วยงานที่ออกหนังสือ :</label>
+                            <div class="col-md-3">
+                                <input type="agencyDocReleased" class="form-control" ng-model="document.agencyDocReleased">
+                            </div>     
+                            <label class="col-md-2 control-label"><span class="necessary">*</span>คำค้น :</label>
+                            <div class="col-md-3">
+                                <input type="keyWord" class="form-control" ng-model="document.keyWord">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" ><span class="necessary">*</span>เลขที่หนังสือ :</label>
+                            <div class="col-md-3">
+                                <input type="bookNO" class="form-control" ng-model="document.bookNO">
+                            </div>
+                            <label class="col-md-2 control-label"><span class="necessary">*</span>หมวดงานเอกสาร :</label>
+                            <div class="col-md-3">
+                                <select class="form-control"ng-model="document.category" ng-options="cat.cate for cat in lodeCategory.content">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><span class="necessary">*</span>เรื่อง :</label>
+                            <div class="col-md-3">
+                                <input type="topic" class="form-control" ng-model="document.topic">
+                            </div>
+                            <label class="col-md-2 control-label">เรียน :</label>
+                            <div class="col-md-3">
+                                <input type="receiver" class="form-control" ng-model="document.receiver">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">คำอธิบาย :</label>
+                            <div class="col-md-3">
+                                <input type="note" class="form-control" ng-model="document.note">
+                            </div>
+                            <label class="col-md-2 control-label">สิทธิ์การเห็น :</label>
+                            <div class="col-md-3">
+                                <select class="form-control" ng-model="document.groupUser">
+                                    <option value="Public">สาธารณะ</option>
+                                    <option value="Teacher">อาจารย์</option>
+                                    <option value="Only me">เฉพาะฉัน</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icon-preview"><i class="mdi-editor-attach-file"></i>
+                                <label class="col-md-2 control-label"><span class="necessary">*</span>ไฟล์แนบ :</label>
+                                <div class="col-md-3">
+                                    <input type="file" class="form-control" ng-model="document.file">
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                <input value="save" type="submit" class="btn btn-info"ng-click="saveDocument()">
+
+                            </div>
+                        </div>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+        </div>
+
+
+    </div>
+</div>
+<ul class="pager">
+    <li class="previous"><a href="#/home">หน้าหลัก</a></li>
+</ul>
