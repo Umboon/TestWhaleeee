@@ -1,24 +1,8 @@
 <div class="container" style="margin-top: 50px">
+    <div class="panel panel-danger">
 
-    <form class="navbar-form navbar-left">
-        
-   <label class="control-label">Search By:</label>
-   <select ng-model="searchData.searchBy">
-        <option value="">วันที่เอกสารเข้า</option>
-        <option value="">วันที่ปฏิบัติงาน</option>
-        <option value="topic">ชื่อเรื่อง</option>
-        <option value="keyword">คำค้น</option>
-   </select> &nbsp;&nbsp;
-   <input type="text" class="form-control col-lg-8" ng-model="searchData.keyWord" placeholder="Search Keyword">
-   <input class="btn btn-info" type="submit" value="Search" ng-click="search()">
-    
-    </form>
-   
-</div>
-<div class="container">
-    <div class="panel panel-danger">     
         <div class="panel-heading" >
-            <h3 class="panel-title">เอกสารทั้งหมด</h3>
+            <h3 class="panel-title">ประวัติการอัพโหลดเอกสาร</h3>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -30,7 +14,6 @@
                                     <th>ลำดับ</th>
                                     <th>วันที่เอกสารเข้า</th>
                                     <th>วันที่ปฏิบัติงาน</th>
-                                    <th>คำค้น</th>
                                     <th>หมวดเอกสาร</th>
                                     <th>เรื่อง</th>   
                                     <th>ไฟล์แนบ</th>
@@ -39,7 +22,8 @@
                                 Dowload
                                 <i class="mdi-file-file-download"></i>
                             </div>
-                          
+                            </th>
+                            <th>รายละเอียด</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,12 +31,11 @@
                                     <td>{{dld.id}}</td>
                                     <td>{{dld.dateReceived}}</td>
                                     <td>{{dld.dateWork}}</td>
-                                    <td>{{dld.keyWord}}</td>
                                     <td>{{dld.category.cate}}</td>
                                     <td>{{dld.topic}}</td>
                                     <td>{{dld.file.name}}</td>
                                     <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
-                                   
+                                    <td><input type="submit" value="แสดงข้อมูล" ng-click="details(dld)"></td>
                                 </tr>
                             </tbody>
                         </table>

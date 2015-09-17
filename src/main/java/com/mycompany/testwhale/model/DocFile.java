@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "FILE")
-public class File implements Serializable{
+public class DocFile implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +28,7 @@ public class File implements Serializable{
     private String name;
     @Lob
     private byte[] content;
-    private String type;
+    private String mimeType;
 
     public Integer getId() {
         return id;
@@ -46,6 +46,9 @@ public class File implements Serializable{
         this.name = name;
     }
 
+   
+    
+
     public byte[] getContent() {
         return content;
     }
@@ -54,15 +57,17 @@ public class File implements Serializable{
         this.content = content;
     }
 
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
    
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+   
 
     @Override
     public int hashCode() {
@@ -79,7 +84,7 @@ public class File implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final File other = (File) obj;
+        final DocFile other = (DocFile) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

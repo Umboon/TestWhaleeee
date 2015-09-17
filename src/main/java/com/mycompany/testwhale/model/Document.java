@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -29,8 +31,12 @@ public class Document implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    
+    @Temporal(TemporalType.DATE)
     private Date dateReceived;
+    @Temporal(TemporalType.DATE)
     private Date dateWork;
+    
     private String agencyDocReleased;
     private String keyWord;
     private String bookNO;
@@ -40,7 +46,7 @@ public class Document implements Serializable{
     private String groupUser;
     
     @OneToOne(cascade = CascadeType.ALL)
-    private File file;
+    private DocFile file;
     
     @ManyToOne
     private User user;
@@ -48,11 +54,11 @@ public class Document implements Serializable{
     @ManyToOne
     private Category category;
 
-    public File getFile() {
+    public DocFile getFile() {
         return file;
     }
 
-    public void setFile(File file) {
+    public void setFile(DocFile file) {
         this.file = file;
     }
 

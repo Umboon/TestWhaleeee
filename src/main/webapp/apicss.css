@@ -2,3 +2,6 @@
     position: relative;
     top: 2px;
 }
+select.ui-datepicker-year{
+    color: black;
+}

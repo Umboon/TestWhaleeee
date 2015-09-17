@@ -11,11 +11,11 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label"><span class="necessary">*</span>วันที่เอกสารเข้า : </label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" ng-model="document.dateReceived">
+                                <input type="text" class="form-control datepicker" ng-model="document.dateReceived">
                             </div> 
                             <label class="col-md-2 control-label"><span class="necessary">*</span>วันที่ปฏิบัติงาน : </label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" ng-model="document.dateWork">
+                                <input type="text" class="form-control datepicker" ng-model="document.dateWork">
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,7 +68,7 @@
                             <div class="icon-preview"><i class="mdi-editor-attach-file"></i>
                                 <label class="col-md-2 control-label"><span class="necessary">*</span>ไฟล์แนบ :</label>
                                 <div class="col-md-3">
-                                    <input type="file" class="form-control" ng-model="document.file">
+                                    <input type="file" class="form-control" file-model="file" custom-on-change ="saveFile">
                                 </div>
                             </div>
                         </div>   
@@ -94,3 +94,5 @@
 <ul class="pager">
     <li class="previous"><a href="#/home">หน้าหลัก</a></li>
 </ul>
+    
+

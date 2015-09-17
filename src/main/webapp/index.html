@@ -16,7 +16,11 @@
         <script src="js/category.js"></script>
         <script src="../js/checklist-model.js"></script>
         <script src="../js/user.js"></script>
-
+        <script src="js/form.js"></script>
+        <script src="js/report_upload.js"></script>
+        <script src="js/detail.js"></script>
+        <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+ 
         <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
@@ -28,6 +32,9 @@
         <link rel="stylesheet" href="material/css/material.min.css">
         <link rel="stylesheet" href="material/css/material-fullpalette.min.css">
         <link rel="stylesheet" href="apicss.css">
+        <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.min.css">
+        <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.theme.min.css">
 
 
     </head>
@@ -54,7 +61,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="">Search</a></li>
                         <li class="dropdown">
-                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown" >Category<b class="caret"></b></a>
+                            <a href="" data-target="#" ng-click="getCategory()" class="dropdown-toggle" data-toggle="dropdown" >Category<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>
                                 <li><a href="#" ng-repeat="cat in categorys.content">{{cat.cate}}</a></li>
@@ -65,7 +72,7 @@
                             <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Document<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#/document">เพิ่มเอกสาร</a></li>
-                                <li><a href="#/view_document">เอกสารทั้งหมด</a></li> 
+                                <li><a href="#/view_document" ng-click="getDocuments()">เอกสารทั้งหมด</a></li> 
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -75,7 +82,12 @@
                                 <li><a href="#/show_user">ผู้ใช้งานระบบ</a></li> 
                             </ul>
                         </li>
-                        <li><a href="#">Form</a></li>
+                        <li class="dropdown">
+                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">แบบฟอร์ม<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#/form">เพิ่มแบบฟอร์ม</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ข้อมูลระบบ<b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -83,9 +95,16 @@
                                 <li><a href="#">กราฟแสดงการเข้าใช้งานระบบ</a></li> 
                             </ul>
                         </li>
+                         <li class="dropdown">
+                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ประวัติการอัพโหลด<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#/report_up">บันทึกการอัพโหลดไฟล์</a></li>
+                                
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> sing up</a></li>
                         <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                     </ul>
                 </div>

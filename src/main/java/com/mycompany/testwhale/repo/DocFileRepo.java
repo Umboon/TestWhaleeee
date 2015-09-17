@@ -5,15 +5,13 @@
  */
 package com.mycompany.testwhale.repo;
 
-import com.mycompany.testwhale.model.Document;
-import java.io.Serializable;
+import com.mycompany.testwhale.model.DocFile;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  *
  * @author UMBOON
  */
-public interface DocumentRepo extends JpaRepository<Document, Integer>, JpaSpecificationExecutor<Document> {
+public interface DocFileRepo extends JpaRepository<DocFile, Integer>{
     
 }

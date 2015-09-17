@@ -20,6 +20,11 @@
     </parent>
     <dependencies>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>5.0.0.Final</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -38,6 +43,7 @@
             <artifactId>h2</artifactId>
             <version>1.4.187</version>
         </dependency>
+      
     </dependencies>
 
     <build>
