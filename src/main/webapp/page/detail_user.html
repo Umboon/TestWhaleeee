@@ -1,0 +1,78 @@
+
+<div class="container" >
+    <div class=" container row">
+        <div class="panel panel-danger">
+            <div class="panel-heading" >
+                <h3 class="panel-title">รายละเอียดผู้ใช้งานระบบ</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <h1> {{userService.detail_user}}</h1>
+                        <div class="form-group">
+                            <div class="icon-preview"><i class="mdi-social-group-add"></i>
+                                <label class="col-md-3 control-label "> UserName :</label>
+                                <label class="col-md-2 control-label">{{detailuser.userName}}</label>   
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label "> PassWord :</label>
+                            <label class="col-md-2 control-label">{{detailuser.passWord}}</label>   
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label "> Confirm PassWord :</label>
+                            <label class="col-md-2 control-label">{{detailuser.passWord}}</label>   
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label "> Email :</label>
+                            <label class="col-md-2 control-label">{{detailuser.email}}</label>   
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Status :</label>
+                            <label class="col-md-2 control-label">{{detailuser.status}}</label>
+
+                        </div>
+                    </div>
+
+                </form>
+
+
+                <input type="submit" value="แก้ไขข้อมูล" ng-click="updateUser(detailuser)">
+                <input type="submit" value="ลบ" data-toggle="modal" data-target="#complete-dialog">
+                <a href="#/show_user"><input value="ย้อนกลับ" type="submit"></a>
+            </div>
+
+
+            <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="complete-dialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ยืนยันการลบ</h4>
+            </div>
+            <div class="modal-body">
+                <br>
+                <br>
+                ผู้ใช้งานระบบ  : {{detailuser.userName}}
+                
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                <button class="btn btn-danger" ng-click="deleteUser()">ลบ</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

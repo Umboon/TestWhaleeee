@@ -28,7 +28,7 @@ public class DocumentSpec {
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 return null;
-                //return cb.or(cb.like(cb., keyword));
+               // return cb.or(cb.(root.get(Document_.dateReceived), new Date(),new Date()));
 
             }
         };

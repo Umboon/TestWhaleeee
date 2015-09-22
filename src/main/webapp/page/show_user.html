@@ -1,6 +1,4 @@
 
-
-
 <div class="container">
     <div class="panel panel-success">
         <div class="panel-heading">
@@ -17,6 +15,7 @@
                                     <th>NAME</th>
                                     <th>E-Mail</th>
                                     <th>STATUS</th>
+                                    <th>รายละเอียด</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,6 +24,7 @@
                                     <td>{{sur.userName}}</td>
                                     <td>{{sur.email}}</td>
                                     <td>{{sur.status}}</td>
+                                    <td><input type="submit" value="แสดงข้อมูล" ng-click="detailuser(sur)"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -43,7 +43,7 @@
 
 
 
-    <h3>Delete User</h3>
+<!--    <h3>Delete User</h3>
     <form class="form-inline">
         <div class="form-group">
             <label >Delete ID : </label>
@@ -51,7 +51,7 @@
             <input type="submit" class="bth btn-danger" value="Delete" ng-click="deleteUser()">
 
         </div>
-    </form>
+    </form>-->
     <br>
     <br>
     <!--    <a href="../index.html">Home</a>-->

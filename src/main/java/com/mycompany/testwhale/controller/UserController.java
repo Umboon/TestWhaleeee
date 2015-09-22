@@ -25,6 +25,8 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
     
+    private Integer userId;
+    
     @RequestMapping(value = "/saveuser",method = RequestMethod.POST)
     private void saveUser(@RequestBody User user){
         userRepo.save(user);
@@ -40,4 +42,14 @@ public class UserController {
         return userRepo.findAll(pageable);
     }
     
+    
+    @RequestMapping(value = "/getuserdetail", method = RequestMethod.GET)
+    private User getUserDetail(){
+        return userRepo.findOne(userId);
+    }
+    
+    @RequestMapping(value = "/setuserdetail", method = RequestMethod.POST)
+    private void setUserDetail(@RequestBody User user){
+        userId = user.getId();
+    }
 }

@@ -30,8 +30,9 @@ var app = angular.module('detail').controller('detailController', function (docu
     }
 
     $scope.deleteDocument = function () {
-        $http.post('/deletedocument', $scope.document).success(function (data) {
-
+        $('.modal-backdrop.in').css('display','none');
+        $http.post('/deletedocument', $scope.details).success(function (data) {
+             location.href = "#/report_up";
         });
     };
 

@@ -12,14 +12,14 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
     }
     ;
 
-    $scope.delUser = {};
-    $scope.deleteUser = function () {
-        $http.post('/deleteuser', $scope.delUser).success(function (data) {
-            getUser();
-        });
+   
+   
+
+
+ $scope.detailuser = function (dtu){
+       $http.post('/setuserdetail',dtu).success(function (data){
+           location.href = "#/detail_user";
+       });  
     };
-
-
-
 
 });

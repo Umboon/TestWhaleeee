@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> Confirm Password :</label>
                                 <div class="col-md-2">
-                                    <input type="password" class="form-control">
+                                    <input type="password" class="form-control" placeholder="Confirm PassWord" ng-model="password">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -49,22 +49,25 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-3 control-label"></label>
-                                <div class="col-md-2">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-3">
                                     <input value="Save" type="submit" class="btn btn-success" ng-click="saveUser()">
-
+                                    <input value="Clear" type="submit" class="btn btn-info" ng-click="clearUser()">
                                 </div>
                             </div>
+
+
                     </div>
                 </form>
+
             </div>
+
         </div>
-         <div class="progress progress-striped">
+        <div class="progress progress-striped">
             <div class="progress-bar progress-bar-success" style="width: 100%"></div>
         </div>
     </div>
+
     <ul class="pager">
         <li class="previous"><a href="#/home">หน้าหลัก</a></li>
     </ul>
-</div>
-

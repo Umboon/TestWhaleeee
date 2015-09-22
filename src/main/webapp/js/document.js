@@ -37,6 +37,10 @@ var app = angular.module('document').controller('documentController', function (
 
         });
     };
+    
+    $scope.clearDoc = function (){
+        $scope.document = {};
+    };
 
   
      $scope.saveFile = function () {

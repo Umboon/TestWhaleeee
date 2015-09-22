@@ -1,32 +1,39 @@
-angular.module('user',['checklist-model']);
-angular.module('user').controller('userController',function($scope,$http){
-    
-    $scope.user = {};
-    
-    
-    $scope.saveUser = function (){
-        $http.post('/saveuser',$scope.user).success(function (data){
+angular.module('user', ['checklist-model']);
+angular.module('user').controller('userController', function (userService, $scope, $http) {
+
+    $scope.user = userService.detail_user;
+    $scope.password = "";
+
+
+    $scope.saveUser = function () {
+        $http.post('/saveuser', $scope.user).success(function (data) {
             getUser();
-           // growl("Save Success","success","top");
-            
-        }).error(function (data){
-          //  growl("Save Error","danger","top");
+
+        }).error(function (data) {
+
         });
     };
-    
-    
-   
-    
-    
+
+
+    $scope.clearUser = function () {
+        $scope.user = {};
+        $scope.password = "";
+    };
+
+
+  
+
     $scope.users = {};
-    function getUser(){
-        $http.get('/getuser').success(function (data){
+    function getUser() {
+        $http.get('/getuser').success(function (data) {
             $scope.users = data;
         });
     }
-    
     getUser();
-    
+
+
+
+
 });
 
 

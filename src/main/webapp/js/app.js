@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'form', 'report_up', 'detail']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'form', 'report_up', 'detail', 'detail_user']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
@@ -53,13 +53,23 @@ angular.module('app').controller('homeController', function ($http, $scope) {
             .when('/detail', {
                 controller: 'detailController',
                 templateUrl: 'page/detail.html'
-            }).otherwise({
-        redirectTo: '/'
-    });
+            })
+            .when('/detail_user', {
+                controller: 'detailUserController',
+                templateUrl: 'page/detail_user.html'
+            })
+            
+            .otherwise({
+                redirectTo: '/'
+            });
 
-}).factory('documentService',function (){
+}).factory('documentService', function () {
     return {
-        detail:{}
+        detail: {}
+    };
+}).factory('userService', function () {
+    return {
+        detail_user: {}
     };
 });
 
