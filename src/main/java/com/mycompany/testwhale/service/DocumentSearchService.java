@@ -21,21 +21,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DocumentSearchService {
+
     @Autowired
-    private  DocumentRepo documentRepo;
-    
-    
-    public Page<Document> searchByTopic(String keyword,Pageable pageable){
-        Specifications<Document> specification = Specifications.where(DocumentSpec.topicLike("%"+keyword+"%"));
-        return documentRepo.findAll(specification,pageable);
+    private DocumentRepo documentRepo;
+
+    public Page<Document> searchByTopic(String keyword, Pageable pageable) {
+        Specifications<Document> specification = Specifications.where(DocumentSpec.topicLike("%" + keyword + "%"));
+        return documentRepo.findAll(specification, pageable);
+    }
+
+    public Page<Document> searchByKeyword(String keyword, Pageable pageable) {
+        Specifications<Document> specification = Specifications.where(DocumentSpec.keyWordLike("%" + keyword + "%"));
+        return documentRepo.findAll(specification, pageable);
+    }
+
+    public Page<Document> searchByFileName(String keyword, Pageable pageable) {
+        Specifications<Document> specification = Specifications.where(DocumentSpec.nameLike("%" + keyword + "%"));
+        return documentRepo.findAll(specification, pageable);
     }
     
-    public Page<Document> searchByKeyword(String keyword,Pageable pageable){
-        Specifications<Document> specification = Specifications.where(DocumentSpec.keyWordLike("%"+keyword+"%"));
-        return documentRepo.findAll(specification,pageable);
+     public Page<Document> searchByCateLike(String keyword, Pageable pageable) {
+        Specifications<Document> specification = Specifications.where(DocumentSpec.cateLike("%" + keyword + "%"));
+        return documentRepo.findAll(specification, pageable);
     }
-     
-   
-    
-    
+
 }

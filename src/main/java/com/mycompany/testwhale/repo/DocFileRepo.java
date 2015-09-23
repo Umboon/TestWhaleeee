@@ -7,12 +7,12 @@ package com.mycompany.testwhale.repo;
 
 import com.mycompany.testwhale.model.DocFile;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
 
 /**
  *
  * @author UMBOON
  */
-public interface DocFileRepo extends JpaRepository<DocFile, Integer>,JpaSpecificationExecutor<DocFile>{
+public interface DocFileRepo extends JpaRepository<DocFile, Integer>{
     
 }

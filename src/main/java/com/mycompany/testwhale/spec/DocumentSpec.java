@@ -5,10 +5,11 @@
  */
 package com.mycompany.testwhale.spec;
 
+import com.mycompany.testwhale.model.Category;
+import com.mycompany.testwhale.model.Category_;
+import com.mycompany.testwhale.model.DocFile_;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.model.Document_;
-import java.util.Date;
-import javafx.scene.chart.PieChart;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -57,6 +58,30 @@ public class DocumentSpec {
             }
         };
 
+    }
+    
+     public static Specification<Document> nameLike(final String keyword){
+        return new Specification<Document>() {
+
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                return cb.like(cb.upper(root.get(Document_.file).get(DocFile_.name)), keyword.toUpperCase());
+               
+            }
+        };
+        
+    }
+     
+      public static Specification<Document> cateLike(final String keyword){
+        return new Specification<Document>() {
+
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                return cb.like(cb.upper(root.get(Document_.category).get(Category_.cate)), keyword.toUpperCase());
+               
+            }
+        };
+        
     }
 
 }

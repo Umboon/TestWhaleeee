@@ -43,6 +43,7 @@ public class DocumentController {
     private DocumentSearchService documentSearchService;
 
     private Integer docId;
+    private String category;
 
     @RequestMapping(value = "/savedocument", method = RequestMethod.POST)
     private void saveDocument(@RequestBody Document document) {
@@ -102,7 +103,26 @@ public class DocumentController {
 
             document = documentSearchService.searchByTopic(keyword, pageable);
         }
+        if("fileName".equals(searchBy)){
+             document = documentSearchService.searchByFileName(keyword, pageable);
+        }
         return document;
 
     }
+      
+       @RequestMapping(value = "/searchbycategory" , method = RequestMethod.POST)
+       private void searchByCategory(@RequestBody SearchData category){
+           System.out.println("------------------------------>"+category.getKeyWord());
+       this.category = category.getKeyWord();
+       }
+    
+       @RequestMapping(value = "/getdocforcate" , method = RequestMethod.GET)
+       private Page<Document> getDocForCate(Pageable pageable){
+       return documentSearchService.searchByCateLike(category, pageable);
+       }
+       
+       @RequestMapping(value = "/gettotalrow" , method = RequestMethod.GET)
+       private Long getTotalRow(){
+       return documentRepo.count();
+       }
 }

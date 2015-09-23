@@ -5,13 +5,13 @@
  */
 package com.mycompany.testwhale.repo;
 
-import com.mycompany.testwhale.model.Form;
+import com.mycompany.testwhale.model.FormUp;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author UMBOON
  */
-public interface FormRepo extends JpaRepository<Form, Integer>{
+public interface FormUpRepo extends JpaRepository<FormUp, Integer>{
     
 }

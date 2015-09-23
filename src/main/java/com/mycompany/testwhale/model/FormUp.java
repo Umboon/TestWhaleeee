@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "FORM")
-public class Form implements Serializable{
+public class FormUp implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +27,7 @@ public class Form implements Serializable{
     private String nameForm;
     @Lob
     private byte[] content;
-    private String type;
+    private String mimeType;
 
     public Integer getId() {
         return id;
@@ -53,13 +53,15 @@ public class Form implements Serializable{
         this.content = content;
     }
 
-    public String getType() {
-        return type;
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
+
+    
     
     
     

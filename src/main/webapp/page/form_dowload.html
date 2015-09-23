@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="panel panel-info">
+
+        <div class="panel-heading" >
+            <h3 class="panel-title">แบบฟอร์มดาวน์โหลด</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+                                  
+                                    <th>ชื่อแบบฟอร์ม</th>   
+                                    
+                                    <th>
+                            <div class="icon-preview">
+                                Dowload
+                                <i class="mdi-file-file-download"></i>
+                            </div>
+                           
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="dld in documents.content">
+                                  
+                                    <td>{{dld.topic}}</td>
+                                    
+                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
+                                    <td><input type="submit" value="แสดงข้อมูล" ng-click="details(dld)"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#/home"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-info" style="width: 100%"></div>
+        </div>
+    </div>
+
+    <ul class="pager">
+        <li class="previous"><a href="#/home">หน้าหลัก</a></li>
+    </ul>
+</div>

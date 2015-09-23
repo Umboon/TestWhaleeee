@@ -1,42 +1,10 @@
-<div class="container">
 
-
-    <form class="navbar-form navbar-left">
-
-        <label class="control-label">Search By:</label>
-        <select ng-model="searchData.searchBy">
-            <option value="">วันที่เอกสารเข้า</option>
-            <option value="">วันที่ปฏิบัติงาน</option>
-            <option value="topic">ชื่อเรื่อง</option>
-            <option value="fileName">ชื่อไฟล์</option>
-            <option value="keyword">คำค้น</option>
-
-        </select> &nbsp;&nbsp;
-        <input type="text" class="form-control col-lg-8" ng-model="searchData.keyWord" placeholder="Search Keyword">
-        <input class="btn btn-info" type="submit" value="Search" ng-click="search()">
-
-    </form>
-
-</div>
 <div class="container">
     <div class="panel panel-danger">     
         <div class="panel-heading" >
-            <h3 class="panel-title">เอกสารทั้งหมด</h3>
+            <h3 class="panel-title">หมวดเอกสาร {{documents.content[0].category.cate}}</h3>
         </div>
         <div class="panel-body">
-            <div class="row">
-                <form class="navbar-form navbar-right">
-                    <label class="col-md-2 control-label" style="margin-top: 5px;">หน้า</label>
-                    <div class="col-md-3">
-                        <select class="form-control" ng-model="size" ng-click="selectSize()">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -55,7 +23,7 @@
                                 Dowload
                                 <i class="mdi-file-file-download"></i>
                             </div>
-
+                          
                             </tr>
                             </thead>
                             <tbody>
@@ -68,18 +36,20 @@
                                     <td>{{dld.topic}}</td>
                                     <td>{{dld.file.name}}</td>
                                     <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
-
+                                   
                                 </tr>
                             </tbody>
                         </table>
                         <a href="#/home"></a>
-                        <ul class="pagination pull-right" >
-                            <li id="firstPage"><a ng-click="firstPage()">«</a></li>
-                            <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
-                            <li><a>{{page+1}}</a></li>
-                            <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
-                            <li id="finalPage"><a ng-click="finalPage()">»</a></li>
-                        </ul>
+                        <ul class="pagination">
+    <li class="disabled"><a href="javascript:void(0)">«</a></li>
+    <li class="active"><a href="javascript:void(0)">1</a></li>
+    <li><a href="javascript:void(0)">2</a></li>
+    <li><a href="javascript:void(0)">3</a></li>
+    <li><a href="javascript:void(0)">4</a></li>
+    <li><a href="javascript:void(0)">5</a></li>
+    <li><a href="javascript:void(0)">»</a></li>
+</ul>
                     </div>
                 </div>
             </div>

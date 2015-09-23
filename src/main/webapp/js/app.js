@@ -1,8 +1,9 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'form', 'report_up', 'detail', 'detail_user']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
-
+    $scope.searchCategory = {};
+    
     function getCategorys() {
         $http.get('/getcategorys').success(function (data) {
             $scope.categorys = data;
@@ -15,7 +16,15 @@ angular.module('app').controller('homeController', function ($http, $scope) {
         getCategorys();
     };
 
-
+    $scope.clickCategory = function (searchCategory) {
+        $scope.searchCategory.keyWord = searchCategory.cate;
+        $scope.searchCategory.searchBy = "";
+        console.log($scope.searchCategory.keyWord);
+        console.log('click'+searchCategory.cate);
+        $http.post('/searchbycategory', $scope.searchCategory).success(function (data) {
+             location.href="#/docforcategory";
+        });
+    };
 
 }).config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -58,7 +67,19 @@ angular.module('app').controller('homeController', function ($http, $scope) {
                 controller: 'detailUserController',
                 templateUrl: 'page/detail_user.html'
             })
-            
+            .when('/docforcategory', {
+                controller: 'docforcateController',
+                templateUrl: 'page/docforcategory.html'
+            })
+//            .when('/form_up', {
+//                controller: 'formupController',
+//                templateUrl: 'page/form_up.html'
+//            })
+//             .when('/form_dowload', {
+//                controller: 'formdowloadController',
+//                templateUrl: 'page/form_dowload.html'
+//            })
+
             .otherwise({
                 redirectTo: '/'
             });

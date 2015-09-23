@@ -1,6 +1,6 @@
 
 <div class="container">
-    <div class="panel panel-warning">
+    <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">เพิ่มหมวดเอกสาร</h3>
         </div>
@@ -22,7 +22,7 @@
             </form>
         </div>
          <div class="progress progress-striped">
-            <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
         </div>
     </div>
    
@@ -47,8 +47,8 @@
                             <tbody ng-repeat="sct in lodeCategory.content">
                             <td>{{sct.cate}}</td>
                             <td>
-                                <input type="submit" value="Edit" class="btn btn-info" ng-click="action(sct)">
-                                <input type="submit" value="Delete" class="btn btn-danger" ng-click="deleteCategory(sct)">
+                                <input type="submit" value="แก้ไข" class="btn btn-success" ng-click="action(sct)">
+                                <input type="submit" value="ลบ" class="btn btn-danger" ng-click="clickDelete(sct)" data-toggle="modal" data-target="#complete-dialog">
                             </td>
                             </tbody>
                         </table>
@@ -66,3 +66,24 @@
 </div>
 
 
+<div id="complete-dialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ยืนยันการลบ</h4>
+            </div>
+            <div class="modal-body">
+                <br>
+                <br>
+                หมวดเอกสารชื่อ  : {{showDeleteCategory.cate}}
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                <button class="btn btn-danger" data-dismiss="modal" ng-click="deleteCategory(showDeleteCategory)">ลบ</button>
+            </div>
+        </div>
+    </div>
+
+</div>

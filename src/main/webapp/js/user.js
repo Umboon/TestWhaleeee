@@ -8,6 +8,7 @@ angular.module('user').controller('userController', function (userService, $scop
     $scope.saveUser = function () {
         $http.post('/saveuser', $scope.user).success(function (data) {
             getUser();
+           
 
         }).error(function (data) {
 
@@ -19,9 +20,16 @@ angular.module('user').controller('userController', function (userService, $scop
         $scope.user = {};
         $scope.password = "";
     };
+    
+    $scope.clear ={};
+     clearUser = function () {
+        $scope.user = {};
+        $scope.password = "";
+    };
 
 
-  
+
+
 
     $scope.users = {};
     function getUser() {

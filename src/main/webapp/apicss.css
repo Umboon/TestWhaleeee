@@ -5,3 +5,7 @@
 select.ui-datepicker-year{
     color: black;
 }
+
+#firstPage:hover,#prePage:hover,#nextPage:hover,#finalPage:hover{
+    cursor: pointer;
+}

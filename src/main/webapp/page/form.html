@@ -8,22 +8,22 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">ชื่อแบบฟอร์ม :</label>
                     <div class="col-md-3">
-                        <input type="cate" class="form-control" ng-model="category.cate">
+                        <input type="cate" class="form-control" ng-model="form.nameForm">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="icon-preview"><i class="mdi-editor-attach-file"></i>
                         <label class="col-md-2 control-label">ไฟล์แนบ :</label>
                         <div class="col-md-3">
-                            <input type="file" class="form-control" ng-model="category.cate">
+                            <input type="file" class="form-control" form-model="form" custom-on-change ="saveForm">
                         </div>
                     </div>
                 </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label"></label>
                         <div class="col-md-3">
-                            <input type="submit" class="btn btn-success" value="Save" ng-click="saveCategory()">
-                            <input type="submit" class="btn btn-warning" value="Clear" ng-click="clearData()">
+                            <input type="submit" class="btn btn-success" value="Save" ng-click="saveForm()">
+                            <input type="submit" class="btn btn-warning" value="Clear" ng-click="clearForm()">
                         </div>
                     </div>
             </form>
