@@ -5,16 +5,13 @@
  */
 package com.mycompany.testwhale.repo;
 
-import com.mycompany.testwhale.model.User;
+import com.mycompany.testwhale.model.FormTopic;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  *
  * @author UMBOON
  */
-public interface UserRepo extends JpaRepository<User, Integer>{
-    
-    public User findByUserName(String username);
+public interface FormTopicRepo extends JpaRepository<FormTopic, Integer>{
     
 }

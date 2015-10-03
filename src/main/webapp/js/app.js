@@ -1,8 +1,9 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory','formtopic_up','form_dowload']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
     $scope.searchCategory = {};
+    $scope.userLogin ={};
     
     function getCategorys() {
         $http.get('/getcategorys').success(function (data) {
@@ -25,6 +26,38 @@ angular.module('app').controller('homeController', function ($http, $scope) {
              location.href="#/docforcategory";
         });
     };
+
+    getUserLogin();
+    function getUserLogin (){
+        $http.get('/getuserlogin').success(function (data){
+            $scope.userLogin = data;
+            console.log(data);
+        });
+    }
+    
+    
+    
+    $scope.checkAdmin = function (){
+        if($scope.userLogin.status == 'Admin'){
+            return true;
+        }
+        else{
+            return false;
+        }
+        //console.log($scope.userLogin.status == 'Admin');
+    };
+    $scope.checkAdminOrTeacher = function (){
+        if(($scope.userLogin.status == 'Admin') || ($scope.userLogin.status == 'Teacher')){
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
+    
+    
+    
+    
 
 }).config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -71,15 +104,15 @@ angular.module('app').controller('homeController', function ($http, $scope) {
                 controller: 'docforcateController',
                 templateUrl: 'page/docforcategory.html'
             })
-//            .when('/form_up', {
-//                controller: 'formupController',
-//                templateUrl: 'page/form_up.html'
-//            })
-//             .when('/form_dowload', {
-//                controller: 'formdowloadController',
-//                templateUrl: 'page/form_dowload.html'
-//            })
-
+            .when('/formtopic_up', {
+                controller: 'formtopicupController',
+                templateUrl: 'page/formtopic_up.html'
+            })
+             .when('/form_dowload', {
+                controller: 'formdowloadController',
+                templateUrl: 'page/form_dowload.html'
+            })
+            
             .otherwise({
                 redirectTo: '/'
             });

@@ -11,6 +11,7 @@ import com.mycompany.testwhale.model.SearchData;
 import com.mycompany.testwhale.repo.DocFileRepo;
 import com.mycompany.testwhale.repo.DocumentRepo;
 import com.mycompany.testwhale.service.DocumentSearchService;
+import com.mycompany.testwhale.spec.DocumentSpec;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -124,5 +125,22 @@ public class DocumentController {
        @RequestMapping(value = "/gettotalrow" , method = RequestMethod.GET)
        private Long getTotalRow(){
        return documentRepo.count();
+       }
+       
+       @RequestMapping(value = "/countsearchdocument" , method = RequestMethod.POST)
+       private Long countSearch(@RequestBody SearchData searchData){
+       String keyword = searchData.getKeyWord();
+       String searchBy = searchData.getSearchBy();
+       Long count = null;
+        if ("keyword".equals(searchBy)) {
+            count = documentRepo.count(DocumentSpec.keyWordLike("%"+keyword+"%"));
+        }
+        if ("topic".equals(searchBy)) {
+            count = documentRepo.count(DocumentSpec.topicLike("%"+keyword+"%"));
+         }
+        if("fileName".equals(searchBy)){
+            count = documentRepo.count(DocumentSpec.topicLike("%"+keyword+"%"));
+        }
+       return count;
        }
 }

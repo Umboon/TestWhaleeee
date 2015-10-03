@@ -6,6 +6,8 @@
 package com.mycompany.testwhale.model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -22,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USER")
-public class User implements Serializable {
+public class User implements Serializable , UserDetails  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,10 +35,20 @@ public class User implements Serializable {
     private String passWord;
     private String email;
     private String status;
+    private boolean enable = true;
 
     @OneToMany(mappedBy = "user")
     private List<Document> documents;
 
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+    
+    
     public List<Document> getDocuments() {
         return documents;
     }
@@ -106,4 +120,41 @@ public class User implements Serializable {
         return true;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+     return Collections.emptySet();
+    
+    }
+
+    @Override
+    public String getPassword() {
+        return passWord;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+       return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enable;
+    }
+
+   
 }

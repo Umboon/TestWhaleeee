@@ -6,25 +6,50 @@ angular.module('user').controller('userController', function (userService, $scop
 
 
     $scope.saveUser = function () {
-        $http.post('/saveuser', $scope.user).success(function (data) {
-            getUser();
-           
+        if (checkPassword()) {
+            $http.post('/saveuser', $scope.user).success(function (data) {
+                getUser();
 
-        }).error(function (data) {
+            }).error(function (data) {
 
-        });
+            });
+        }
+        else {
+            console.log('password error');
+        }
     };
+
+    $scope.checkPassword = function () {
+        checkPassword();
+    };
+    function checkPassword() {
+        if (!!$scope.password && !!$scope.user.passWord){
+            if (($scope.password == $scope.user.passWord)) {
+                $('#confirm').removeClass('mdi-content-clear').addClass('mdi-action-done').css('color', 'green');
+                return true;
+            }
+            if ($scope.password != $scope.user.passWord) {
+                $('#confirm').removeClass('mdi-action-done').addClass('mdi-content-clear').css('color', 'red');
+                return false;
+            }
+        }
+        else{
+             $('#confirm').removeClass('mdi-content-clear , mdi-action-done');
+        }
+    }
 
 
     $scope.clearUser = function () {
         $scope.user = {};
         $scope.password = "";
+        checkPassword();
     };
-    
-    $scope.clear ={};
-     clearUser = function () {
+
+    $scope.clear = {};
+    clearUser = function () {
         $scope.user = {};
         $scope.password = "";
+        checkPassword();
     };
 
 

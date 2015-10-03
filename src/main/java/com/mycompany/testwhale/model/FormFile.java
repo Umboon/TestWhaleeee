@@ -6,6 +6,7 @@
 package com.mycompany.testwhale.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,13 +19,13 @@ import javax.persistence.Table;
  * @author UMBOON
  */
 @Entity
-@Table(name = "FORM")
-public class FormUp implements Serializable{
+@Table(name = "FORMFILE")
+public class FormFile implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String nameForm;
+ 
     @Lob
     private byte[] content;
     private String mimeType;
@@ -37,13 +38,7 @@ public class FormUp implements Serializable{
         this.id = id;
     }
 
-    public String getNameForm() {
-        return nameForm;
-    }
-
-    public void setNameForm(String nameForm) {
-        this.nameForm = nameForm;
-    }
+   
 
     public byte[] getContent() {
         return content;
@@ -59,6 +54,28 @@ public class FormUp implements Serializable{
 
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FormFile other = (FormFile) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     

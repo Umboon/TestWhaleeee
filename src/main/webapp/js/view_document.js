@@ -10,7 +10,8 @@ angular.module('view_document').controller('view_documentController', function (
     function getDocuments() {
         $http.get('/getdocuments', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
-            console.log($scope.documents);
+            //console.log($scope.documents);
+            getTotalRow();
         });
 
     }
@@ -26,33 +27,50 @@ angular.module('view_document').controller('view_documentController', function (
 
 
     $scope.search = function () {
-        $http.post('/searchdocument', $scope.searchData).success(function (data) {
+        search();
+    };
+    
+    function search(){
+         $http.post('/searchdocument', $scope.searchData , {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             if (!!data.content[0].id) {
                 console.log('true');
                 $scope.documents = data;
+                countSearch();
             }
             $scope.documents = data;
 
         });
-    };
+    }
+    
+    function countSearch(){
+        $http.post('/countsearchdocument',$scope.searchData).success(function (data){
+            totalRow = data;
+            console.log('total search'+data);
+            findPage();
+        });
+    }
 
     $scope.selectSize = function () {
-        getDocuments();
+       selectGetOrSearch();
         findPage();
     };
+    
+    function selectGetOrSearch(){
+        if(!!$scope.searchData.keyWord){
+            search();
+        }
+        else{
+            getDocuments();
+        }
+    }
 
-    getTotalRow();
+    
     function getTotalRow() {
         $http.get('/gettotalrow').success(function (data) {
             totalRow = data;
-            console.log('totalrow : ' + totalRow);
+           // console.log('totalrow : ' + totalRow);
             findPage();
-            if ($scope.page == 0) {
-                $('#prePage , #firstPage').addClass('disabled');
-            }
-            if ($scope.page == totalPage - 1) {
-                $('#nextPage , #finalPage').addClass('disabled');
-            }
+            console.log(totalPage+" "+$scope.page);
         });
     }
     ;
@@ -63,12 +81,21 @@ angular.module('view_document').controller('view_documentController', function (
         }
         totalPage = result;
         console.log(totalPage + 'totalPage');
-        console.log(totalRow);
+    }
+    
+    checkLoadPage();
+    function checkLoadPage(){
+        if(totalPage == 1){
+             $('#prePage , #firstPage , #nextPage , #finalPage').addClass('disabled');
+         }
+        if(totalPage != 1){
+            $('#prePage , #firstPage').addClass('disabled');
+        }
     }
 
     $scope.firstPage = function () {
         $scope.page = 0;
-        getDocuments();
+        selectGetOrSearch();
         $('#prePage , #firstPage').addClass('disabled');
         $('#nextPage , #finalPage').removeClass('disabled');
     };
@@ -76,28 +103,29 @@ angular.module('view_document').controller('view_documentController', function (
     $scope.prePage = function () {
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
-            getDocuments();
+           selectGetOrSearch();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-                $('#nextPage , #finalPage').removeClass('disabled');
-            }
+           }
+           $('#nextPage , #finalPage').removeClass('disabled');
         }
     };
 
     $scope.nextPage = function () {
         if (!$('#nextPage').hasClass('disabled')) {
             $scope.page++;
-            getDocuments();
+           selectGetOrSearch();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
-                $('#prePage , #firstPage').removeClass('disabled');
             }
+            console.log('remove');
+            $('#prePage , #firstPage').removeClass('disabled');
         }
     };
 
     $scope.finalPage = function () {
         $scope.page = totalPage - 1;
-        getDocuments();
+       selectGetOrSearch();
         $('#nextPage , #finalPage').addClass('disabled');
         $('#prePage , #firstPage').removeClass('disabled');
     };

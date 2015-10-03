@@ -7,9 +7,11 @@ package com.mycompany.testwhale.controller;
 
 import com.mycompany.testwhale.model.User;
 import com.mycompany.testwhale.repo.UserRepo;
+import javax.ws.rs.core.SecurityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,5 +53,16 @@ public class UserController {
     @RequestMapping(value = "/setuserdetail", method = RequestMethod.POST)
     private void setUserDetail(@RequestBody User user){
         userId = user.getId();
+    }
+    
+    @RequestMapping(value = "/getuserlogin", method = RequestMethod.GET)
+    private User getUserLogin(){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepo.findOne(user.getId());
+    } 
+    
+    @RequestMapping(value = "/gettotalrowuser",method = RequestMethod.GET)
+    private long getTotalRowUser(){
+        return userRepo.count();
     }
 }

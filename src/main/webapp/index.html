@@ -20,11 +20,12 @@
         <script src="js/detail.js"></script>
         <script src="js/detail_user.js"></script>
         <script src="js/docforcategory.js"></script>
-<!--        <script src="js/form_up.js"></script>
-        <script src="js/form_dowload.js"></script>-->
-   
+        <script src="js/formtopic_up.js"></script>
+        <script src="js/form_dowload.js"></script>
+
+
         <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
- 
+
         <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
@@ -44,81 +45,82 @@
     </head>
     <body class="bg-danger">      
 
-        <nav class="navbar navbar-inverse">
-            <div>
-                <marquee direction="left" scrollamount="4"><b>Document Management System </b></marquee>
-                
-            </div>
-      
-            <div class="navbar navbar-warning" ng-controller="homeController">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#/home">Home</a>
-                </div>
-               
-                <div class="navbar-collapse collapse navbar-warning-collapse">
+        <nav class="navbar navbar-invere" style="background: #03a9f4" ng-controller="homeController">
+           
+            <ul class="nav navbar-nav navbar-right">
+                <li><a><span style="margin-left: 20px;margin-right: 10px;">{{" ชื่อผู้ใช้ "+ userLogin.userName}}</span><span style="margin-left: 10px;margin-right: 20px;">{{" สถานะผู้ใช้ "+ userLogin.status}}</span></a></li>
+             </ul>
+        </nav>
 
-                    <ul class="nav navbar-nav">
-                    
-                        <li class="dropdown">
-                            <a href="" data-target="#" ng-click="getCategory()" class="dropdown-toggle" data-toggle="dropdown" >หมวดเอกสาร<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>
-                                <li><a href="#" ng-repeat="cat in categorys.content" ng-click="clickCategory(cat)">{{cat.cate}}</a></li>
 
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Document<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/document">เพิ่มเอกสาร</a></li>
-                                <li><a href="#/view_document" ng-click="getDocuments()">เอกสารทั้งหมด</a></li> 
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Authority<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/user">เพิ่มผู้ใช้งานระบบ</a></li>
-                                <li><a href="#/show_user">ผู้ใช้งานระบบ</a></li> 
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">แบบฟอร์ม<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/form">เพิ่มแบบฟอร์ม</a></li>
-                                 <li><a href="#/form_dowload">แบบฟอร์มดาวน์โหลด</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ข้อมูลระบบ<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">บันทึกการเข้าใช้งานระบบ</a></li>
-                                <li><a href="#">กราฟแสดงการเข้าใช้งานระบบ</a></li> 
-                            </ul>
-                        </li>
-                         <li class="dropdown">
-                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ประวัติการอัพโหลด<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/report_up">บันทึกการอัพโหลดไฟล์</a></li>
-                                
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> sing up</a></li>
-                        <li><a href="page/login.html"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                    </ul>
-                    
-                    
-          
+        <div class="navbar navbar-warning" style="margin-top: -20px;" ng-controller="homeController">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/home">Home</a>
             </div>
-            
+
+            <div class="navbar-collapse collapse navbar-warning-collapse">
+
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a href="" data-target="#" ng-click="getCategory()" class="dropdown-toggle" data-toggle="dropdown" >หมวดเอกสาร<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <!--                                <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>-->
+                            <li><a href="#" ng-repeat="cat in categorys.content" ng-click="clickCategory(cat)">{{cat.cate}}</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Document<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li ng-show="checkAdminOrTeacher()"><a href="#/document">เพิ่มเอกสาร</a></li>
+                            <li><a href="#/view_document" ng-click="getDocuments()">เอกสารทั้งหมด</a></li> 
+                        </ul>
+                    </li>
+                   
+                    <li class="dropdown">
+                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">แบบฟอร์ม<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <!--                                <li><a href="#/formtopic_up">เพิ่มแบบฟอร์ม</a></li>-->
+                            <li><a href="#/form_dowload">แบบฟอร์มดาวน์โหลด</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="dropdown" ng-show="checkAdmin()">
+                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ผู้ดูแลระบบ<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>
+                            <li><a href="#/report_up">จัดการเอกสาร</a></li>  
+                            <li><a href="#/user">เพิ่มผู้ใช้งานระบบ</a></li>
+                            <li><a href="#/show_user">ผู้ใช้งานระบบ</a></li> 
+                            <li><a href="#/formtopic_up">เพิ่มแบบฟอร์ม</a></li>
+                            <li><a href="#">บันทึกการเข้าใช้งานระบบ</a></li>
+                            <li><a href="#">กราฟแสดงการเข้าใช้งานระบบ</a></li> 
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" ng-show="checkAdminOrTeacher()">
+                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ประวัติการอัพโหลด<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/report_up">บันทึกการอัพโหลดไฟล์</a></li>   
+                        </ul>
+                    </li>
+
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                </ul>
+
+
+
+            </div>
+
         </div>
-    </nav>
 
 
 
@@ -129,8 +131,8 @@
 
 
 
-    <div ng-view></div>
+        <div ng-view></div>
 
-</body>
+    </body>
 
 </html>

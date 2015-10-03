@@ -1,10 +1,22 @@
 <div class="container">
     <div class="panel panel-info">
-
         <div class="panel-heading" >
             <h3 class="panel-title">แบบฟอร์มดาวน์โหลด</h3>
         </div>
         <div class="panel-body">
+            <div class="row">
+                <form class="navbar-form navbar-right">
+                    <label class="col-md-2 control-label" style="margin-top: 5px;">หน้า</label>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="size" ng-click="selectSizeForm()">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
@@ -12,27 +24,30 @@
                             <thead>
                                 <tr>
                                     <th>ลำดับ</th>
-                                  
                                     <th>ชื่อแบบฟอร์ม</th>   
-                                    
                                     <th>
                             <div class="icon-preview">
                                 Dowload
                                 <i class="mdi-file-file-download"></i>
                             </div>
-                           
+                            </th>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="dld in documents.content">
-                                  
-                                    <td>{{dld.topic}}</td>
-                                    
-                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
-                                    <td><input type="submit" value="แสดงข้อมูล" ng-click="details(dld)"></td>
+                                <tr ng-repeat="fdl in formfiles.content">
+                                    <td>{{fdl.id}}</td>
+                                    <td>{{fdl.formName}}</td>
+                                    <td><input type="submit" value="Dowload" ng-click="dowload(fdl)"></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="#/home"></a>
+                        <ul class="pagination pull-right" >
+                            <li id="firstPage"><a ng-click="firstPage()">«</a></li>
+                            <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
+                            <li><a>{{page + 1}}</a></li>
+                            <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
+                            <li id="finalPage"><a ng-click="finalPage()">»</a></li>
+                        </ul>
+
                     </div>
                 </div>
             </div>

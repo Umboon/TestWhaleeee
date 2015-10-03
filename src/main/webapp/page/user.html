@@ -22,13 +22,14 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> PassWord :</label>
                                 <div class="col-md-2">
-                                    <input type="password" class="form-control" placeholder="Enter PassWord"ng-model="user.passWord">
+                                    <input type="password" ng-change="checkPassword()" class="form-control" placeholder="Enter PassWord"ng-model="user.passWord">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"> <i id="confirm" class=""></i>
                                 <label class="col-md-3 control-label"> Confirm Password :</label>
                                 <div class="col-md-2">
-                                    <input type="password" class="form-control" placeholder="Confirm PassWord" ng-model="password">
+                                    <input ng-change="checkPassword()" type="password" class="form-control" placeholder="Confirm PassWord" ng-model="password">
+                                   
                                 </div>
                             </div>
                             <div class="form-group">
@@ -52,7 +53,7 @@
                                 <label class="col-md-2 control-label"></label>
                                 <div class="col-md-3">
 
-                                    <input value="Save" type="submit" class="btn btn-success"  data-toggle="modal" data-target="#simple-dialog" ng-click="saveUser()">
+                                    <input value="Save" type="submit" class="btn btn-success"   ng-click="saveUser()">
                                     <input value="Clear" type="submit" class="btn btn-info" ng-click="clearUser()">
                                 </div>
                             </div>
@@ -75,12 +76,3 @@
     </div>
 
 
-<div id="simple-dialog" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                บันทึกสำเร็จ
-                
-            </div>
-        </div>
-    </div>
