@@ -83,5 +83,15 @@ public class DocumentSpec {
         };
         
     }
+      
+      public static Specification<Document> documentDesc(){
+      return new Specification<Document>() {
+
+          @Override
+          public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+             return (Predicate) cq.orderBy(cb.desc(root.get(Document_.id)));
+          }
+      };
+      }
 
 }

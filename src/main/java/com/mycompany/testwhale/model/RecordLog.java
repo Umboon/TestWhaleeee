@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -23,7 +24,8 @@ public class RecordLog implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private Date date;
+    
+    private Date dateLogin;
     private String status;
 
     public Integer getId() {
@@ -42,13 +44,15 @@ public class RecordLog implements Serializable{
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateLogin() {
+        return dateLogin;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateLogin(Date dateLogin) {
+        this.dateLogin = dateLogin;
     }
+
+   
 
     public String getStatus() {
         return status;

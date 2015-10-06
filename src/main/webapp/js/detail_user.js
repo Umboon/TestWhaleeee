@@ -4,6 +4,7 @@ angular.module('detail_user').controller('detailUserController',function (userSe
     $scope.user = {};
     $scope.detailuser = {};
     
+    
    // console.log(userService.detail_user);
     $scope.saveUser = function (){
         $http.post('/saveuser',$scope.user).success(function (data){

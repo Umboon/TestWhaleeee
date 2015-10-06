@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory','formtopic_up','form_dowload']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory','formtopic_up','form_dowload','record_log']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
@@ -111,6 +111,10 @@ angular.module('app').controller('homeController', function ($http, $scope) {
              .when('/form_dowload', {
                 controller: 'formdowloadController',
                 templateUrl: 'page/form_dowload.html'
+            })
+            .when('/record_log', {
+                controller: 'recordlogController',
+                templateUrl: 'page/record_log.html'
             })
             
             .otherwise({

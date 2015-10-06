@@ -68,6 +68,7 @@ public class DocumentController {
 
     @RequestMapping(value = "/getdocuments", method = RequestMethod.GET)
     private Page<Document> getDocument(Pageable pageable) {
+//       return documentRepo.findAll(DocumentSpec.documentDesc(),pageable);
         return documentRepo.findAll(pageable);
     }
 

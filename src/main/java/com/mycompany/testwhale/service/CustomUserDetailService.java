@@ -5,8 +5,12 @@
  */
 package com.mycompany.testwhale.service;
 
+import com.mycompany.testwhale.model.RecordLog;
 import com.mycompany.testwhale.model.User;
+import com.mycompany.testwhale.repo.RecordLogRepo;
 import com.mycompany.testwhale.repo.UserRepo;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,11 +26,20 @@ public class CustomUserDetailService implements UserDetailsService{
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private RecordLogRepo recordLogRepo;
     
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-        User user = userRepo.findByUserName(string);
-        
+       RecordLog recordLog = new RecordLog();
+       
+       User user = userRepo.findByUserName(string);
+       if(user != null){
+            recordLog.setName(user.getUserName());
+            recordLog.setStatus(user.getStatus());
+            recordLog.setDateLogin(new Date());
+            recordLogRepo.save(recordLog);
+        }
         return user;
     }
     

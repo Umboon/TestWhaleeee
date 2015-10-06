@@ -1,15 +1,14 @@
-
 <div class="container">
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title">ผู้ใช้งานระบบ</h3>
+    <div class="panel panel-info">     
+        <div class="panel-heading" >
+            <h3 class="panel-title">บันทึกการเข้าใช้งาน</h3>
         </div>
         <div class="panel-body">
             <div class="row">
                 <form class="navbar-form navbar-right">
                     <label class="col-md-6 control-label" style="margin-top: 5px;">ผู้ใช้</label>
                     <div class="col-md-3">
-                        <select class="form-control" ng-model="size" ng-click="selectSizeUser()">
+                        <select class="form-control" ng-model="size" ng-click="selectSize()">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30">30</option>
@@ -25,23 +24,26 @@
                             <thead>
                                 <tr>
                                     <th>ลำดับ</th>
+                                    <th>วัน-เวลาที่เข้าใช้</th>
                                     <th>ชื่อผู้ใช้</th>
-                                    <th>อีเมล์</th>
-                                    <th>สถานะผู้ใช้</th>
-                                    <th>รายละเอียด</th>
+                                    <th>สถานะ</th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="sur in users.content">
-                                    <td>{{sur.id}}</td>
-                                    <td>{{sur.userName}}</td>
-                                    <td>{{sur.email}}</td>
-                                    <td>{{sur.status}}</td>
-                                    <td><input type="submit" value="แสดงข้อมูล" ng-click="detailuser(sur)"></td>
+                                <tr ng-repeat="rcl in recordlog">
+                                    <td>{{rcl.id}}</td>
+                                    <td>{{rcl.dateLogin}}</td>
+                                    <td>{{rcl.name}}</td>
+                                    <td>{{rcl.status}}</td>
+                               
+<!--                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>-->
+
                                 </tr>
                             </tbody>
                         </table>
-                       
+                        <a href="#/home"></a>
                         <ul class="pagination pull-right" >
                             <li id="firstPage"><a ng-click="firstPage()">«</a></li>
                             <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
@@ -49,36 +51,16 @@
                             <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
                             <li id="finalPage"><a ng-click="finalPage()">»</a></li>
                         </ul>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
         <div class="progress progress-striped">
-            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+            <div class="progress-bar progress-bar-default" style="width: 100%"></div>
         </div>
     </div>
 
-
-
-    <!--    <h3>Delete User</h3>
-        <form class="form-inline">
-            <div class="form-group">
-                <label >Delete ID : </label>
-                <input ng-model="delUser.id">
-                <input type="submit" class="bth btn-danger" value="Delete" ng-click="deleteUser()">
-    
-            </div>
-        </form>-->
-    <br>
-    <br>
-    <!--    <a href="../index.html">Home</a>-->
     <ul class="pager">
         <li class="previous"><a href="#/home">หน้าหลัก</a></li>
     </ul>
-
 </div>
-
-

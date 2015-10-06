@@ -22,7 +22,8 @@
         <script src="js/docforcategory.js"></script>
         <script src="js/formtopic_up.js"></script>
         <script src="js/form_dowload.js"></script>
-
+        <script src="js/record_log.js"></script>
+        <script src="js/moment.js"></script>
 
         <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 
@@ -43,12 +44,12 @@
 
 
     </head>
-    <body class="bg-danger">      
 
-        <nav class="navbar navbar-invere" style="background: #03a9f4" ng-controller="homeController">
+    <body style="background: #FFFFE0">
+        <nav class="navbar navbar-invere" style="background: #6495ED" ng-controller="homeController">
            
-            <ul class="nav navbar-nav navbar-right">
-                <li><a><span style="margin-left: 20px;margin-right: 10px;">{{" ชื่อผู้ใช้ "+ userLogin.userName}}</span><span style="margin-left: 10px;margin-right: 20px;">{{" สถานะผู้ใช้ "+ userLogin.status}}</span></a></li>
+            <ul class="nav navbar-nav navbar-right" style="color: #FFFFFF">
+                <li><a><span style="margin-left: 20px;margin-right: 10px; " >{{" ชื่อผู้ใช้ "+ userLogin.userName}}</span><span style="margin-left: 10px;margin-right: 20px;">{{" สถานะผู้ใช้ "+ userLogin.status}}</span></a></li>
              </ul>
         </nav>
 
@@ -76,7 +77,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Document<b class="caret"></b></a>
+                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">เอกสาร<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li ng-show="checkAdminOrTeacher()"><a href="#/document">เพิ่มเอกสาร</a></li>
                             <li><a href="#/view_document" ng-click="getDocuments()">เอกสารทั้งหมด</a></li> 
@@ -99,7 +100,7 @@
                             <li><a href="#/user">เพิ่มผู้ใช้งานระบบ</a></li>
                             <li><a href="#/show_user">ผู้ใช้งานระบบ</a></li> 
                             <li><a href="#/formtopic_up">เพิ่มแบบฟอร์ม</a></li>
-                            <li><a href="#">บันทึกการเข้าใช้งานระบบ</a></li>
+                            <li><a href="#/record_log">บันทึกการเข้าใช้งานระบบ</a></li>
                             <li><a href="#">กราฟแสดงการเข้าใช้งานระบบ</a></li> 
                         </ul>
                     </li>
@@ -113,7 +114,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> ออกจากระบบ</a></li>
                 </ul>
 
 

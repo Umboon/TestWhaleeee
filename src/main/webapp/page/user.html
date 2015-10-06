@@ -12,7 +12,7 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <div class="icon-preview"><i class="mdi-social-group-add"></i>
-                                    <label class="col-md-3 control-label "> UserName :</label>
+                                    <label class="col-md-3 control-label "> ชื่อผู้ใช้งาน :</label>
 
                                     <div class="col-md-2">
                                         <input type="username" class="form-control" placeholder="Enter Name"ng-model="user.userName">
@@ -20,26 +20,26 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label"> PassWord :</label>
+                                <label class="col-md-3 control-label"> รหัสผ่าน :</label>
                                 <div class="col-md-2">
                                     <input type="password" ng-change="checkPassword()" class="form-control" placeholder="Enter PassWord"ng-model="user.passWord">
                                 </div>
                             </div>
                             <div class="form-group"> <i id="confirm" class=""></i>
-                                <label class="col-md-3 control-label"> Confirm Password :</label>
+                                <label class="col-md-3 control-label"> ยืนยันรหัสผ่าน :</label>
                                 <div class="col-md-2">
                                     <input ng-change="checkPassword()" type="password" class="form-control" placeholder="Confirm PassWord" ng-model="password">
                                    
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label"> Email :</label>
+                                <label class="col-md-3 control-label"> อีเมล์ :</label>
                                 <div class="col-md-2">
                                     <input type="email" class="form-control" placeholder="Enter Email"ng-model="user.email">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label"> Status :</label>
+                                <label class="col-md-3 control-label"> สถานะการใช้งาน :</label>
                                 <div class="col-md-2">
                                     <select type="status" class="form-control" ng-model="user.status">
                                         <option value="Admin">Admin</option>

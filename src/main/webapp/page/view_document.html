@@ -3,7 +3,7 @@
 
     <form class="navbar-form navbar-left">
 
-        <label class="control-label">Search By:</label>
+        <label class="control-label">ค้นหาจาก:</label>
         <select ng-model="searchData.searchBy">
             <option value="">วันที่เอกสารเข้า</option>
             <option value="">วันที่ปฏิบัติงาน</option>
@@ -13,7 +13,7 @@
 
         </select> &nbsp;&nbsp;
         <input type="text" class="form-control col-lg-8" ng-model="searchData.keyWord" placeholder="Search Keyword">
-        <input class="btn btn-info" type="submit" value="Search" ng-click="search()">
+        <input class="btn btn-info" type="submit" value="ค้นหา" ng-click="search()">
 
     </form>
 
@@ -26,7 +26,7 @@
         <div class="panel-body">
             <div class="row">
                 <form class="navbar-form navbar-right">
-                    <label class="col-md-2 control-label" style="margin-top: 5px;">หน้า</label>
+                    <label class="col-md-2 control-label" style="margin-top: 5px;">ไฟล์</label>
                     <div class="col-md-3">
                         <select class="form-control" ng-model="size" ng-click="selectSize()">
                             <option value="10">10</option>
@@ -43,7 +43,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ลำดับ</th>
+<!--                                    <th>ลำดับ</th>-->
                                     <th>วันที่เอกสารเข้า</th>
                                     <th>วันที่ปฏิบัติงาน</th>
                                     <th>คำค้น</th>
@@ -60,7 +60,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="dld in documents.content">
-                                    <td>{{dld.id}}</td>
+<!--                                    <td>{{dld.id}}</td>-->
                                     <td>{{dld.dateReceived}}</td>
                                     <td>{{dld.dateWork}}</td>
                                     <td>{{dld.keyWord}}</td>
