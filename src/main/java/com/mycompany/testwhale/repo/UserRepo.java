@@ -6,8 +6,9 @@
 package com.mycompany.testwhale.repo;
 
 import com.mycompany.testwhale.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  *
@@ -16,5 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserRepo extends JpaRepository<User, Integer>{
     
     public User findByUserName(String username);
+    public Page<User> findAllByOrderByIdDesc (Pageable pageable);
+   
     
 }

@@ -8,13 +8,21 @@ package com.mycompany.testwhale.controller;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.model.DocFile;
 import com.mycompany.testwhale.model.SearchData;
+import com.mycompany.testwhale.model.User;
 import com.mycompany.testwhale.repo.DocFileRepo;
 import com.mycompany.testwhale.repo.DocumentRepo;
+import com.mycompany.testwhale.repo.UserRepo;
 import com.mycompany.testwhale.service.DocumentSearchService;
 import com.mycompany.testwhale.spec.DocumentSpec;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -22,6 +30,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,12 +52,14 @@ public class DocumentController {
     private DocFileRepo docFileRepo;
     @Autowired
     private DocumentSearchService documentSearchService;
-
+    @Autowired
+    private UserRepo userRepo;
+    
     private Integer docId;
     private String category;
 
     @RequestMapping(value = "/savedocument", method = RequestMethod.POST)
-    private void saveDocument(@RequestBody Document document) {
+    private void saveDocument(@Validated @RequestBody Document document) {
         documentRepo.save(document);
     }
 
@@ -69,7 +81,7 @@ public class DocumentController {
     @RequestMapping(value = "/getdocuments", method = RequestMethod.GET)
     private Page<Document> getDocument(Pageable pageable) {
 //       return documentRepo.findAll(DocumentSpec.documentDesc(),pageable);
-        return documentRepo.findAll(pageable);
+        return documentRepo.findAllByOrderByIdDesc(pageable);
     }
 
     @RequestMapping(value = "/getfile/{id}", method = RequestMethod.GET)
@@ -92,9 +104,10 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "/searchdocument", method = RequestMethod.POST)
-    private Page<Document> searchDocument(@RequestBody SearchData searchData, Pageable pageable) {
+    private Page<Document> searchDocument(@RequestBody SearchData searchData, Pageable pageable) throws ParseException {
         String keyword = searchData.getKeyWord();
         String searchBy = searchData.getSearchBy();
+        
 
         Page<Document> document = null;
         if ("keyword".equals(searchBy)) {
@@ -105,43 +118,67 @@ public class DocumentController {
 
             document = documentSearchService.searchByTopic(keyword, pageable);
         }
-        if("fileName".equals(searchBy)){
-             document = documentSearchService.searchByFileName(keyword, pageable);
+        if ("fileName".equals(searchBy)) {
+            document = documentSearchService.searchByFileName(keyword, pageable);
+        }
+        if("dateReceived".equals(searchBy)){
+            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd" , Locale.US);
+            Date date = sim.parse(keyword);
+            document = documentSearchService.searchByDeteIn(date ,date , pageable);
+        }
+        if("dateWork".equals(searchBy)){
+            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd" , Locale.US);
+            Date date = sim.parse(keyword);
+            document = documentSearchService.searchByDateWork(date ,date , pageable);
         }
         return document;
 
     }
-      
-       @RequestMapping(value = "/searchbycategory" , method = RequestMethod.POST)
-       private void searchByCategory(@RequestBody SearchData category){
-           System.out.println("------------------------------>"+category.getKeyWord());
-       this.category = category.getKeyWord();
-       }
-    
-       @RequestMapping(value = "/getdocforcate" , method = RequestMethod.GET)
-       private Page<Document> getDocForCate(Pageable pageable){
-       return documentSearchService.searchByCateLike(category, pageable);
-       }
-       
-       @RequestMapping(value = "/gettotalrow" , method = RequestMethod.GET)
-       private Long getTotalRow(){
-       return documentRepo.count();
-       }
-       
-       @RequestMapping(value = "/countsearchdocument" , method = RequestMethod.POST)
-       private Long countSearch(@RequestBody SearchData searchData){
-       String keyword = searchData.getKeyWord();
-       String searchBy = searchData.getSearchBy();
-       Long count = null;
+
+    @RequestMapping(value = "/searchbycategory", method = RequestMethod.POST)
+    private void searchByCategory(@RequestBody SearchData category) {
+        System.out.println("------------------------------>" + category.getKeyWord());
+        this.category = category.getKeyWord();
+    }
+
+    @RequestMapping(value = "/getdocforcate", method = RequestMethod.GET)
+    private Page<Document> getDocForCate(Pageable pageable) {
+        return documentSearchService.searchByCateLike(category, pageable);
+    }
+
+    @RequestMapping(value = "/gettotalrow", method = RequestMethod.GET)
+    private Long getTotalRow() {
+        return documentRepo.count();
+    }
+
+    @RequestMapping(value = "/countsearchdocument", method = RequestMethod.POST)
+    private Long countSearch(@RequestBody SearchData searchData) {
+        String keyword = searchData.getKeyWord();
+        String searchBy = searchData.getSearchBy();
+        Long count = null;
         if ("keyword".equals(searchBy)) {
-            count = documentRepo.count(DocumentSpec.keyWordLike("%"+keyword+"%"));
+            count = documentRepo.count(DocumentSpec.keyWordLike("%" + keyword + "%"));
         }
         if ("topic".equals(searchBy)) {
-            count = documentRepo.count(DocumentSpec.topicLike("%"+keyword+"%"));
-         }
-        if("fileName".equals(searchBy)){
-            count = documentRepo.count(DocumentSpec.topicLike("%"+keyword+"%"));
+            count = documentRepo.count(DocumentSpec.topicLike("%" + keyword + "%"));
         }
-       return count;
-       }
+        if ("fileName".equals(searchBy)) {
+            count = documentRepo.count(DocumentSpec.topicLike("%" + keyword + "%"));
+        }
+        return count;
+    }
+
+    
+    //======================================================================================//
+    @RequestMapping(value = "/getuserupload" , method = RequestMethod.GET)
+    private User getUserUpload(){
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return userRepo.findOne(user.getId());
+    }
+    
+    @RequestMapping(value = "/getuploadhistory")
+    private Page<Document> uploadHistory(Pageable pageable) {
+       User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      return documentRepo.findByUserr(user, pageable);
+    }
 }

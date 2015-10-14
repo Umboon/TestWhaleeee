@@ -4,22 +4,23 @@
     <form class="navbar-form navbar-left">
 
         <label class="control-label">ค้นหาจาก:</label>
-        <select ng-model="searchData.searchBy">
-            <option value="">วันที่เอกสารเข้า</option>
-            <option value="">วันที่ปฏิบัติงาน</option>
+        <select ng-model="searchData.searchBy" ng-change="selectSearchBy()" ng-init="searchData.searchBy = 'fileName'">
+            <option value="dateReceived">วันที่เอกสารเข้า</option>
+            <option value="dateWork">วันที่ปฏิบัติงาน</option>
             <option value="topic">ชื่อเรื่อง</option>
             <option value="fileName">ชื่อไฟล์</option>
             <option value="keyword">คำค้น</option>
 
         </select> &nbsp;&nbsp;
-        <input type="text" class="form-control col-lg-8" ng-model="searchData.keyWord" placeholder="Search Keyword">
-        <input class="btn btn-info" type="submit" value="ค้นหา" ng-click="search()">
-
+        <input ng-show="showDatePicker" type="text" class="form-control col-lg-8 datepicker" ng-model="searchData.keyWord" placeholder="Search Keyword">
+        <input ng-hide="showDatePicker" type="text" class="form-control col-lg-8 " ng-model="searchData.keyWord" placeholder="Search Keyword">
+        <input class="btn btn-info" type="submit" value="ค้นหา"  ng-click="search()">
+        <input type="submit" data-toggle="modal" data-target="#complete-dialog" id="datanotfond" style="display: none">
     </form>
 
 </div>
 <div class="container">
-    <div class="panel panel-danger">     
+    <div class="panel panel-primary">     
         <div class="panel-heading" >
             <h3 class="panel-title">เอกสารทั้งหมด</h3>
         </div>
@@ -43,13 +44,14 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-<!--                                    <th>ลำดับ</th>-->
+                                    <!--                                    <th>ลำดับ</th>-->
                                     <th>วันที่เอกสารเข้า</th>
                                     <th>วันที่ปฏิบัติงาน</th>
                                     <th>คำค้น</th>
                                     <th>หมวดเอกสาร</th>
                                     <th>เรื่อง</th>   
                                     <th>ไฟล์แนบ</th>
+                                    <th>ผู้อัพไฟล์</th>
                                     <th>
                             <div class="icon-preview">
                                 Dowload
@@ -60,13 +62,14 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="dld in documents.content">
-<!--                                    <td>{{dld.id}}</td>-->
+                                    <!--                                    <td>{{dld.id}}</td>-->
                                     <td>{{dld.dateReceived}}</td>
                                     <td>{{dld.dateWork}}</td>
                                     <td>{{dld.keyWord}}</td>
                                     <td>{{dld.category.cate}}</td>
                                     <td>{{dld.topic}}</td>
                                     <td>{{dld.file.name}}</td>
+                                    <td>{{dld.user.userName}}</td>
                                     <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
 
                                 </tr>
@@ -76,7 +79,7 @@
                         <ul class="pagination pull-right" >
                             <li id="firstPage"><a ng-click="firstPage()">«</a></li>
                             <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
-                            <li><a>{{page+1}}</a></li>
+                            <li><a>{{page + 1}}</a></li>
                             <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
                             <li id="finalPage"><a ng-click="finalPage()">»</a></li>
                         </ul>
@@ -85,11 +88,31 @@
             </div>
         </div>
         <div class="progress progress-striped">
-            <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+            <div class="progress-bar progress-bar-primary" style="width: 100%"></div>
         </div>
     </div>
 
     <ul class="pager">
         <li class="previous"><a href="#/home">หน้าหลัก</a></li>
     </ul>
+</div>
+
+<div id="complete-dialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ไม่มีเอกสารที่คุณค้นหา</h4>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ตกลง</button>
+
+            </div>
+        </div>
+    </div>
+
 </div>

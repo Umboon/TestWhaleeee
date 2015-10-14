@@ -7,11 +7,13 @@ angular.module('view_document').controller('view_documentController', function (
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
+    $scope.showDatePicker = false;
     function getDocuments() {
         $http.get('/getdocuments', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
             //console.log($scope.documents);
             getTotalRow();
+            console.log(data);
         });
 
     }
@@ -25,52 +27,62 @@ angular.module('view_document').controller('view_documentController', function (
         location.href = '/getfile/' + dld.file.id;
     };
 
+    $scope.selectSearchBy = function () {
+        if ($scope.searchData.searchBy == 'dateReceived' || $scope.searchData.searchBy == 'dateWork') {
+            console.log('true');
+            $scope.showDatePicker = true;
+        }
+        else {
+            $scope.showDatePicker = false;
+        }
+    };
 
     $scope.search = function () {
         search();
     };
-    
-    function search(){
-         $http.post('/searchdocument', $scope.searchData , {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-            if (!!data.content[0].id) {
-                console.log('true');
-                $scope.documents = data;
-                countSearch();
-            }
-            $scope.documents = data;
 
+    function search() {
+        $scope.searchData.keyWord;
+        $http.post('/searchdocument', $scope.searchData, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+            console.log('true');
+            console.log(data);
+            countSearch();
+            if (!data.content.length) {
+
+                $("#complete-dialog").modal('show');
+            }
         });
     }
-    
-    function countSearch(){
-        $http.post('/countsearchdocument',$scope.searchData).success(function (data){
+
+    function countSearch() {
+        $http.post('/countsearchdocument', $scope.searchData).success(function (data) {
             totalRow = data;
-            console.log('total search'+data);
+            console.log('total search' + data);
             findPage();
         });
     }
 
     $scope.selectSize = function () {
-       selectGetOrSearch();
+        selectGetOrSearch();
         findPage();
     };
-    
-    function selectGetOrSearch(){
-        if(!!$scope.searchData.keyWord){
+
+    function selectGetOrSearch() {
+        if (!!$scope.searchData.keyWord) {
             search();
         }
-        else{
+        else {
             getDocuments();
         }
     }
 
-    
+
     function getTotalRow() {
         $http.get('/gettotalrow').success(function (data) {
             totalRow = data;
-           // console.log('totalrow : ' + totalRow);
+            // console.log('totalrow : ' + totalRow);
             findPage();
-            console.log(totalPage+" "+$scope.page);
+            console.log(totalPage + " " + $scope.page);
         });
     }
     ;
@@ -82,13 +94,13 @@ angular.module('view_document').controller('view_documentController', function (
         totalPage = result;
         console.log(totalPage + 'totalPage');
     }
-    
+
     checkLoadPage();
-    function checkLoadPage(){
-        if(totalPage == 1){
-             $('#prePage , #firstPage , #nextPage , #finalPage').addClass('disabled');
-         }
-        if(totalPage != 1){
+    function checkLoadPage() {
+        if (totalPage == 1) {
+            $('#prePage , #firstPage , #nextPage , #finalPage').addClass('disabled');
+        }
+        if (totalPage != 1) {
             $('#prePage , #firstPage').addClass('disabled');
         }
     }
@@ -103,18 +115,18 @@ angular.module('view_document').controller('view_documentController', function (
     $scope.prePage = function () {
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
-           selectGetOrSearch();
+            selectGetOrSearch();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-           }
-           $('#nextPage , #finalPage').removeClass('disabled');
+            }
+            $('#nextPage , #finalPage').removeClass('disabled');
         }
     };
 
     $scope.nextPage = function () {
         if (!$('#nextPage').hasClass('disabled')) {
             $scope.page++;
-           selectGetOrSearch();
+            selectGetOrSearch();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
             }
@@ -125,9 +137,17 @@ angular.module('view_document').controller('view_documentController', function (
 
     $scope.finalPage = function () {
         $scope.page = totalPage - 1;
-       selectGetOrSearch();
+        selectGetOrSearch();
         $('#nextPage , #finalPage').addClass('disabled');
         $('#prePage , #firstPage').removeClass('disabled');
     };
+
+    $('.datepicker.form-control.col-lg-8').datepicker({
+        changeYear: true,
+        yearRange: "-100:+100",
+        dateFormat: 'yy-mm-dd'
+    });
+
+
 });
 

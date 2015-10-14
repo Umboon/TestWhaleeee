@@ -5,6 +5,8 @@
  */
 package com.mycompany.testwhale.model;
 
+import java.util.Date;
+
 /**
  *
  * @author UMBOON
@@ -13,6 +15,8 @@ public class SearchData {
     
     private String keyWord;
     private String searchBy;
+  
+    
 
     public String getKeyWord() {
         return keyWord;

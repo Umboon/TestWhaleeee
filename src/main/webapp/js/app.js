@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory','formtopic_up','form_dowload','record_log']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory','formtopic_up','form_dowload','record_log','doc_manage']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
@@ -116,7 +116,10 @@ angular.module('app').controller('homeController', function ($http, $scope) {
                 controller: 'recordlogController',
                 templateUrl: 'page/record_log.html'
             })
-            
+            .when('/doc_manage', {
+                controller: 'docmanageController',
+                templateUrl: 'page/doc_manage.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });

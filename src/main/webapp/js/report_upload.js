@@ -1,25 +1,26 @@
 angular.module('report_up', []);
 angular.module('report_up').controller('reportUpController', function ($http, $scope) {
 
-
     $scope.documents = {};
     $scope.page = 0;
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
-    function getDocuments() {
-        $http.get('/getdocuments', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-            $scope.documents = data;
-            //console.log($scope.documents);
-
-        });
-
-    }
-    getDocuments();
-
+   
     $scope.getDocuments = function () {
         getDocuments();
     };
+ 
+      getDocuments();
+    function getDocuments(){
+        $http.get('/getuploadhistory', {params: {page: $scope.page, size: $scope.size}}).success(function (data){
+            $scope.documents = data;
+            console.log(data);
+            
+        });
+    }
+    
+  
 
     $scope.selectSize = function () {
         getDocuments();
@@ -99,7 +100,7 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
         });
     };
 
-
+    $('body').css('overflowY','scroll');
 
 });
 

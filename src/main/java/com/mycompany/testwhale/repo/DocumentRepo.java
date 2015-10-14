@@ -6,7 +6,9 @@
 package com.mycompany.testwhale.repo;
 
 import com.mycompany.testwhale.model.Document;
-import java.io.Serializable;
+import com.mycompany.testwhale.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -16,4 +18,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface DocumentRepo extends JpaRepository<Document, Integer>, JpaSpecificationExecutor<Document> {
     
+    public Page<Document> findAllByOrderByIdDesc(Pageable pageable);
+    public Page<Document> findByUserr(User userr, Pageable pageable);
 }

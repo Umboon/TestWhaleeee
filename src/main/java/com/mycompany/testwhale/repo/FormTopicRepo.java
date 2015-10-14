@@ -6,6 +6,8 @@
 package com.mycompany.testwhale.repo;
 
 import com.mycompany.testwhale.model.FormTopic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author UMBOON
  */
 public interface FormTopicRepo extends JpaRepository<FormTopic, Integer>{
+    public Page<FormTopic> findAllByOrderByIdDesc(Pageable pageable);
     
 }

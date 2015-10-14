@@ -1,0 +1,31 @@
+#growl-custom{
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+.msg-green{
+  background: #4bd86f; 
+  color: white;
+}
+.msg-red{
+    background: #f95757;
+    color: white;
+}
+.msg-black{
+    background: black;
+    color: white;
+}
+.msg-blue{
+    background: #576ef9;
+    color: white;
+}
+.msg-orenge{
+    background: #f9be57;
+    color: white;
+}
+.msg-oom{
+    background: #349ff4;
+    color: red;
+}

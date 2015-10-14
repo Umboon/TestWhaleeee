@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.annotation.Order;
 
 /**
@@ -30,30 +32,34 @@ import org.springframework.core.annotation.Order;
  */
 @Entity
 @Table(name = "DOCUMENT")
-public class Document implements Serializable{
+public class Document implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
     @Temporal(TemporalType.DATE)
     private Date dateReceived;
     @Temporal(TemporalType.DATE)
     private Date dateWork;
-    
+
     private String agencyDocReleased;
     private String keyWord;
     private String bookNO;
+    
+    @Column(nullable = false)
+    @NotBlank(message = "กรุณากรอกชื่อเรื่อง")
     private String topic;
     private String receiver;
     private String note;
     private String groupUser;
     
+
     @OneToOne(cascade = CascadeType.ALL)
     private DocFile file;
-    
+
     @ManyToOne
-    private User user;
-    
+    private User userr;
+
     @ManyToOne
     private Category category;
 
@@ -66,11 +72,11 @@ public class Document implements Serializable{
     }
 
     public User getUser() {
-        return user;
+        return userr;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.userr = user;
     }
 
     public Category getCategory() {
@@ -80,8 +86,6 @@ public class Document implements Serializable{
     public void setCategory(Category category) {
         this.category = category;
     }
-    
-    
 
     public Integer getId() {
         return id;
@@ -184,9 +188,5 @@ public class Document implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
-    
+
 }

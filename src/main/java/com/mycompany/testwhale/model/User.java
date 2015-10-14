@@ -5,11 +5,13 @@
  */
 package com.mycompany.testwhale.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -31,13 +34,20 @@ public class User implements Serializable , UserDetails  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(nullable = false)
+    @NotBlank(message = "กรุณากรอกชื่อผู้ใช้")
     private String userName;
+    @Column(nullable = false)
+    @NotBlank(message = "กรุณากรอกรหัสผ่าน")
     private String passWord;
     private String email;
+    @Column(nullable = false)
+    @NotBlank(message = "กรุณากรอกสถานะผู้ใช้")
     private String status;
     private boolean enable = true;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userr")
+    @JsonIgnore
     private List<Document> documents;
 
     public boolean isEnable() {

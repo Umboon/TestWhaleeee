@@ -8,6 +8,7 @@ package com.mycompany.testwhale.service;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.repo.DocumentRepo;
 import com.mycompany.testwhale.spec.DocumentSpec;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,5 +45,13 @@ public class DocumentSearchService {
         Specifications<Document> specification = Specifications.where(DocumentSpec.cateLike("%" + keyword + "%"));
         return documentRepo.findAll(specification, pageable);
     }
-
+     
+    public Page<Document> searchByDeteIn(Date start,Date end, Pageable pageable){
+        Specification<Document> specification = Specifications.where(DocumentSpec.dateInBetween(start, end));
+        return documentRepo.findAll(specification,pageable);
+    }
+    public Page<Document> searchByDateWork(Date start,Date end, Pageable pageable){
+        Specification<Document> specification = Specifications.where(DocumentSpec.dateWorkBetween(start, end));
+        return documentRepo.findAll(specification,pageable);
+    }
 }

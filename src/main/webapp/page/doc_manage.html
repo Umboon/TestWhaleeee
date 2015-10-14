@@ -1,12 +1,12 @@
 <div class="container">
     <div class="panel panel-primary">     
         <div class="panel-heading" >
-            <h3 class="panel-title">บันทึกการเข้าใช้งาน</h3>
+            <h3 class="panel-title">จัดการเอกสารทั้งหมด</h3>
         </div>
         <div class="panel-body">
             <div class="row">
                 <form class="navbar-form navbar-right">
-                    <label class="col-md-6 control-label" style="margin-top: 5px;">ผู้ใช้</label>
+                    <label class="col-md-2 control-label" style="margin-top: 5px;">ไฟล์</label>
                     <div class="col-md-3">
                         <select class="form-control" ng-model="size" ng-click="selectSize()">
                             <option value="10">10</option>
@@ -23,22 +23,33 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ลำดับ</th>
-                                    <th>วัน-เวลาที่เข้าใช้</th>
-                                    <th>ชื่อผู้ใช้</th>
-                                    <th>สถานะ</th>
+<!--                                    <th>ลำดับ</th>-->
+                                    <th>วันที่เอกสารเข้า</th>
+                                    <th>วันที่ปฏิบัติงาน</th>
+                                    <th>คำค้น</th>
+                                    <th>หมวดเอกสาร</th>
+                                    <th>เรื่อง</th>   
+                                    <th>ไฟล์แนบ</th>
+                                    <th>ผู้อัพไฟล์</th>
+                                    <th>
+                            <div class="icon-preview">
+                                Dowload
+                                <i class="mdi-file-file-download"></i>
+                            </div>
 
-
-                                </tr>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="rcl in recordlog">
-                                    <td>{{rcl.id}}</td>
-                                    <td>{{rcl.dateLogin}}</td>
-                                    <td>{{rcl.name}}</td>
-                                    <td>{{rcl.status}}</td>
-                               
-<!--                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>-->
+                                <tr ng-repeat="dld in documents.content">
+<!--                                    <td>{{dld.id}}</td>-->
+                                    <td>{{dld.dateReceived}}</td>
+                                    <td>{{dld.dateWork}}</td>
+                                    <td>{{dld.keyWord}}</td>
+                                    <td>{{dld.category.cate}}</td>
+                                    <td>{{dld.topic}}</td>
+                                    <td>{{dld.file.name}}</td>
+                                    <td>{{dld.user.userName}}</td>
+                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
 
                                 </tr>
                             </tbody>
@@ -47,7 +58,7 @@
                         <ul class="pagination pull-right" >
                             <li id="firstPage"><a ng-click="firstPage()">«</a></li>
                             <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
-                            <li><a>{{page + 1}}</a></li>
+                            <li><a>{{page+1}}</a></li>
                             <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
                             <li id="finalPage"><a ng-click="finalPage()">»</a></li>
                         </ul>

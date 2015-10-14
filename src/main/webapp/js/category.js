@@ -5,12 +5,17 @@ angular.module('category').controller('categorycontroller', function ($http, $sc
     $scope.showDeleteCategory = {};
 
     $scope.saveCategory = function () {
-        $http.post('/savecategory', $scope.category).success(function (data) {
+       if(!!$scope.category.cate){
+            $http.post('/savecategory', $scope.category).success(function (data) {
             getCategory();
-         
+            growl("บันทึกสำเร็จ",'msg-green','top');
 
-        });
-
+       
+       });
+       }
+        else{
+            growl("กรุณากรอกชื่อหมวดเอกสาร",'msg-red','top');
+        }
     };
     $scope.deleteCategory = function (cat) {
         $http.post('/deletecategory', cat).success(function (data) {

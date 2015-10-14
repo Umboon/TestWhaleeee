@@ -4,10 +4,11 @@ var app = angular.module('document').controller('documentController', function (
     $scope.file;
     $scope.document = documentService.detail;
     $scope.categorys = {};
+    $scope.derror = {};
 
     $scope.saveDocument = function () {
         saveDocument();
-
+        
     };
     
     if(!!$scope.document.category){
@@ -17,6 +18,13 @@ var app = angular.module('document').controller('documentController', function (
         getCategory(1);
     }
     
+    
+    function getUserUpload(){
+        $http.get('/getuserupload').success(function (data){
+            $scope.document.user = data;
+            console.log(data);
+        });
+    }
     
     $scope.lodeCategory = {};
     function getCategory(id) {
@@ -28,7 +36,13 @@ var app = angular.module('document').controller('documentController', function (
     
     
    function saveDocument(){
+       getUserUpload();
          $http.post('/savedocument', $scope.document).success(function (data) {
+             growl("บันทึกสำเร็จ",'msg-green','top');
+        }).error(function (data){
+            
+            $scope.derror = data;
+            growl("กรุณากรอกข้อมูลที่จำเป็น","msg-red",'top');
         });
     }
 

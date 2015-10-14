@@ -1,30 +1,35 @@
-angular.module('form_dowload', []);
-angular.module('form_dowload').controller('formdowloadController', function ($http, $scope) {
+angular.module('doc_manage', []);
+angular.module('doc_manage').controller('docmanageController'), function ($http, $scope) {
 
-    $scope.formfiles = {};
+    $scope.documents = {};
     $scope.page = 0;
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
 
-    getFormTopic();
-    function getFormTopic() {
-        $http.get('/getformtopic', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-            $scope.formfiles = data;
+    $scope.getDocuments = function () {
+        getDocuments();
+    };
+
+    getDocuments();
+    function getDocuments() {
+        $http.get('/getuploadhistory', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+            $scope.documents = data;
+            console.log(data);
+
         });
     }
-    
-    $scope.getFormTopic = function (){
-        getFormTopic();
-    };
-    
-    $scope.selectSizeForm = function (){
-        getFormTopic();
+
+
+
+    $scope.selectSize = function () {
+        getDocuments();
         findPage();
     };
+
     getTotalRow();
     function getTotalRow() {
-        $http.get('/gettotalrowform').success(function (data) {
+        $http.get('/gettotalrow').success(function (data) {
             totalRow = data;
             findPage();
             if ($scope.page == 0) {
@@ -42,12 +47,12 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
             result++;
         }
         totalPage = result;
-      //  console.log(totalPage + 'totalPage');
+        console.log(totalPage + 'totalPage');
     }
-    
-     $scope.firstPage = function () {
+
+    $scope.firstPage = function () {
         $scope.page = 0;
-        getFormTopic();
+        getDocuments();
         $('#prePage , #firstPage').addClass('disabled');
         $('#nextPage , #finalPage').removeClass('disabled');
     };
@@ -55,7 +60,7 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
     $scope.prePage = function () {
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
-            getFormTopic();
+            getDocuments();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
                 $('#nextPage , #finalPage').removeClass('disabled');
@@ -66,7 +71,7 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
     $scope.nextPage = function () {
         if (!$('#nextPage').hasClass('disabled')) {
             $scope.page++;
-            getFormTopic();
+            getDocuments();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
                 $('#prePage , #firstPage').removeClass('disabled');
@@ -76,15 +81,15 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
 
     $scope.finalPage = function () {
         $scope.page = totalPage - 1;
-        getFormTopic();
+        getDocuments();
         $('#nextPage , #finalPage').addClass('disabled');
         $('#prePage , #firstPage').removeClass('disabled');
     };
 
 
 
-    $scope.dowload = function (fld) {
-        location.href = '/getfileform/' + fld.file.id;
+    $scope.dowload = function (dld) {
+        location.href = '/getfile/' + dld.file.id;
     };
 
 
@@ -95,10 +100,8 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
         });
     };
 
+    $('body').css('overflowY', 'scroll');
 
+};
 
-
-
-
-});
 

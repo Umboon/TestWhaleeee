@@ -5,11 +5,11 @@
  */
 package com.mycompany.testwhale.spec;
 
-import com.mycompany.testwhale.model.Category;
 import com.mycompany.testwhale.model.Category_;
 import com.mycompany.testwhale.model.DocFile_;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.model.Document_;
+import java.util.Date;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -29,7 +29,7 @@ public class DocumentSpec {
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 return null;
-               // return cb.or(cb.(root.get(Document_.dateReceived), new Date(),new Date()));
+                // return cb.or(cb.(root.get(Document_.dateReceived), new Date(),new Date()));
 
             }
         };
@@ -59,39 +59,48 @@ public class DocumentSpec {
         };
 
     }
-    
-     public static Specification<Document> nameLike(final String keyword){
+
+    public static Specification<Document> nameLike(final String keyword) {
         return new Specification<Document>() {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 return cb.like(cb.upper(root.get(Document_.file).get(DocFile_.name)), keyword.toUpperCase());
-               
+
             }
         };
-        
+
     }
-     
-      public static Specification<Document> cateLike(final String keyword){
+
+    public static Specification<Document> cateLike(final String keyword) {
         return new Specification<Document>() {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
                 return cb.like(cb.upper(root.get(Document_.category).get(Category_.cate)), keyword.toUpperCase());
-               
+
             }
         };
-        
+
     }
-      
-      public static Specification<Document> documentDesc(){
-      return new Specification<Document>() {
 
-          @Override
-          public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-             return (Predicate) cq.orderBy(cb.desc(root.get(Document_.id)));
-          }
-      };
-      }
+    public static Specification<Document> dateInBetween(final Date start, final Date end) {
+        return new Specification<Document>() {
 
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                return cb.between(root.get(Document_.dateReceived), start, end);
+            }
+        };
+    }
+
+    public static Specification<Document> dateWorkBetween(final Date start, final Date end) {
+        return new Specification<Document>() {
+
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                return cb.between(root.get(Document_.dateWork), start, end);
+            }
+        };
+    }
 }

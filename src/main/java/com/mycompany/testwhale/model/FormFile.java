@@ -20,12 +20,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "FORMFILE")
-public class FormFile implements Serializable{
-    
+public class FormFile implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
- 
+    private String formName;
+
     @Lob
     private byte[] content;
     private String mimeType;
@@ -38,7 +39,13 @@ public class FormFile implements Serializable{
         this.id = id;
     }
 
-   
+    public String getFormName() {
+        return formName;
+    }
+
+    public void setFormName(String formName) {
+        this.formName = formName;
+    }
 
     public byte[] getContent() {
         return content;
@@ -78,8 +85,4 @@ public class FormFile implements Serializable{
         return true;
     }
 
-    
-    
-    
-    
 }

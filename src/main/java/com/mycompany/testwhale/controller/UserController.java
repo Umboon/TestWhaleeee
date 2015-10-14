@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +31,7 @@ public class UserController {
     private Integer userId;
     
     @RequestMapping(value = "/saveuser",method = RequestMethod.POST)
-    private void saveUser(@RequestBody User user){
+    private void saveUser(@Validated @RequestBody User user){
         userRepo.save(user);
     }
     
@@ -41,7 +42,7 @@ public class UserController {
     
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public Page<User> getUser(Pageable pageable){
-        return userRepo.findAll(pageable);
+        return userRepo.findAllByOrderByIdDesc(pageable);
     }
     
     

@@ -3,19 +3,22 @@ angular.module('user').controller('userController', function (userService, $scop
 
     $scope.user = userService.detail_user;
     $scope.password = "";
-
+    $scope.error = {};
 
     $scope.saveUser = function () {
         if (checkPassword()) {
             $http.post('/saveuser', $scope.user).success(function (data) {
                 getUser();
+                growl("บันทึกสำเร็จ",'msg-oom','top');
 
             }).error(function (data) {
-
+               $scope.error = data;
+               
             });
         }
         else {
             console.log('password error');
+             growl("กรุณากรอกข้อมูลให้ครบถ้วน",'msg-red','top');
         }
     };
 

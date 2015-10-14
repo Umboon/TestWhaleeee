@@ -24,6 +24,8 @@
         <script src="js/form_dowload.js"></script>
         <script src="js/record_log.js"></script>
         <script src="js/moment.js"></script>
+        <script src="js/jquery-custom-growl_1.js"></script>
+        <script src="js/doc_manage.js"></script>
 
         <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 
@@ -41,20 +43,32 @@
         <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.min.css">
         <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.structure.min.css">
         <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.theme.min.css">
+        <link rel="stylesheet" href="css/bootstrap-custom-growl.css">
 
-
-    </head>
-
-    <body style="background: #FFFFE0">
-        <nav class="navbar navbar-invere" style="background: #6495ED" ng-controller="homeController">
+        <style>
+            body{
+                background: url(image/bgg.jpg)no-repeat center center fixed;
+                background-size: cover;
+            }
+            img{
+                max-width:90%;
+                height:auto;
+            }
            
+        </style>
+    </head>
+    <!--style="background: #FFFFE0"-->
+    <body>
+
+        <nav class="navbar navbar-invere" style="background: rgba(100,149,237,0.5)" ng-controller="homeController">
+
             <ul class="nav navbar-nav navbar-right" style="color: #FFFFFF">
-                <li><a><span style="margin-left: 20px;margin-right: 10px; " >{{" ชื่อผู้ใช้ "+ userLogin.userName}}</span><span style="margin-left: 10px;margin-right: 20px;">{{" สถานะผู้ใช้ "+ userLogin.status}}</span></a></li>
-             </ul>
+                <li><a><span style="margin-left: 20px;margin-right: 10px; " >{{" ชื่อผู้ใช้ " + userLogin.userName}}</span><span style="margin-left: 10px;margin-right: 20px;">{{" สถานะผู้ใช้ " + userLogin.status}}</span></a></li>
+            </ul>
         </nav>
 
-
-        <div class="navbar navbar-warning" style="margin-top: -20px;" ng-controller="homeController">
+        <!--background-color: #87CEFA-->
+        <div class="navbar" style="margin-top: -20px;background: rgba(135,206,250,0.5)" ng-controller="homeController">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
                     <span class="icon-bar"></span>
@@ -83,7 +97,7 @@
                             <li><a href="#/view_document" ng-click="getDocuments()">เอกสารทั้งหมด</a></li> 
                         </ul>
                     </li>
-                   
+
                     <li class="dropdown">
                         <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">แบบฟอร์ม<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -91,17 +105,17 @@
                             <li><a href="#/form_dowload">แบบฟอร์มดาวน์โหลด</a></li>
                         </ul>
                     </li>
-                  
+
                     <li class="dropdown" ng-show="checkAdmin()">
                         <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ผู้ดูแลระบบ<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>
-                            <li><a href="#/report_up">จัดการเอกสาร</a></li>  
+                            <li><a href="#/doc_manage">จัดการเอกสาร</a></li>  
                             <li><a href="#/user">เพิ่มผู้ใช้งานระบบ</a></li>
                             <li><a href="#/show_user">ผู้ใช้งานระบบ</a></li> 
                             <li><a href="#/formtopic_up">เพิ่มแบบฟอร์ม</a></li>
                             <li><a href="#/record_log">บันทึกการเข้าใช้งานระบบ</a></li>
-                            <li><a href="#">กราฟแสดงการเข้าใช้งานระบบ</a></li> 
+                          
                         </ul>
                     </li>
 
