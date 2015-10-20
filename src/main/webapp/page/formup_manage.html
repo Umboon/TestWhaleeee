@@ -1,15 +1,14 @@
 <div class="container">
     <div class="panel panel-primary">
-
         <div class="panel-heading" >
-            <h3 class="panel-title">จัดการเอกสาร</h3>
+            <h3 class="panel-title">จัดการแบบฟอร์มดาวน์โหลด</h3>
         </div>
         <div class="panel-body">
             <div class="row">
                 <form class="navbar-form navbar-right">
                     <label class="col-md-2 control-label" style="margin-top: 5px;">ไฟล์</label>
                     <div class="col-md-3">
-                        <select class="form-control" ng-model="size" ng-click="selectSize()">
+                        <select class="form-control" ng-model="size" ng-click="selectSizeForm()">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30">30</option>
@@ -24,39 +23,26 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <!--                                    <th>ลำดับ</th>-->
-                                    <th>วันที่เอกสารเข้า</th>
-                                    <th>วันที่ปฏิบัติงาน</th>
-                                    <th>คำค้น</th>
-                                    <th>หมวดเอกสาร</th>
-                                    <th>เรื่อง</th>  
-                                    <th>ไฟล์แนบ</th>
-                                    <th>ผู้อับไฟล์</th>
+                                    <th>ลำดับ</th>
+                                    <th>ชื่อแบบฟอร์ม</th>   
                                     <th>
                             <div class="icon-preview">
                                 Dowload
                                 <i class="mdi-file-file-download"></i>
                             </div>
                             </th>
-                            <th>รายละเอียด</th>
-                            </tr>
+                            <th>จัดการ</th>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="dld in documents.content">
-                                    <!--                                    <td>{{dld.id}}</td>-->
-                                    <td>{{dld.dateReceived}}</td>
-                                    <td>{{dld.dateWork}}</td>
-                                    <td>{{dld.keyWord}}</td>
-                                    <td>{{dld.category.cate}}</td>
-                                    <td>{{dld.topic}}</td>
-                                    <td>{{dld.file.name}}</td>
-                                     <td>{{dld.user.userName}}</td>
-                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
-                                    <td><input type="submit" value="แสดงข้อมูล" ng-click="detaildoc(dld)"></td>
+                                <tr ng-repeat="fdl in formfiles.content">
+                                    <td>{{fdl.id}}</td>
+                                    <td>{{fdl.formName}}</td>
+                                    <td><input type="submit" value="Dowload" ng-click="dowload(fdl)"></td>
+                                    <td><input type="submit" value="ลบ"  ng-click="clickDelete(fdl)" data-toggle="modal" data-target="#complete-dialog">
+                                    </td> 
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="#/home"></a>
                         <ul class="pagination pull-right" >
                             <li id="firstPage"><a ng-click="firstPage()">«</a></li>
                             <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
@@ -64,6 +50,7 @@
                             <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
                             <li id="finalPage"><a ng-click="finalPage()">»</a></li>
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -76,4 +63,27 @@
     <ul class="pager">
         <li class="previous"><a href="#/home">หน้าหลัก</a></li>
     </ul>
+</div>
+
+
+<div id="complete-dialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ยืนยันการลบ</h4>
+            </div>
+            <div class="modal-body">
+                <br>
+                <br>
+                แบบฟอร์มชื่อ  : {{delete.formName}}
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+                <button class="btn btn-danger"  data-dismiss="modal" ng-click="deleteForm()">ลบ</button>
+            </div>
+        </div>
+    </div>
+
 </div>

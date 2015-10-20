@@ -8,9 +8,9 @@
                 <form class="form-horizontal">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">วันที่เอกสารเข้า : </label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control datepicker" ng-model="document.dateReceived">
+                            <label class="col-md-2 control-label"><span style="color: red">*</span>วันที่เอกสารเข้า : </label>
+                            <div class="col-md-3"><span style="color: red">{{derror.violations.dateReceived.message}}</span>
+                                <input type="text" class="form-control datepicker" ng-model="document.dateReceived" ng-change="derror.violations.dateReceived.message=''" >
                             </div> 
                             <label class="col-md-2 control-label">วันที่ปฏิบัติงาน : </label>
                             <div class="col-md-3">
@@ -28,9 +28,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label" >เลขที่หนังสือ :</label>
-                            <div class="col-md-3">
-                                <input type="bookNO" class="form-control" ng-model="document.bookNO">
+                            <label class="col-md-2 control-label" ><span style="color: red">*</span>เลขที่หนังสือ :</label>
+                            <div class="col-md-3"><span style="color: red">{{derror.violations.bookNO.message}}</span>
+                                <input type="bookNO" class="form-control" ng-model="document.bookNO" ng-change="derror.violations.bookNO.message=''">
                             </div>
                             <label class="col-md-2 control-label">หมวดงานเอกสาร :</label>
                             <div class="col-md-3">
@@ -74,7 +74,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label"></label>
                             <div class="col-md-3">
-                                <input value="save" type="submit" class="btn btn-success"ng-click="saveDocument()">
+                                <input value="บันทึก" type="submit" class="btn btn-success"ng-click="saveDocument()">
                                 <input value="clear" type="submit" class="btn btn-info"ng-click="clearDoc()">
                             </div>
                         </div>

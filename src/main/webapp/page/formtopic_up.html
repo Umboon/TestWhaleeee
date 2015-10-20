@@ -6,9 +6,9 @@
         <div class="panel-body">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-md-2 control-label">ชื่อแบบฟอร์ม :</label>
-                    <div class="col-md-3">
-                        <input type="nameform" class="form-control" ng-model="topicform.formName">
+                    <label class="col-md-2 control-label"><span style="color: red">*</span>ชื่อแบบฟอร์ม :</label>
+                    <div class="col-md-3"><span style="color: red">{{ferror.violations.formName.message}}</span>
+                        <input type="nameform" class="form-control" ng-model="topicform.formName" ng-change="ferror.violations.formName.message=''">
                     </div>
                 </div>
                 <div class="form-group">
@@ -34,3 +34,4 @@
     </div>
 
 </div>
+<div id="growl-custom"></div>

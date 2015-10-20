@@ -1,10 +1,10 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user','docforcategory','formtopic_up','form_dowload','record_log','doc_manage']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user', 'docforcategory', 'formtopic_up', 'form_dowload', 'record_log', 'doc_manage', 'detail_docmanage','formup_manage']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
     $scope.searchCategory = {};
-    $scope.userLogin ={};
-    
+    $scope.userLogin = {};
+
     function getCategorys() {
         $http.get('/getcategorys').success(function (data) {
             $scope.categorys = data;
@@ -21,43 +21,43 @@ angular.module('app').controller('homeController', function ($http, $scope) {
         $scope.searchCategory.keyWord = searchCategory.cate;
         $scope.searchCategory.searchBy = "";
         console.log($scope.searchCategory.keyWord);
-        console.log('click'+searchCategory.cate);
+        console.log('click' + searchCategory.cate);
         $http.post('/searchbycategory', $scope.searchCategory).success(function (data) {
-             location.href="#/docforcategory";
+            location.href = "#/docforcategory";
         });
     };
 
     getUserLogin();
-    function getUserLogin (){
-        $http.get('/getuserlogin').success(function (data){
+    function getUserLogin() {
+        $http.get('/getuserlogin').success(function (data) {
             $scope.userLogin = data;
             console.log(data);
         });
     }
-    
-    
-    
-    $scope.checkAdmin = function (){
-        if($scope.userLogin.status == 'Admin'){
+
+
+
+    $scope.checkAdmin = function () {
+        if ($scope.userLogin.status == 'Admin') {
             return true;
         }
-        else{
+        else {
             return false;
         }
         //console.log($scope.userLogin.status == 'Admin');
     };
-    $scope.checkAdminOrTeacher = function (){
-        if(($scope.userLogin.status == 'Admin') || ($scope.userLogin.status == 'Teacher')){
+    $scope.checkAdminOrTeacher = function () {
+        if (($scope.userLogin.status == 'Admin') || ($scope.userLogin.status == 'Teacher')) {
             return true;
         }
-        else{
+        else {
             return false;
         }
     };
-    
-    
-    
-    
+
+
+
+
 
 }).config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -108,7 +108,7 @@ angular.module('app').controller('homeController', function ($http, $scope) {
                 controller: 'formtopicupController',
                 templateUrl: 'page/formtopic_up.html'
             })
-             .when('/form_dowload', {
+            .when('/form_dowload', {
                 controller: 'formdowloadController',
                 templateUrl: 'page/form_dowload.html'
             })
@@ -120,6 +120,14 @@ angular.module('app').controller('homeController', function ($http, $scope) {
                 controller: 'docmanageController',
                 templateUrl: 'page/doc_manage.html'
             })
+            .when('/detail_docmanage', {
+                controller: 'detaildocController',
+                templateUrl: 'page/detail_docmanage.html'
+            })
+             .when('/formup_manage', {
+                controller: 'formupmanageController',
+                templateUrl: 'page/formup_manage.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -127,11 +135,21 @@ angular.module('app').controller('homeController', function ($http, $scope) {
 }).factory('documentService', function () {
     return {
         detail: {}
+        
     };
 }).factory('userService', function () {
     return {
         detail_user: {}
     };
+    
+}).factory('docmanageService', function () {
+    return {
+        detail_docmanage: {}
+    };
+//}).factory('formmanageService',function (){
+//    return {
+//        detail_formup: {}
+//    };
 });
 
 

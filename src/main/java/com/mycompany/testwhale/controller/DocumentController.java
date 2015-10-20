@@ -102,6 +102,16 @@ public class DocumentController {
     private void setDocumentDetail(@RequestBody Document document) {
         docId = document.getId();
     }
+    
+    @RequestMapping(value = "/getdocmanagedetail",method = RequestMethod.GET)
+    private Document getDocManageDetail(){
+        return documentRepo.findOne(docId);
+    }
+    
+    @RequestMapping(value = "/setdocmanagedetail", method = RequestMethod.POST)
+    private void setDocManageDetail(@RequestBody Document document){
+        docId = document.getId();
+    }
 
     @RequestMapping(value = "/searchdocument", method = RequestMethod.POST)
     private Page<Document> searchDocument(@RequestBody SearchData searchData, Pageable pageable) throws ParseException {

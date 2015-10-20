@@ -47,6 +47,7 @@ angular.module('view_document').controller('view_documentController', function (
             console.log('true');
             console.log(data);
             countSearch();
+            $scope.documents = data;
             if (!data.content.length) {
 
                 $("#complete-dialog").modal('show');

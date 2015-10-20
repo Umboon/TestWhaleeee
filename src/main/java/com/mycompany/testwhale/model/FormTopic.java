@@ -8,11 +8,13 @@ package com.mycompany.testwhale.model;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -23,6 +25,8 @@ public class FormTopic implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(nullable = false)
+    @NotBlank(message = "กรุณากรอกชื่อแบบฟอร์ม")
     private String formName;
     
     @OneToOne(cascade = CascadeType.ALL)

@@ -14,6 +14,7 @@ var app = angular.module('detail').controller('detailController', function (docu
      $scope.update = function (doc){
          documentService.detail = doc;
          location.href="#/document";
+         
      };
 
     getDocumentDetail();

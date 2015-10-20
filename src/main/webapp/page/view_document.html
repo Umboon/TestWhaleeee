@@ -4,11 +4,11 @@
     <form class="navbar-form navbar-left">
 
         <label class="control-label">ค้นหาจาก:</label>
-        <select ng-model="searchData.searchBy" ng-change="selectSearchBy()" ng-init="searchData.searchBy = 'fileName'">
+        <select ng-model="searchData.searchBy" ng-change="selectSearchBy()" ng-init="searchData.searchBy = 'topic'">
             <option value="dateReceived">วันที่เอกสารเข้า</option>
             <option value="dateWork">วันที่ปฏิบัติงาน</option>
             <option value="topic">ชื่อเรื่อง</option>
-            <option value="fileName">ชื่อไฟล์</option>
+            <option value="fileName">นามสกุลไฟล์</option>
             <option value="keyword">คำค้น</option>
 
         </select> &nbsp;&nbsp;

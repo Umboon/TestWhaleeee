@@ -5,7 +5,7 @@
  */
 package com.mycompany.testwhale.model;
 
-import java.util.Date;
+//import java.util.Date;
 
 /**
  *

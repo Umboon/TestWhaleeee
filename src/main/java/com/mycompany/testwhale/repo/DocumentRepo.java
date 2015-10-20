@@ -20,4 +20,5 @@ public interface DocumentRepo extends JpaRepository<Document, Integer>, JpaSpeci
     
     public Page<Document> findAllByOrderByIdDesc(Pageable pageable);
     public Page<Document> findByUserr(User userr, Pageable pageable);
+    
 }

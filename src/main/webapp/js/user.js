@@ -9,7 +9,7 @@ angular.module('user').controller('userController', function (userService, $scop
         if (checkPassword()) {
             $http.post('/saveuser', $scope.user).success(function (data) {
                 getUser();
-                growl("บันทึกสำเร็จ",'msg-oom','top');
+                growl("บันทึกสำเร็จ",'msg-green','top');
 
             }).error(function (data) {
                $scope.error = data;

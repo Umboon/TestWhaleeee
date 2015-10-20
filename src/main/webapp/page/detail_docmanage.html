@@ -8,52 +8,52 @@
             <div class="panel-body">
                 <form class="form-horizontal">
                     <div class="row">
-                        <h1> {{documentService.detail.topic}}</h1>
+                        <h1> {{docmanageService.detaildoc.topic}}</h1>
                         <div class="form-group">
                             <label class="col-md-2 control-label"><span class="necessary">*</span>วันที่เอกสารเข้า : </label>
-                            <label class="col-md-3 control-label">{{details.dateReceived}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.dateReceived}}</label>
 
                             <label class="col-md-2 control-label"><span class="necessary">*</span>วันที่ปฏิบัติงาน : </label>
-                            <label class="col-md-3 control-label">{{details.dateWork}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.dateWork}}</label>
 
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">หน่วยงานที่ออกหนังสือ :</label>
-                            <label class="col-md-3 control-label">{{details.agencyDocReleased}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.agencyDocReleased}}</label>
                             <label class="col-md-2 control-label"><span class="necessary">*</span>คำค้น :</label>
-                            <label class="col-md-3 control-label">{{details.keyWord}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.keyWord}}</label>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label" ><span class="necessary">*</span>เลขที่หนังสือ :</label>
-                            <label class="col-md-3 control-label">{{details.bookNO}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.bookNO}}</label>
                             <label class="col-md-2 control-label"><span class="necessary">*</span>หมวดงานเอกสาร :</label>
-                            <label class="col-md-3 control-label">{{details.category.cate}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.category.cate}}</label>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label"><span class="necessary">*</span>เรื่อง :</label>
-                            <label class="col-md-3 control-label">{{details.topic}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.topic}}</label>
                             <label class="col-md-2 control-label">เรียน :</label>
-                            <label class="col-md-3 control-label">{{details.receiver}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.receiver}}</label>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">คำอธิบาย :</label>
-                            <label class="col-md-3 control-label">{{details.note}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.note}}</label>
                             <label class="col-md-2 control-label">สิทธิ์การเห็น :</label>
-                            <label class="col-md-3 control-label">{{details.groupUser}}</label>
+                            <label class="col-md-3 control-label">{{detaildoc.groupUser}}</label>
                         </div>
 
                         <div class="form-group">
                             <div class="icon-preview"><i class="mdi-editor-attach-file"></i>
                                 <label class="col-md-2 control-label"><span class="necessary">*</span>ไฟล์แนบ :</label>
-                                <label class="col-md-3 control-label">{{details.file.name}}</label>
+                                <label class="col-md-3 control-label">{{detaildoc.file.name}}</label>
                             </div>
                         </div>  
                         <div class="form-group">
                             <label class="col-md-2 control-label"></label>
                             <div class="col-md-6">
-                                <input type="submit" value="แก้ไขข้อมูล" class="btn btn-success" ng-click="update(details)">
+                                <input type="submit" value="แก้ไขข้อมูล" class="btn btn-success" ng-click="update(detaildoc)">
                                 <input type="submit" value="ลบ"  class="btn btn-danger" data-toggle="modal" data-target="#complete-dialog">
-                                <a href="#/report_up"><input type="submit" value="ย้อนกลับ" class="btn btn-info"></a>
+                                <a href="#/doc_manage"><input type="submit" value="ย้อนกลับ" class="btn btn-info"></a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
             <div class="modal-body">
                 <br>
                 <br>
-                เอกสารชื่อ  : {{details.topic}}
+                เอกสารชื่อ  : {{detaildoc.topic}}
 
             </div>
             <div class="modal-footer">

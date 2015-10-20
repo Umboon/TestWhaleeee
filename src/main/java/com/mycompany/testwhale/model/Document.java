@@ -23,6 +23,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.annotation.Order;
 
@@ -37,22 +38,27 @@ public class Document implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    @NotNull(message = "กรุณากรอกวันที่เอกสารเข้า")
     private Date dateReceived;
     @Temporal(TemporalType.DATE)
     private Date dateWork;
 
     private String agencyDocReleased;
     private String keyWord;
+
+    @Column(nullable = false)
+    @NotBlank(message = "กรุณากรอกเลขที่เอกสาร")
     private String bookNO;
-    
+
     @Column(nullable = false)
     @NotBlank(message = "กรุณากรอกชื่อเรื่อง")
     private String topic;
     private String receiver;
     private String note;
     private String groupUser;
-    
 
     @OneToOne(cascade = CascadeType.ALL)
     private DocFile file;
