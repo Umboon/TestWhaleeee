@@ -37,7 +37,8 @@
                                 <tr ng-repeat="fdl in formfiles.content">
                                     <td>{{fdl.id}}</td>
                                     <td>{{fdl.formName}}</td>
-                                    <td><input type="submit" value="Dowload" ng-click="dowload(fdl)"></td>
+                                    <td><input type="submit" ng-show="!!fdl.file.mimeType" value="Dowload" ng-click="dowload(fdl)">
+                                        <h5 ng-hide="!!fdl.file.mimeType" style="color: red">ไม่มีไฟล์ข้อมูล</h5></td>
                                     <td><input type="submit" value="ลบ"  ng-click="clickDelete(fdl)" data-toggle="modal" data-target="#complete-dialog">
                                     </td> 
                                 </tr>

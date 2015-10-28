@@ -9,6 +9,7 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
         $scope.topicform.file = $scope.form;
         $http.post('/saveformtopic', $scope.topicform).success(function (data) {
             getFormTopic();
+            $scope.clearForm();
             growl("บันทึกสำเร็จ", 'msg-green', 'top');
         }).error(function (data) {
             $scope.ferror = data;

@@ -16,6 +16,7 @@ var app = angular.module('document').controller('documentController', function (
 
     $scope.saveDocument = function () {
         saveDocument();
+        
 
     };
 
@@ -48,6 +49,7 @@ var app = angular.module('document').controller('documentController', function (
         $http.post('/savedocument', $scope.document).success(function (data) {
             growl("บันทึกสำเร็จ", 'msg-green', 'top');
             getUserUpload();
+            $scope.clearDoc();
         }).error(function (data) {
 
             $scope.derror = data;
@@ -64,6 +66,8 @@ var app = angular.module('document').controller('documentController', function (
     $scope.clearDoc = function () {
         $scope.document = {};
         getUserUpload();
+        getCategory(1);
+        $scope.document.groupUser='Only me';
     };
 
     $scope.saveFile = function () {

@@ -13,7 +13,7 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
  
       getDocuments();
     function getDocuments(){
-        $http.get('/getdocuments', {params: {page: $scope.page, size: $scope.size}}).success(function (data){
+        $http.get('/getdocmanage', {params: {page: $scope.page, size: $scope.size}}).success(function (data){
             $scope.documents = data;
             console.log(data);
             

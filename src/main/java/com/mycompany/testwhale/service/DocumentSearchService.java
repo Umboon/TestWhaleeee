@@ -54,4 +54,6 @@ public class DocumentSearchService {
         Specification<Document> specification = Specifications.where(DocumentSpec.dateWorkBetween(start, end));
         return documentRepo.findAll(specification,pageable);
     }
+    
+   
 }

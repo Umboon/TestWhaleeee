@@ -24,7 +24,7 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-<!--                                    <th>ลำดับ</th>-->
+                                    <th>ลำดับ</th>
                                     <th>วันที่เอกสารเข้า</th>
                                     <th>วันที่ปฏิบัติงาน</th>
                                     <th>หมวดเอกสาร</th>
@@ -41,13 +41,14 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="dld in documents.content">
-<!--                                    <td>{{dld.id}}</td>-->
+                                    <td>{{dld.id}}</td>
                                     <td>{{dld.dateReceived}}</td>
                                     <td>{{dld.dateWork}}</td>
                                     <td>{{dld.category.cate}}</td>
                                     <td>{{dld.topic}}</td>
                                     <td>{{dld.file.name}}</td>
-                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
+                                    <td><input type="submit" ng-show="!!dld.file.mimeType" value="Dowload" ng-click="dowload(dld)">
+                                        <h5 ng-hide="!!dld.file.mimeType" style="color: red">ไม่มีไฟล์ข้อมูล</h5></td>
                                     <td><input type="submit" value="แสดงข้อมูล" ng-click="details(dld)"></td>
                                 </tr>
                             </tbody>

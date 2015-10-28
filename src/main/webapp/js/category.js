@@ -8,6 +8,7 @@ angular.module('category').controller('categorycontroller', function ($http, $sc
        if(!!$scope.category.cate){
             $http.post('/savecategory', $scope.category).success(function (data) {
             getCategory();
+            $scope.clearData();
             growl("บันทึกสำเร็จ",'msg-green','top');
 
        

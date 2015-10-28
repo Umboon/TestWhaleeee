@@ -17,8 +17,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @author UMBOON
  */
 public interface DocumentRepo extends JpaRepository<Document, Integer>, JpaSpecificationExecutor<Document> {
-    
+
     public Page<Document> findAllByOrderByIdDesc(Pageable pageable);
-    public Page<Document> findByUserr(User userr, Pageable pageable);
-    
+
+    public Page<Document> findByUserrOrderByIdDesc(User userr, Pageable pageable);
+
+    public Page<Document> findByGroupUserOrderByIdDesc(String status, Pageable pageable);
+
+    public Page<Document> findByGroupUserOrGroupUserOrderByIdDesc(String teacher, String publics, Pageable pageable);
 }

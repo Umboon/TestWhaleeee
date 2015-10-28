@@ -8,8 +8,19 @@ angular.module('view_document').controller('view_documentController', function (
     var totalRow = 0;
     var totalPage = 0;
     $scope.showDatePicker = false;
+    var userLogin = {};
+    
+    loadUserLogin();
+    function loadUserLogin(){
+        $http.get('/getuserlogin').success(function (data){
+            userLogin = data;
+            console.log(data.status+'---------');
+            getDocuments();
+        });
+    }
+    
     function getDocuments() {
-        $http.get('/getdocuments', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+        $http.post('/getdocuments', userLogin, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
             //console.log($scope.documents);
             getTotalRow();
@@ -17,8 +28,7 @@ angular.module('view_document').controller('view_documentController', function (
         });
 
     }
-    getDocuments();
-
+    
     $scope.getDocuments = function () {
         getDocuments();
     };

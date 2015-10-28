@@ -24,7 +24,7 @@ angular.module('formup_manage').controller('formupmanageController', function ($
         $('.modal-backdrop.in').css('display', 'none');
         $http.post('/deleteformtopic', $scope.delete).success(function (data) {
             location.href = "#/formup_manage";
-            getFormTopic()
+            getFormTopic();
         });
 
     };

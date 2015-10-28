@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,9 +79,26 @@ public class DocumentController {
         documentRepo.delete(document);
     }
 
-    @RequestMapping(value = "/getdocuments", method = RequestMethod.GET)
-    private Page<Document> getDocument(Pageable pageable) {
+    @RequestMapping(value = "/getdocuments", method = RequestMethod.POST)
+    private Page<Document> getDocument(@RequestBody User user , Pageable pageable) {
 //       return documentRepo.findAll(DocumentSpec.documentDesc(),pageable);
+        Page<Document> docs = null;
+        //System.out.println("------------------------------------------------------->"+user.getStatus());
+        if("Admin".equals(user.getStatus())){
+        docs = documentRepo.findAllByOrderByIdDesc(pageable);
+        }
+        else if ("Teacher".equals(user.getStatus())) {
+
+            docs = documentRepo.findByGroupUserOrGroupUserOrderByIdDesc("Public", "Teacher", pageable);
+        }
+        else if("Student".equals(user.getStatus())){
+        docs = documentRepo.findByGroupUserOrderByIdDesc("Public", pageable);
+        }
+        return docs;
+    }
+    
+    @RequestMapping(value = "/getdocmanage" , method = RequestMethod.GET)
+    private Page<Document>getDocManage(Pageable pageable){
         return documentRepo.findAllByOrderByIdDesc(pageable);
     }
 
@@ -189,6 +207,6 @@ public class DocumentController {
     @RequestMapping(value = "/getuploadhistory")
     private Page<Document> uploadHistory(Pageable pageable) {
        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      return documentRepo.findByUserr(user, pageable);
+      return documentRepo.findByUserrOrderByIdDesc(user, pageable);
     }
 }

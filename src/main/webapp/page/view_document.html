@@ -70,7 +70,9 @@
                                     <td>{{dld.topic}}</td>
                                     <td>{{dld.file.name}}</td>
                                     <td>{{dld.user.userName}}</td>
-                                    <td><input type="submit" value="Dowload" ng-click="dowload(dld)"></td>
+                                    <td><input type="submit" ng-show="!!dld.file.mimeType" value="Dowload" ng-click="dowload(dld)">
+                                        <h5 ng-hide="!!dld.file.mimeType" style="color: red">ไม่มีไฟล์ข้อมูล</h5>
+                                    </td>
 
                                 </tr>
                             </tbody>
