@@ -65,9 +65,10 @@
 
                         <div class="form-group">
                             <div class="icon-preview"><i class="mdi-editor-attach-file"></i>
-                                <label class="col-md-2 control-label">ไฟล์แนบ :</label>
+                                <label class="col-md-2 control-label"><span style="color: red">*</span>ไฟล์แนบ :</label>
                                 <div class="col-md-3">
-                                    <input type="file" class="form-control" file-model="file" custom-on-change ="saveFile">
+                                    <span style="color: red">{{derror.violations.file.message}}</span>
+                                    <input id="filedoc" type="file" class="form-control" file-model="file" custom-on-change ="saveFile">
                                 </div>
                             </div>
                         </div>   

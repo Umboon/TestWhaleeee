@@ -54,8 +54,8 @@ angular.module('view_document').controller('view_documentController', function (
     function search() {
         $scope.searchData.keyWord;
         $http.post('/searchdocument', $scope.searchData, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-            console.log('true');
-            console.log(data);
+           // console.log('true');
+           // console.log(data);
             countSearch();
             $scope.documents = data;
             if (!data.content.length) {

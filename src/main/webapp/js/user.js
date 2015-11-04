@@ -10,24 +10,31 @@ angular.module('user').controller('userController', function (userService, $scop
             $http.post('/saveuser', $scope.user).success(function (data) {
                 getUser();
                 $scope.clearUser();
-                growl("บันทึกสำเร็จ",'msg-green','top');
-
+                growl("บันทึกสำเร็จ", 'msg-green', 'top');
+                userService.detail_user = {};
+                if (!!userService.detail_user) {
+                    userService.detail_user = {};
+                    location.href = '#/show_user';
+                }
             }).error(function (data) {
-               $scope.error = data;
-               
+                $scope.error = data;
+                growl("ชื่อผู้ใช้งานซ้ำ", 'msg-red', 'top');
             });
+
         }
         else {
-            console.log('password error');
-             growl("กรุณากรอกข้อมูลให้ครบถ้วน",'msg-red','top');
+           // console.log('password error');
+            growl("กรุณากรอกข้อมูลให้ครบถ้วน", 'msg-red', 'top');
         }
     };
+
+
 
     $scope.checkPassword = function () {
         checkPassword();
     };
     function checkPassword() {
-        if (!!$scope.password && !!$scope.user.passWord){
+        if (!!$scope.password && !!$scope.user.passWord) {
             if (($scope.password == $scope.user.passWord)) {
                 $('#confirm').removeClass('mdi-content-clear').addClass('mdi-action-done').css('color', 'green');
                 return true;
@@ -37,8 +44,8 @@ angular.module('user').controller('userController', function (userService, $scop
                 return false;
             }
         }
-        else{
-             $('#confirm').removeClass('mdi-content-clear , mdi-action-done');
+        else {
+            $('#confirm').removeClass('mdi-content-clear , mdi-action-done');
         }
     }
 
@@ -47,6 +54,7 @@ angular.module('user').controller('userController', function (userService, $scop
         $scope.user = {};
         $scope.password = "";
         checkPassword();
+        $scope.user.status = 'Student';
     };
 
     $scope.clear = {};
@@ -54,6 +62,7 @@ angular.module('user').controller('userController', function (userService, $scop
         $scope.user = {};
         $scope.password = "";
         checkPassword();
+        $scope.user.status = 'Student';
     };
 
 

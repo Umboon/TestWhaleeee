@@ -9,7 +9,7 @@ angular.module('category').controller('categorycontroller', function ($http, $sc
             $http.post('/savecategory', $scope.category).success(function (data) {
             getCategory();
             $scope.clearData();
-            growl("บันทึกสำเร็จ",'msg-green','top');
+            growl("บันทึกสำเร็จ",'msg-green','buttom');
 
        
        });

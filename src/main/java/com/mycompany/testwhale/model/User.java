@@ -29,12 +29,12 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Table(name = "USER")
-public class User implements Serializable , UserDetails  {
+public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank(message = "กรุณากรอกชื่อผู้ใช้")
     private String userName;
     @Column(nullable = false)
@@ -57,8 +57,7 @@ public class User implements Serializable , UserDetails  {
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
-    
-    
+
     public List<Document> getDocuments() {
         return documents;
     }
@@ -132,8 +131,8 @@ public class User implements Serializable , UserDetails  {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-     return Collections.emptySet();
-    
+        return Collections.emptySet();
+
     }
 
     @Override
@@ -148,7 +147,7 @@ public class User implements Serializable , UserDetails  {
 
     @Override
     public boolean isAccountNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
@@ -166,5 +165,4 @@ public class User implements Serializable , UserDetails  {
         return enable;
     }
 
-   
 }

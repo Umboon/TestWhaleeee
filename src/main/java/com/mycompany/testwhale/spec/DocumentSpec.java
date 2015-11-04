@@ -22,20 +22,19 @@ import org.springframework.data.jpa.domain.Specification;
  */
 public class DocumentSpec {
 
-    public static Specification<Document> dateReceivedLike(final String keyword) {
-        String dateReceived = Document_.dateReceived + "";
-        return new Specification<Document>() {
-
-            @Override
-            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return null;
-                // return cb.or(cb.(root.get(Document_.dateReceived), new Date(),new Date()));
-
-            }
-        };
-
-    }
-
+//    public static Specification<Document> dateReceivedLike(final String keyword) {
+//        String dateReceived = Document_.dateReceived + "";
+//        return new Specification<Document>() {
+//
+//            @Override
+//            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+//                return null;
+//                // return cb.or(cb.(root.get(Document_.dateReceived), new Date(),new Date()));
+//
+//            }
+//        };
+//
+//    }
     public static Specification<Document> topicLike(final String keyword) {
         return new Specification<Document>() {
 
@@ -103,5 +102,17 @@ public class DocumentSpec {
             }
         };
     }
+    
+ //===================pagsearch===================================================================//
+    public static Specification<Document> docForCategory(final String keyword) {
+        return new Specification<Document>() {
 
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.like(root.get(Document_.category).get(Category_.cate), keyword);
+            }
+
+        };
+
+    }
 }

@@ -40,6 +40,9 @@ public class CustomUserDetailService implements UserDetailsService{
             recordLog.setDateLogin(new Date());
             recordLogRepo.save(recordLog);
         }
+//       else{
+//           new UsernameNotFoundException("User Not Font");
+//       }
         return user;
     }
     

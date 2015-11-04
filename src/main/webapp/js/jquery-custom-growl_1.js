@@ -11,7 +11,7 @@ function growl(message, type, position) {
             positionHeight = 100;
             break;
         case 'buttom':
-            positionHeight = $(window).outerHeight() - 80;
+            positionHeight = $(window).outerHeight() - 100;
             break;
         default :
             positionHeight = ($(window).outerHeight() - browser().scrollTop());
@@ -19,7 +19,7 @@ function growl(message, type, position) {
 
     $growlCustom.css('top', positionHeight);
     $growlCustom.css('left', positionWidth);
-    $growlCustom.addClass(alretType).fadeIn(1000).fadeOut(3500);
+    $growlCustom.addClass(alretType).fadeIn(100).fadeOut(5000);
 }
 
 function browser() {

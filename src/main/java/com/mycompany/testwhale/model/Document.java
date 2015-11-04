@@ -25,6 +25,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.core.annotation.Order;
 
 /**
@@ -61,6 +62,7 @@ public class Document implements Serializable {
     private String groupUser;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @NotNull(message = "กรุณาเลือกไฟล์")
     private DocFile file;
 
     @ManyToOne

@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.NotBlank;
+//import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -22,13 +22,14 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name = "FILE")
-public class DocFile implements Serializable{
-    
+public class DocFile implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(nullable = false)
     private String name;
-    
+
     @Lob
     private byte[] content;
     private String mimeType;
@@ -49,9 +50,6 @@ public class DocFile implements Serializable{
         this.name = name;
     }
 
-   
-    
-
     public byte[] getContent() {
         return content;
     }
@@ -67,10 +65,6 @@ public class DocFile implements Serializable{
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
-
-   
-
-   
 
     @Override
     public int hashCode() {
@@ -93,12 +87,5 @@ public class DocFile implements Serializable{
         }
         return true;
     }
-    
-    
 
-   
-
-   
-    
-    
 }

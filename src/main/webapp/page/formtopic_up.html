@@ -8,24 +8,25 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label"><span style="color: red">*</span>ชื่อแบบฟอร์ม :</label>
                     <div class="col-md-3"><span style="color: red">{{ferror.violations.formName.message}}</span>
-                        <input type="nameform" class="form-control" ng-model="topicform.formName" ng-change="ferror.violations.formName.message=''">
+                        <input type="nameform" class="form-control" ng-model="topicform.formName" ng-change="ferror.violations.formName.message = ''">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="icon-preview"><i class="mdi-editor-attach-file"></i>
-                        <label class="col-md-2 control-label">ไฟล์แนบ :</label>
+                        <label class="col-md-2 control-label"><span style="color: red">*</span>ไฟล์แนบ :</label>
                         <div class="col-md-3">
-                            <input type="file" class="form-control" file-model="form" custom-on-change ="changeForm">
+                            <span style="color: red">{{ferror.violations.file.message}}</span>
+                            <input id="formdoc" type="file" class="form-control" file-model="form" custom-on-change ="changeForm">
                         </div>
                     </div>
                 </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label"></label>
-                        <div class="col-md-3">
-                            <input type="submit" class="btn btn-success" value="save" ng-click="saveFormTopic()">
-<!--                            <input type="submit" class="btn btn-info" value="clear" ng-click="clearForm()">-->
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input type="submit" class="btn btn-success" value="save" ng-click="saveFormTopic()">
+                        <!--                            <input type="submit" class="btn btn-info" value="clear" ng-click="clearForm()">-->
                     </div>
+                </div>
             </form>
         </div>
         <div class="progress progress-striped">

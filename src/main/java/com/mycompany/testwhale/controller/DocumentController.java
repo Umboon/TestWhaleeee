@@ -209,4 +209,12 @@ public class DocumentController {
        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       return documentRepo.findByUserrOrderByIdDesc(user, pageable);
     }
+     
+    //===================pagsearch===================================================================//
+    
+    
+    @RequestMapping(value = "/countdocforcate", method = RequestMethod.GET)
+    private long countDoucumentForCategory (){
+        return documentRepo.count(DocumentSpec.docForCategory(category));
+    }
 }

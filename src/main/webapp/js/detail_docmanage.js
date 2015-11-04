@@ -12,9 +12,8 @@ var app = angular.module('detail_docmanage').controller('detaildocController', f
     };
 
     $scope.update = function (doc) {
-        docmanageService.detail_docmanage = doc;
+       docmanageService.detail_docmanage = doc;
         location.href = "#/document";
-       
     };
 
     getDocManageDetail();

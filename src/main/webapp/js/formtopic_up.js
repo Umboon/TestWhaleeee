@@ -7,14 +7,19 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
 
     $scope.saveFormTopic = function () {
         $scope.topicform.file = $scope.form;
+
         $http.post('/saveformtopic', $scope.topicform).success(function (data) {
             getFormTopic();
             $scope.clearForm();
             growl("บันทึกสำเร็จ", 'msg-green', 'top');
         }).error(function (data) {
             $scope.ferror = data;
-            growl("กรุณากรอกชื่อแบบฟอร์ม",'msg-red','top');
+            growl("กรุณากรอกข้อมูลแบบฟอร์ม", 'msg-red', 'top');
         });
+        if (!!$scope.ferror.violations.file) {
+            $scope.ferror.violations.file.message = "";
+        }
+        $("#formdoc").val("");
     };
 
     $scope.formfiles = {};
@@ -28,11 +33,12 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
 
     $scope.clearForm = function () {
         $scope.topicform = {};
-
+        //$scope.formfiles = {};
     };
 
 
     $scope.changeForm = function () {
+        $("#formdoc").val();
         var fd = new FormData();
         fd.append('forms', $scope.form);
         $http.post('/saveform', fd, {

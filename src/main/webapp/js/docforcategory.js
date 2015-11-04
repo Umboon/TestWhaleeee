@@ -15,10 +15,48 @@ angular.module('docforcategory').controller('docforcateController', function ($h
 
     $scope.searchData = {};
     $scope.documents = {};
+    //var userLogin = {};
+    $scope.user = {};
+    getUserUpload();
+    var countDocForcate = 0;
+    function getUserUpload() {
+        $http.get('/getuserupload').success(function (data) {
+            $scope.user = data;
+           // console.log(data.status+'userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+        });
+    }
+    
+  
+
+    $scope.checkViewUser = function (doc) {
+       // console.log($scope.documents.content[0] + 'hellooooooooooooooooooooooooo');
+        if('Admin' === $scope.user.status){
+            return true;
+        }
+        else if(('Teacher' === $scope.user.status) && (doc.groupUser === 'Public' || doc.groupUser === 'Teacher')){
+            return true;
+        }
+        else if(('Student' === $scope.user.status) && doc.groupUser === 'Public'){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    };
+    
+    countDocForCategory();
+    function countDocForCategory(){
+        $http.get('/countdocforcate').success(function (data){
+            console.log(data);
+            countDocForcate = data;
+        });
+    }
 
     function getDocuments() {
         $http.get('/getdocforcate', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
+            //  getCateGroupUser();
             console.log($scope.documents);
         });
 
@@ -32,6 +70,14 @@ angular.module('docforcategory').controller('docforcateController', function ($h
     $scope.dowload = function (dld) {
         location.href = '/getfile/' + dld.file.id;
     };
+//
+//    function getCateGroupUser(){
+//        $http.post('/getcategroupuser',userLogin).success(function (data){
+//            $scope.documents = data;
+//        });
+//    }
+
+//    check();
 
 
     $scope.search = function () {

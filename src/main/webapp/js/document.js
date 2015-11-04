@@ -1,13 +1,14 @@
 var app = angular.module('document', ['checklist-model']);
-var app = angular.module('document').controller('documentController', function (documentService,docmanageService,$scope, $http) {
+var app = angular.module('document').controller('documentController', function (documentService, docmanageService, $scope, $http) {
+
 
     $scope.file;
     $scope.document = {};
-    if(!!documentService.detail.topic){
+    if (!!documentService.detail.topic) {
         $scope.document = documentService.detail;
         console.log('1');
     }
-    if(!!docmanageService.detail_docmanage.topic){
+    if (!!docmanageService.detail_docmanage.topic) {
         $scope.document = docmanageService.detail_docmanage;
         console.log('2');
     }
@@ -16,15 +17,34 @@ var app = angular.module('document').controller('documentController', function (
 
     $scope.saveDocument = function () {
         saveDocument();
-        
+        if(!!$scope.derror.violations.file){
+        $scope.derror.violations.file.message = "";
+    }
+        $("#filedoc").val("");
+        if (!!documentService.detail.topic) {
+            $scope.document = documentService.detail;
+            //   console.log('1');
+            documentService.detail = {};
+            location.href = "#/detail";
+        }
+        if (!!docmanageService.detail_docmanage.topic) {
+            $scope.document = docmanageService.detail_docmanage;
+            //   console.log('2');
+            docmanageService.detail_docmanage = {};
+            location.href = "#/detail_docmanage";
+        }
 
     };
 
     if (!!$scope.document.category) {
+        //  console.log($scope.document.category);
+        //  console.log("has category");
         getCategory($scope.document.category.id);
+
     }
     else {
         getCategory(1);
+        //   console.log(("No"));
     }
 
     getUserUpload();
@@ -47,7 +67,7 @@ var app = angular.module('document').controller('documentController', function (
 
     function saveDocument() {
         $http.post('/savedocument', $scope.document).success(function (data) {
-            growl("บันทึกสำเร็จ", 'msg-green', 'top');
+            growl("บันทึกสำเร็จ", 'msg-green', 'buttom');
             getUserUpload();
             $scope.clearDoc();
         }).error(function (data) {
@@ -67,10 +87,12 @@ var app = angular.module('document').controller('documentController', function (
         $scope.document = {};
         getUserUpload();
         getCategory(1);
-        $scope.document.groupUser='Only me';
+        $scope.document.groupUser = 'Only me';
     };
 
     $scope.saveFile = function () {
+        $("#filedoc").val();
+        console.log($("#filedoc").val());
         var fd = new FormData();
         fd.append('files', $scope.file);
         $http.post('/savefile', fd, {

@@ -9,3 +9,6 @@ select.ui-datepicker-year{
 #firstPage:hover,#prePage:hover,#nextPage:hover,#finalPage:hover{
     cursor: pointer;
 }
+.form-control{
+    background-size: 0 2px,100% 2px;
+}

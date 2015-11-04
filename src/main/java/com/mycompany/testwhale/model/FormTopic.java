@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -21,15 +22,18 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author UMBOON
  */
 @Entity
-public class FormTopic implements Serializable{
+public class FormTopic implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(nullable = false)
     @NotBlank(message = "กรุณากรอกชื่อแบบฟอร์ม")
     private String formName;
-    
+
+
     @OneToOne(cascade = CascadeType.ALL)
+
     private FormFile file;
 
     public FormFile getFile() {
@@ -39,8 +43,6 @@ public class FormTopic implements Serializable{
     public void setFile(FormFile file) {
         this.file = file;
     }
-    
-    
 
     public Integer getId() {
         return id;
@@ -79,7 +81,5 @@ public class FormTopic implements Serializable{
         }
         return true;
     }
-    
-    
-    
+
 }
