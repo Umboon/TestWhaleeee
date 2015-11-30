@@ -35,8 +35,7 @@ public class CustomUserDetailService implements UserDetailsService{
        
        User user = userRepo.findByUserName(string);
        if(user != null){
-            recordLog.setName(user.getUserName());
-            recordLog.setStatus(user.getStatus());
+            recordLog.setUser(user);
             recordLog.setDateLogin(new Date());
             recordLogRepo.save(recordLog);
         }

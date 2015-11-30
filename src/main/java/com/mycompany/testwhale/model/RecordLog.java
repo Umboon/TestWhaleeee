@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -23,11 +24,11 @@ public class RecordLog implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
+    @ManyToOne
+    private User user;
     
     private Date dateLogin;
-    private String status;
-
+    
     public Integer getId() {
         return id;
     }
@@ -36,14 +37,15 @@ public class RecordLog implements Serializable{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
+   
     public Date getDateLogin() {
         return dateLogin;
     }
@@ -52,15 +54,6 @@ public class RecordLog implements Serializable{
         this.dateLogin = dateLogin;
     }
 
-   
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     @Override
     public int hashCode() {

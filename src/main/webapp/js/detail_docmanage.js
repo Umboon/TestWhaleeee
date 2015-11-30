@@ -12,7 +12,7 @@ var app = angular.module('detail_docmanage').controller('detaildocController', f
     };
 
     $scope.update = function (doc) {
-       docmanageService.detail_docmanage = doc;
+       docmanageService.detail_docmanage = doc;//เรียกใช้ docmanageService เพื่อแก้ไขข้อมูล
         location.href = "#/document";
     };
 

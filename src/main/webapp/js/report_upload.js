@@ -6,21 +6,21 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
-   
+
+
+    function getDocuments() {
+        $http.get('/getuploadhistory', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+            $scope.documents = data;
+
+        });
+    }
+    getDocuments();
+
     $scope.getDocuments = function () {
         getDocuments();
     };
- 
-      getDocuments();
-    function getDocuments(){
-        $http.get('/getuploadhistory', {params: {page: $scope.page, size: $scope.size}}).success(function (data){
-            $scope.documents = data;
-            console.log(data);
-            
-        });
-    }
-    
-  
+
+
 
     $scope.selectSize = function () {
         getDocuments();
@@ -29,7 +29,7 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
 
     getTotalRow();
     function getTotalRow() {
-        $http.get('/gettotalrow').success(function (data) {
+       $http.get('/countdocforuser').success(function (data) {
             totalRow = data;
             findPage();
             if ($scope.page == 0) {
@@ -40,14 +40,14 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
             }
         });
     }
-    ;
+ 
     function findPage() {
         var result = parseInt(totalRow / $scope.size);
         if ((totalRow % $scope.size) != 0) {
             result++;
         }
         totalPage = result;
-        console.log(totalPage + 'totalPage');
+        
     }
 
     $scope.firstPage = function () {
@@ -61,6 +61,7 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
             getDocuments();
+            getTotalRow();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
                 $('#nextPage , #finalPage').removeClass('disabled');
@@ -87,7 +88,6 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
     };
 
 
-
     $scope.dowload = function (dld) {
         location.href = '/getfile/' + dld.file.id;
     };
@@ -100,7 +100,7 @@ angular.module('report_up').controller('reportUpController', function ($http, $s
         });
     };
 
-    $('body').css('overflowY','scroll');
+    $('body').css('overflowY', 'scroll');
 
 });
 

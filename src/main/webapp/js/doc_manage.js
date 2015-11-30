@@ -6,21 +6,21 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
-   
+
     $scope.getDocuments = function () {
         getDocuments();
     };
- 
-      getDocuments();
-    function getDocuments(){
-        $http.get('/getdocmanage', {params: {page: $scope.page, size: $scope.size}}).success(function (data){
+
+    getDocuments();
+    function getDocuments() {
+        $http.get('/getdocmanage', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
             console.log(data);
-            
+
         });
     }
-    
-  
+
+
 
     $scope.selectSize = function () {
         getDocuments();
@@ -32,12 +32,7 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
         $http.get('/gettotalrow').success(function (data) {
             totalRow = data;
             findPage();
-            if ($scope.page == 0) {
-                $('#prePage , #firstPage').addClass('disabled');
-            }
-            if ($scope.page == totalPage - 1) {
-                $('#nextPage , #finalPage').addClass('disabled');
-            }
+
         });
     }
     ;
@@ -47,14 +42,23 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
             result++;
         }
         totalPage = result;
-        console.log(totalPage + 'totalPage');
+        if (result <= 1) {
+            $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage , #finalPage').addClass('disabled');
+        }
+        if (result > 1) {
+            $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage , #finalPage').removeClass('disabled');
+        }
     }
 
     $scope.firstPage = function () {
-        $scope.page = 0;
+       if(!$('#prePage').hasClass('disabled')){
+            $scope.page = 0;
         getDocuments();
         $('#prePage , #firstPage').addClass('disabled');
         $('#nextPage , #finalPage').removeClass('disabled');
+       }
     };
 
     $scope.prePage = function () {
@@ -63,8 +67,8 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
             getDocuments();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-                $('#nextPage , #finalPage').removeClass('disabled');
             }
+             $('#nextPage , #finalPage').removeClass('disabled');
         }
     };
 
@@ -74,16 +78,18 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
             getDocuments();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
-                $('#prePage , #firstPage').removeClass('disabled');
-            }
+           }
+           $('#prePage , #firstPage').removeClass('disabled');
         }
     };
 
     $scope.finalPage = function () {
-        $scope.page = totalPage - 1;
+       if(!$('#nextPage').hasClass('disabled')){
+            $scope.page = totalPage - 1;
         getDocuments();
         $('#nextPage , #finalPage').addClass('disabled');
         $('#prePage , #firstPage').removeClass('disabled');
+       }
     };
 
 
@@ -96,12 +102,12 @@ angular.module('doc_manage').controller('docmanageController', function ($http, 
     $scope.detaildoc = function (doc) {
 //       location.href="#/detail/";
         $http.post('/setdocmanagedetail', doc).success(function (data) {
-          //  console.log('click');
+            //  console.log('click');
             location.href = "#/detail_docmanage";
         });
     };
 
-    $('body').css('overflowY','scroll');
+    $('body').css('overflowY', 'scroll');
 
 });
 

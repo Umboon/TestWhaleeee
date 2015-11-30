@@ -14,13 +14,12 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-
 /**
  * @author pramoth
  */
 @Configuration
 @EnableWebMvcSecurity()
-@EnableGlobalMethodSecurity(prePostEnabled = true , securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -41,13 +40,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
+                .deleteCookies("JSESSIONID")//ลบเซกชั่นเก่าที่ใช้งานมาแล้ว
+                .permitAll()
                 .and()
                 .authorizeRequests().anyRequest().authenticated();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/console/*");
+        web.ignoring()
+                .antMatchers("/console/*")
+                .antMatchers("/js/**")
+                .antMatchers("/jquery-ui-1.11.4.custom/**")
+                .antMatchers("/material/**")
+                .antMatchers("/bootstrap-3.3.5-dist/**")
+                .antMatchers("/apicss.css");
+        
     }
 
 }

@@ -37,6 +37,6 @@ public class RecordLogController {
     
     @RequestMapping(value = "/getrecordlog", method = RequestMethod.GET)
     public Page<RecordLog> getRecordLog (Pageable pageable){
-        return recordLogRepo.findAll(pageable);
+        return recordLogRepo.findAllByOrderByIdDesc(pageable);
     }
 }

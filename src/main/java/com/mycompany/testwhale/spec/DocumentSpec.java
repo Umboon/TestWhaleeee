@@ -9,6 +9,8 @@ import com.mycompany.testwhale.model.Category_;
 import com.mycompany.testwhale.model.DocFile_;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.model.Document_;
+import com.mycompany.testwhale.model.User;
+import com.mycompany.testwhale.model.User_;
 import java.util.Date;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,19 +24,6 @@ import org.springframework.data.jpa.domain.Specification;
  */
 public class DocumentSpec {
 
-//    public static Specification<Document> dateReceivedLike(final String keyword) {
-//        String dateReceived = Document_.dateReceived + "";
-//        return new Specification<Document>() {
-//
-//            @Override
-//            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-//                return null;
-//                // return cb.or(cb.(root.get(Document_.dateReceived), new Date(),new Date()));
-//
-//            }
-//        };
-//
-//    }
     public static Specification<Document> topicLike(final String keyword) {
         return new Specification<Document>() {
 
@@ -102,8 +91,8 @@ public class DocumentSpec {
             }
         };
     }
-    
- //===================pagsearch===================================================================//
+
+// ===================pagsearch===================================================================//
     public static Specification<Document> docForCategory(final String keyword) {
         return new Specification<Document>() {
 
@@ -113,6 +102,18 @@ public class DocumentSpec {
             }
 
         };
+    }
 
+    //===================pagsearchuserupload===================================================================//
+    
+    public static Specification<Document> docForUser(final String keyword) {
+        return new Specification<Document>() {
+
+            @Override
+            public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.like(root.get(Document_.userr).get(User_.userName), keyword);
+
+            }
+        };
     }
 }

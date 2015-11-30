@@ -1,12 +1,12 @@
 
 <div class="container">
-<!--    <div class="panel panel-primary">-->
-<!--<div class="panel" style="background: #CDC5BF;">-->
-<div class="panel panel-primary">
+    <!--    <div class="panel panel-primary">-->
+    <!--<div class="panel" style="background: #CDC5BF;">-->
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">เพิ่มหมวดเอกสาร</h3>
         </div>
-    <div class="panel-body">
+        <div class="panel-body">
             <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-md-2 control-label">ชื่อหมวดเอกสาร :</label>
@@ -18,16 +18,16 @@
                     <label class="col-md-2 control-label"></label>
                     <div class="col-md-3">
                         <input type="submit" class="btn btn-success" value="บันทึก" ng-click="saveCategory()">
-<!--                        <input type="submit" class="btn btn-info" value="Clear" ng-click="clearData()">-->
+                        <!--                        <input type="submit" class="btn btn-info" value="Clear" ng-click="clearData()">-->
                     </div>
                 </div>
             </form>
         </div>
-         <div class="progress progress-striped">
+        <div class="progress progress-striped">
             <div class="progress-bar progress-bar-success" style="width: 100%"></div>
         </div>
     </div>
-   
+
 </div>
 
 <div class="container">
@@ -43,7 +43,7 @@
                             <thead>
                                 <tr>
                                     <td>หมวดเอกสาร</td>
-<!--                                    <td>Action</td>-->
+                                    <!--                                    <td>Action</td>-->
                                 </tr>  
                             </thead> 
                             <tbody ng-repeat="sct in lodeCategory.content">
@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-         <div class="progress progress-striped">
+        <div class="progress progress-striped">
             <div class="progress-bar progress-bar-success" style="width: 100%"></div>
         </div>
     </div>
@@ -91,3 +91,20 @@
 </div>
 
 <div id="growl-custom"></div>
+
+
+<div id="complete-dialog-savecategory" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">บันทึกสำเร็จ</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</div>

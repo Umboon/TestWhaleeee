@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user', 'docforcategory', 'formtopic_up', 'form_dowload', 'record_log', 'doc_manage', 'detail_docmanage','formup_manage']);
+angular.module('app', ['ngRoute', 'document', 'user', 'show_user', 'view_document', 'category', 'report_up', 'detail', 'detail_user', 'docforcategory', 'formtopic_up', 'form_dowload', 'record_log', 'doc_manage', 'detail_docmanage', 'formup_manage']);
 angular.module('app').controller('homeController', function ($http, $scope) {
 
     $scope.categorys = {};
@@ -36,18 +36,22 @@ angular.module('app').controller('homeController', function ($http, $scope) {
     }
 
 
-
+    //console.log($scope.userLogin.status == 'Admin');
+    
     $scope.checkAdmin = function () {
-        if ($scope.userLogin.status == 'Admin') {
+        if ($scope.userLogin.status == 'Admin')
+        //ตรวจสอบสถานะของ userLogin ถ้าเท่ากับ Admin ให้ส่งค่า true
+        {
             return true;
         }
         else {
             return false;
         }
-        //console.log($scope.userLogin.status == 'Admin');
     };
     $scope.checkAdminOrTeacher = function () {
-        if (($scope.userLogin.status == 'Admin') || ($scope.userLogin.status == 'Teacher')) {
+        if (($scope.userLogin.status == 'Admin') || ($scope.userLogin.status == 'Teacher')) 
+        //ตรวจสอบสถานะของ userLogin ถ้าเท่ากับ Admin หรือ Teacher ให้ส่งค่า true
+        {
             return true;
         }
         else {
@@ -124,7 +128,7 @@ angular.module('app').controller('homeController', function ($http, $scope) {
                 controller: 'detaildocController',
                 templateUrl: 'page/detail_docmanage.html'
             })
-             .when('/formup_manage', {
+            .when('/formup_manage', {
                 controller: 'formupmanageController',
                 templateUrl: 'page/formup_manage.html'
             })
@@ -135,21 +139,18 @@ angular.module('app').controller('homeController', function ($http, $scope) {
 }).factory('documentService', function () {
     return {
         detail: {}
-        
+
     };
 }).factory('userService', function () {
     return {
         detail_user: {}
     };
-    
+
 }).factory('docmanageService', function () {
     return {
         detail_docmanage: {}
     };
-//}).factory('formmanageService',function (){
-//    return {
-//        detail_formup: {}
-//    };
+
 });
 
 

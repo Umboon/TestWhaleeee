@@ -22,6 +22,7 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
         getFormTopic();
         findPage();
     };
+    
     getTotalRow();
     function getTotalRow() {
         $http.get('/gettotalrowform').success(function (data) {
@@ -35,14 +36,14 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
             }
         });
     }
-    ;
+    
     function findPage() {
         var result = parseInt(totalRow / $scope.size);
         if ((totalRow % $scope.size) != 0) {
             result++;
         }
         totalPage = result;
-      //  console.log(totalPage + 'totalPage');
+    
     }
     
      $scope.firstPage = function () {
@@ -56,6 +57,7 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
             getFormTopic();
+            getTotalRow();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
                 $('#nextPage , #finalPage').removeClass('disabled');
@@ -89,7 +91,6 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
 
 
     $scope.details = function (doc) {
-//       location.href="#/detail/";
         $http.post('/setdocumentdetail', doc).success(function (data) {
             location.href = "#/detail";
         });

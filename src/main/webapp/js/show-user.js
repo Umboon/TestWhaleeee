@@ -4,13 +4,13 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
     $scope.users = {};
     $scope.page = 0;
     $scope.size = '10';
+    var totalRow = 0;
+    var totalPage = 0;
     
     getUser();
     function getUser() {
         $http.get('/getuser',{params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-
             $scope.users = data;
-
         });
     };
     
@@ -23,8 +23,7 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
         findPage();
     };
 
-    var totalRow = 0;
-    var totalPage = 0;
+    
     
     getTotalRow();
     function getTotalRow() {
@@ -46,15 +45,17 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
             result++;
         }
         totalPage = result;
-      //  console.log(totalPage + 'totalPage');
-      //  console.log(totalRow);
+      //  getTotalRow();
+
     }
 
     $scope.firstPage = function () {
-        $scope.page = 0;
+       if(!$('#prePage').hasClass('disabled')){
+            $scope.page = 0;
         getUser();
         $('#prePage , #firstPage').addClass('disabled');
         $('#nextPage , #finalPage').removeClass('disabled');
+       }
     };
 
     $scope.prePage = function () {
@@ -63,8 +64,9 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
             getUser();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-                $('#nextPage , #finalPage').removeClass('disabled');
+                
             }
+            $('#nextPage , #finalPage').removeClass('disabled');
         }
     };
 
@@ -74,16 +76,19 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
             getUser();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
-                $('#prePage , #firstPage').removeClass('disabled');
+                
             }
+            $('#prePage , #firstPage').removeClass('disabled');
         }
     };
 
     $scope.finalPage = function () {
-        $scope.page = totalPage - 1;
+       if(!$('#nextPage').hasClass('disabled')){
+            $scope.page = totalPage - 1;
         getUser();
         $('#nextPage , #finalPage').addClass('disabled');
         $('#prePage , #firstPage').removeClass('disabled');
+       }
     };
 
 

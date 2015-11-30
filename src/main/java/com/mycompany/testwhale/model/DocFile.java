@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author UMBOON
  */
 @Entity
-@Table(name = "FILE")
+@Table(name = "DOCFILE")
 public class DocFile implements Serializable {
 
     @Id

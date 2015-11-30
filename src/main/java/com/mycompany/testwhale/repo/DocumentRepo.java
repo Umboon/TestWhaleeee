@@ -25,4 +25,6 @@ public interface DocumentRepo extends JpaRepository<Document, Integer>, JpaSpeci
     public Page<Document> findByGroupUserOrderByIdDesc(String status, Pageable pageable);
 
     public Page<Document> findByGroupUserOrGroupUserOrderByIdDesc(String teacher, String publics, Pageable pageable);
+    
+    public Page<Document> findByTopicLike(String keyword,Pageable pageable);
 }

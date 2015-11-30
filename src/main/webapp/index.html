@@ -69,7 +69,7 @@
             </ul>
         </nav>
 
-        <!--background-color: #87CEFA-->
+    
         <div class="navbar" style="margin-top: -20px;background: rgba(135,206,250,0.5)" ng-controller="homeController">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-warning-collapse">
@@ -77,7 +77,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#/home">Home</a>
+                <a class="navbar-brand topic" href="#/home">Home</a>
             </div>
 
             <div class="navbar-collapse collapse navbar-warning-collapse">
@@ -85,7 +85,7 @@
                 <ul class="nav navbar-nav">
 
                     <li class="dropdown">
-                        <a href="" data-target="#" ng-click="getCategory()" class="dropdown-toggle" data-toggle="dropdown" >หมวดเอกสาร<b class="caret"></b></a>
+                        <a href="" data-target="#" ng-click="getCategory()" class="dropdown-toggle topic" data-toggle="dropdown" >หมวดเอกสาร<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <!--                                <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>-->
                             <li><a href="#" ng-repeat="cat in categorys.content" ng-click="clickCategory(cat)">{{cat.cate}}</a></li>
@@ -93,7 +93,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">เอกสาร<b class="caret"></b></a>
+                        <a href="" data-target="#" class="dropdown-toggle topic" data-toggle="dropdown">เอกสาร<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li ng-show="checkAdminOrTeacher()"><a href="#/document">เพิ่มเอกสาร</a></li>
                             <li><a href="#/view_document" ng-click="getDocuments()">เอกสารทั้งหมด</a></li> 
@@ -101,20 +101,19 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">แบบฟอร์ม<b class="caret"></b></a>
+                        <a href="" data-target="#" class="dropdown-toggle topic" data-toggle="dropdown">แบบฟอร์ม<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <!--                                <li><a href="#/formtopic_up">เพิ่มแบบฟอร์ม</a></li>-->
                             <li><a href="#/form_dowload">แบบฟอร์มดาวน์โหลด</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown" ng-show="checkAdmin()">
-                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">จัดการระบบ<b class="caret"></b></a>
+                        <a href="" data-target="#" class="dropdown-toggle topic" data-toggle="dropdown">จัดการระบบ<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#/category">เพิ่มหมวดเอกสาร</a></li>
                             <li><a href="#/doc_manage">จัดการเอกสาร</a></li>  
                             <li><a href="#/user">เพิ่มผู้ใช้งานระบบ</a></li>
-                            <li><a href="#/show_user">ผู้ใช้งานระบบ</a></li> 
+                            <li><a href="#/show_user">รายชื่อผู้ใช้งานระบบ</a></li> 
                             <li><a href="#/formtopic_up">เพิ่มแบบฟอร์ม</a></li>
                              <li><a href="#/formup_manage">จัดการแบบฟอร์ม</a></li>
                             <li><a href="#/record_log">บันทึกการเข้าใช้งานระบบ</a></li>
@@ -125,13 +124,13 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown" ng-show="checkAdminOrTeacher()">
-                        <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">ประวัติการอัพโหลด<b class="caret"></b></a>
+                        <a href="" data-target="#" class="dropdown-toggle topic" data-toggle="dropdown">ประวัติการอัพโหลด<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#/report_up">บันทึกการอัพโหลดไฟล์</a></li>   
                         </ul>
                     </li>
 
-                    <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> ออกจากระบบ</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-in "></span> <span class="topic">ออกจากระบบ</span></a></li>
                 </ul>
 
 

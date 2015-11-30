@@ -9,26 +9,25 @@ angular.module('view_document').controller('view_documentController', function (
     var totalPage = 0;
     $scope.showDatePicker = false;
     var userLogin = {};
-    
+
     loadUserLogin();
-    function loadUserLogin(){
-        $http.get('/getuserlogin').success(function (data){
+    function loadUserLogin() {
+        $http.get('/getuserlogin').success(function (data) {
             userLogin = data;
-            console.log(data.status+'---------');
+            console.log(data.status + '---------');
             getDocuments();
         });
     }
-    
+    getTotalRow();
     function getDocuments() {
         $http.post('/getdocuments', userLogin, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
-            //console.log($scope.documents);
-            getTotalRow();
-            console.log(data);
+
         });
 
     }
-    
+    getDocuments();
+
     $scope.getDocuments = function () {
         getDocuments();
     };
@@ -48,18 +47,28 @@ angular.module('view_document').controller('view_documentController', function (
     };
 
     $scope.search = function () {
-        search();
+        $scope.page = 0;
+        $scope.searchData.keyWord;
+        $http.post('/searchdocument', $scope.searchData, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+
+            $http.post('/countsearchdocument', $scope.searchData).success(function (data) {
+                totalRow = data;
+                console.log('-------------------------------->'+data);
+               findPage();
+              
+            });
+            $scope.documents = data;
+            if (!data.content.length) {
+                $("#complete-dialog").modal('show');
+            }
+        });
     };
 
     function search() {
         $scope.searchData.keyWord;
         $http.post('/searchdocument', $scope.searchData, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-           // console.log('true');
-           // console.log(data);
-            countSearch();
             $scope.documents = data;
             if (!data.content.length) {
-
                 $("#complete-dialog").modal('show');
             }
         });
@@ -68,8 +77,8 @@ angular.module('view_document').controller('view_documentController', function (
     function countSearch() {
         $http.post('/countsearchdocument', $scope.searchData).success(function (data) {
             totalRow = data;
-            console.log('total search' + data);
-            findPage();
+
+            //  console.log('total search' + data);
         });
     }
 
@@ -103,30 +112,30 @@ angular.module('view_document').controller('view_documentController', function (
             result++;
         }
         totalPage = result;
-        console.log(totalPage + 'totalPage');
-    }
-
-    checkLoadPage();
-    function checkLoadPage() {
-        if (totalPage == 1) {
+        console.log(totalPage);
+            if (totalPage == 1) {
             $('#prePage , #firstPage , #nextPage , #finalPage').addClass('disabled');
         }
         if (totalPage != 1) {
             $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage,#finalPage').removeClass('disabled');//ลบเพจเก่าไปเวลาเลื่อนเพจใหม่ได้เลื่อนได้
         }
     }
 
     $scope.firstPage = function () {
-        $scope.page = 0;
-        selectGetOrSearch();
-        $('#prePage , #firstPage').addClass('disabled');
-        $('#nextPage , #finalPage').removeClass('disabled');
+        if (!$('#prePage').hasClass('disabled')) {
+            $scope.page = 0;
+            selectGetOrSearch();
+            $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage , #finalPage').removeClass('disabled');
+        }
     };
 
     $scope.prePage = function () {
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
             selectGetOrSearch();
+
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
             }
@@ -140,17 +149,20 @@ angular.module('view_document').controller('view_documentController', function (
             selectGetOrSearch();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
+
             }
-            console.log('remove');
             $('#prePage , #firstPage').removeClass('disabled');
+
         }
     };
 
     $scope.finalPage = function () {
-        $scope.page = totalPage - 1;
-        selectGetOrSearch();
-        $('#nextPage , #finalPage').addClass('disabled');
-        $('#prePage , #firstPage').removeClass('disabled');
+        if (!$('#nextPage').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+            selectGetOrSearch();
+            $('#nextPage , #finalPage').addClass('disabled');
+            $('#prePage , #firstPage').removeClass('disabled');
+        }
     };
 
     $('.datepicker.form-control.col-lg-8').datepicker({

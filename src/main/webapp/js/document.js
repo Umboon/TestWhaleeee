@@ -6,30 +6,28 @@ var app = angular.module('document').controller('documentController', function (
     $scope.document = {};
     if (!!documentService.detail.topic) {
         $scope.document = documentService.detail;
-        console.log('1');
+        //console.log('1');
     }
     if (!!docmanageService.detail_docmanage.topic) {
         $scope.document = docmanageService.detail_docmanage;
-        console.log('2');
+        //console.log('2');
     }
     $scope.categorys = {};
     $scope.derror = {};
 
     $scope.saveDocument = function () {
-        saveDocument();
-        if(!!$scope.derror.violations.file){
-        $scope.derror.violations.file.message = "";
-    }
+        saveDocument();// เรียกใช้ ฟังกชั่น saveDocument
+        if (!!$scope.derror.violations.file) {//ถ้าไม่ได้เลือกไฟล์ให้โชว์ข้อความขึ้นมา
+            $scope.derror.violations.file.message = "";
+        }
         $("#filedoc").val("");
         if (!!documentService.detail.topic) {
-            $scope.document = documentService.detail;
-            //   console.log('1');
+            //$scope.document = documentService.detail;
             documentService.detail = {};
             location.href = "#/detail";
         }
         if (!!docmanageService.detail_docmanage.topic) {
-            $scope.document = docmanageService.detail_docmanage;
-            //   console.log('2');
+            //$scope.document = docmanageService.detail_docmanage;
             docmanageService.detail_docmanage = {};
             location.href = "#/detail_docmanage";
         }
@@ -37,14 +35,10 @@ var app = angular.module('document').controller('documentController', function (
     };
 
     if (!!$scope.document.category) {
-        //  console.log($scope.document.category);
-        //  console.log("has category");
         getCategory($scope.document.category.id);
-
     }
     else {
         getCategory(1);
-        //   console.log(("No"));
     }
 
     getUserUpload();
@@ -65,11 +59,12 @@ var app = angular.module('document').controller('documentController', function (
     }
 
 
-    function saveDocument() {
+    function saveDocument() {          
         $http.post('/savedocument', $scope.document).success(function (data) {
-            growl("บันทึกสำเร็จ", 'msg-green', 'buttom');
+         $('#complete-dialog-savedocument').modal('show');//เรียกไดอะล็อกมาโชว์
             getUserUpload();
             $scope.clearDoc();
+            
         }).error(function (data) {
 
             $scope.derror = data;

@@ -1,65 +1,58 @@
 angular.module('docforcategory', []);
 angular.module('docforcategory').controller('docforcateController', function ($http, $scope) {
 
-//    $scope.documents = {};
-//    
-//    getSearchCategory();
-//    function getSearchCategory(){
-//        $http.get('/getdocforcate').success(function (data){
-//            $scope.documents = data;
-//        });
-//    };
-//    
     $scope.page = 0;
     $scope.size = '10';
-
     $scope.searchData = {};
     $scope.documents = {};
-    //var userLogin = {};
+    var totalRow = 0;
     $scope.user = {};
+    
     getUserUpload();
-    var countDocForcate = 0;
     function getUserUpload() {
         $http.get('/getuserupload').success(function (data) {
             $scope.user = data;
-           // console.log(data.status+'userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+            // console.log(data.status+'userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
         });
     }
-    
-  
+
+
 
     $scope.checkViewUser = function (doc) {
-       // console.log($scope.documents.content[0] + 'hellooooooooooooooooooooooooo');
-        if('Admin' === $scope.user.status){
+        // console.log($scope.documents.content[0] + 'hellooooooooooooooooooooooooo');
+        if ('Admin' === $scope.user.status) {
             return true;
         }
-        else if(('Teacher' === $scope.user.status) && (doc.groupUser === 'Public' || doc.groupUser === 'Teacher')){
+        else if (('Teacher' === $scope.user.status) && (doc.groupUser === 'Public' || doc.groupUser === 'Teacher')) {
             return true;
         }
-        else if(('Student' === $scope.user.status) && doc.groupUser === 'Public'){
+        else if (('Student' === $scope.user.status) && doc.groupUser === 'Public') {
             return true;
         }
-        else{
+        else {
             return false;
         }
 
     };
-    
+
     countDocForCategory();
-    function countDocForCategory(){
-        $http.get('/countdocforcate').success(function (data){
-            console.log(data);
-            countDocForcate = data;
+    function countDocForCategory() {
+        $http.get('/countdocforcate').success(function (data) {
+            totalRow = data;
+            findPage();
+            if ($scope.page == 0) {
+                $('#prePage , #firstPage').addClass('disabled');
+            }
+            if ($scope.page == totalPage - 1) {
+                $('#nextPage , #finalPage').addClass('disabled');
+            }
         });
     }
 
     function getDocuments() {
         $http.get('/getdocforcate', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
-            //  getCateGroupUser();
-            console.log($scope.documents);
         });
-
     }
     getDocuments();
 
@@ -70,14 +63,7 @@ angular.module('docforcategory').controller('docforcateController', function ($h
     $scope.dowload = function (dld) {
         location.href = '/getfile/' + dld.file.id;
     };
-//
-//    function getCateGroupUser(){
-//        $http.post('/getcategroupuser',userLogin).success(function (data){
-//            $scope.documents = data;
-//        });
-//    }
 
-//    check();
 
 
     $scope.search = function () {
@@ -96,22 +82,8 @@ angular.module('docforcategory').controller('docforcateController', function ($h
         findPage();
     };
 
-    var totalRow = 0;
-    var totalPage = 0;
 
-    getTotalRow();
-    function getTotalRow() {
-        $http.get('/gettotalrow').success(function (data) {
-            totalRow = data;
-            findPage();
-            if ($scope.page == 0) {
-                $('#prePage , #firstPage').addClass('disabled');
-            }
-            if ($scope.page == totalPage - 1) {
-                $('#nextPage , #finalPage').addClass('disabled');
-            }
-        });
-    }
+    var totalPage = 0;
 
     function findPage() {
         var result = parseInt(totalRow / $scope.size);

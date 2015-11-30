@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -30,11 +31,24 @@ public class FormTopic implements Serializable {
     @Column(nullable = false)
     @NotBlank(message = "กรุณากรอกชื่อแบบฟอร์ม")
     private String formName;
+    
+    @ManyToOne
+    private User user ;
 
 
     @OneToOne(cascade = CascadeType.ALL)
 
     private FormFile file;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
 
     public FormFile getFile() {
         return file;

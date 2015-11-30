@@ -7,18 +7,17 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
 
     $scope.saveFormTopic = function () {
         $scope.topicform.file = $scope.form;
-
         $http.post('/saveformtopic', $scope.topicform).success(function (data) {
             getFormTopic();
-            $scope.clearForm();
-            growl("บันทึกสำเร็จ", 'msg-green', 'top');
+            $scope.clearForm();//เรียกใช้ ฟังก์ชั่น clearForm เพื่อเคลียร์ข้อมูลที่บันทึกไปแล้ว
+            $("#complete-dialog-saveformtopic").modal('show');//แสดงไดอะล็อก"บันทึกสำเร็จ"
         }).error(function (data) {
             $scope.ferror = data;
             growl("กรุณากรอกข้อมูลแบบฟอร์ม", 'msg-red', 'top');
         });
-        if (!!$scope.ferror.violations.file) {
-            $scope.ferror.violations.file.message = "";
-        }
+//        if (!!$scope.ferror.violations.file) {
+//            $scope.ferror.violations.file.message = "";
+//        }
         $("#formdoc").val("");
     };
 
@@ -35,6 +34,15 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
         $scope.topicform = {};
         //$scope.formfiles = {};
     };
+    
+    getUserUpload();
+    function getUserUpload() {
+        $http.get('/getuserupload').success(function (data) {
+            $scope.topicform.user = data;
+            console.log(data);
+            return data;
+        });
+    }
 
 
     $scope.changeForm = function () {

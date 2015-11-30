@@ -12,8 +12,8 @@ var app = angular.module('detail').controller('detailController', function (docu
     };
 
      $scope.update = function (doc){
-         documentService.detail = doc;
-         location.href="#/document";
+         documentService.detail = doc;//เรียกใช้ documentService เพื่อให้ไฟล์ที่ต้องการแก้ไขค้างอยู่
+         location.href="#/document";//เรียกใช้ location.href เพื่อให้ย้อนกลับไปที่หน้าของการกรอกข้อมูล
          
      };
 
@@ -31,15 +31,14 @@ var app = angular.module('detail').controller('detailController', function (docu
     }
 
     $scope.deleteDocument = function () {
-        $('.modal-backdrop.in').css('display','none');
+        $('.modal-backdrop.in').css('display','none');//เมื่อโชว์ไดอะล็อกแสดงการลบแล้ว สามารถกลับไปใช้งานได้ปกติ
         $http.post('/deletedocument', $scope.details).success(function (data) {
-             location.href = "#/report_up";
+             location.href = "#/report_up";//เรียกใช้ location.href เพื่อให้ย้อนกลับไปที่หน้าประวัติการอัพโหลดเอกสาร
         });
     };
 
     $scope.details = function (doc) {
         console.log(doc);
-      
     };
 
     $scope.lodeCategory = {};

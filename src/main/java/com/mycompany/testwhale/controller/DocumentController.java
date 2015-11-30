@@ -135,15 +135,11 @@ public class DocumentController {
     private Page<Document> searchDocument(@RequestBody SearchData searchData, Pageable pageable) throws ParseException {
         String keyword = searchData.getKeyWord();
         String searchBy = searchData.getSearchBy();
-        
-
         Page<Document> document = null;
         if ("keyword".equals(searchBy)) {
-
             document = documentSearchService.searchByKeyword(keyword, pageable);
         }
         if ("topic".equals(searchBy)) {
-
             document = documentSearchService.searchByTopic(keyword, pageable);
         }
         if ("fileName".equals(searchBy)) {
@@ -172,6 +168,7 @@ public class DocumentController {
     @RequestMapping(value = "/getdocforcate", method = RequestMethod.GET)
     private Page<Document> getDocForCate(Pageable pageable) {
         return documentSearchService.searchByCateLike(category, pageable);
+       
     }
 
     @RequestMapping(value = "/gettotalrow", method = RequestMethod.GET)
@@ -214,7 +211,15 @@ public class DocumentController {
     
     
     @RequestMapping(value = "/countdocforcate", method = RequestMethod.GET)
-    private long countDoucumentForCategory (){
+    private Long countDoucumentForCategory (){
         return documentRepo.count(DocumentSpec.docForCategory(category));
+    }
+    
+    
+    //===================pagsearchuserupload===================================================================//
+    @RequestMapping(value = "/countdocforuser", method = RequestMethod.GET)
+    private Long countDocumentForUser(){
+         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return documentRepo.count(DocumentSpec.docForUser(user.getUserName()));
     }
 }

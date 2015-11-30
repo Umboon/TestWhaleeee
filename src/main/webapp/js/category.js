@@ -9,9 +9,9 @@ angular.module('category').controller('categorycontroller', function ($http, $sc
             $http.post('/savecategory', $scope.category).success(function (data) {
             getCategory();
             $scope.clearData();
-            growl("บันทึกสำเร็จ",'msg-green','buttom');
-
-       
+            //growl("บันทึกสำเร็จ",'msg-green','top');
+            $('#complete-dialog-savecategory').modal('show');
+      
        });
        }
         else{
