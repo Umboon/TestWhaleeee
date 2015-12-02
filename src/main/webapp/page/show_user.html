@@ -9,7 +9,7 @@
                 <form class="navbar-form navbar-right">
                     <label class="col-md-6 control-label" style="margin-top: 5px;">ผู้ใช้</label>
                     <div class="col-md-3">
-                        <select class="form-control" ng-model="size" ng-click="selectSizeUser()">
+                        <select class="form-control" ng-model="size" ng-change="selectSizeUser()">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30">30</option>
@@ -41,7 +41,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                       
+
                         <ul class="pagination pull-right" >
                             <li id="firstPage"><a ng-click="firstPage()">«</a></li>
                             <li id="prePage"><a ng-click="prePage()">&LT;</a></li>

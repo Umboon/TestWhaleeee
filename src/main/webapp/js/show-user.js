@@ -6,31 +6,33 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
-    
+
     getUser();
     function getUser() {
-        $http.get('/getuser',{params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+        $http.get('/getuser', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.users = data;
         });
-    };
-    
-    $scope.getUser = function (){
+    }
+    ;
+
+    $scope.getUser = function () {
         getUser();
     };
-    
-    $scope.selectSizeUser = function (){
-        getUser();  
-        findPage();
+
+    $scope.selectSizeUser = function () {
+        $scope.page = 0;
+        getUser();
+        getTotalRow();
     };
 
-    
-    
+
+
     getTotalRow();
     function getTotalRow() {
         $http.get('/gettotalrowuser').success(function (data) {
             totalRow = data;
             findPage();
-             if ($scope.page == 0) {
+            if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
             }
             if ($scope.page == totalPage - 1) {
@@ -45,17 +47,17 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
             result++;
         }
         totalPage = result;
-      //  getTotalRow();
+        //  getTotalRow();
 
     }
 
     $scope.firstPage = function () {
-       if(!$('#prePage').hasClass('disabled')){
+        if (!$('#prePage').hasClass('disabled')) {
             $scope.page = 0;
-        getUser();
-        $('#prePage , #firstPage').addClass('disabled');
-        $('#nextPage , #finalPage').removeClass('disabled');
-       }
+            getUser();
+            $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage , #finalPage').removeClass('disabled');
+        }
     };
 
     $scope.prePage = function () {
@@ -64,7 +66,7 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
             getUser();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-                
+
             }
             $('#nextPage , #finalPage').removeClass('disabled');
         }
@@ -76,19 +78,19 @@ angular.module('show_user').controller('show_usercontroller', function ($http, $
             getUser();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
-                
+
             }
             $('#prePage , #firstPage').removeClass('disabled');
         }
     };
 
     $scope.finalPage = function () {
-       if(!$('#nextPage').hasClass('disabled')){
+        if (!$('#nextPage').hasClass('disabled')) {
             $scope.page = totalPage - 1;
-        getUser();
-        $('#nextPage , #finalPage').addClass('disabled');
-        $('#prePage , #firstPage').removeClass('disabled');
-       }
+            getUser();
+            $('#nextPage , #finalPage').addClass('disabled');
+            $('#prePage , #firstPage').removeClass('disabled');
+        }
     };
 
 

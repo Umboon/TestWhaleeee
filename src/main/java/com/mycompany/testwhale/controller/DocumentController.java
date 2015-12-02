@@ -133,20 +133,20 @@ public class DocumentController {
 
     @RequestMapping(value = "/searchdocument", method = RequestMethod.POST)
     private Page<Document> searchDocument(@RequestBody SearchData searchData, Pageable pageable) throws ParseException {
-        String keyword = searchData.getKeyWord();
-        String searchBy = searchData.getSearchBy();
+        String keyword = searchData.getKeyWord(); // assign ค่า keyword
+        String searchBy = searchData.getSearchBy(); // assign ค่า searchby
         Page<Document> document = null;
-        if ("keyword".equals(searchBy)) {
-            document = documentSearchService.searchByKeyword(keyword, pageable);
+        if ("keyword".equals(searchBy)) { // ถ้า searchby มีค่าเท่ากับ keyword
+            document = documentSearchService.searchByKeyword(keyword, pageable);//ทำการค้นหาเเละ return
         }
-        if ("topic".equals(searchBy)) {
+        if ("topic".equals(searchBy)) {// ถ้า searchby มีค่าเท่ากับ topic
             document = documentSearchService.searchByTopic(keyword, pageable);
         }
-        if ("fileName".equals(searchBy)) {
+        if ("fileName".equals(searchBy)) {// ถ้า searchby มีค่าเท่ากับ fileName
             document = documentSearchService.searchByFileName(keyword, pageable);
         }
-        if("dateReceived".equals(searchBy)){
-            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd" , Locale.US);
+        if("dateReceived".equals(searchBy)){// ถ้า searchby มีค่าเท่ากับ dateReceived
+            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd" , Locale.US); // ทำการเเปลงรูปเเบบ date ให้อยู่ในรูปเเบบที่ database รองรับ Locale บอกว่าเราจะใช้ รูปเเบบของ us
             Date date = sim.parse(keyword);
             document = documentSearchService.searchByDeteIn(date ,date , pageable);
         }

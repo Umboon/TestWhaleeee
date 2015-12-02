@@ -27,7 +27,7 @@ public class DocumentSearchService {
     private DocumentRepo documentRepo;
 
     public Page<Document> searchByTopic(String keyword, Pageable pageable) {
-        Specifications<Document> specification = Specifications.where(DocumentSpec.topicLike("%" + keyword + "%"));
+        Specifications<Document> specification = Specifications.where(DocumentSpec.topicLike("%" + keyword + "%")); // % คือ เป็นตัวอะไรก็ได้ กี่ตัวก็ได้ %keyword% หมายถึง ข้างหน้าเเละข้างหลังเป็นอะไรก็ได้กี่ตัวก็ได้ เเต่ต้องมี keyword อยู่ภายในนั้นด้วย
         return documentRepo.findAll(specification, pageable);
     }
 
