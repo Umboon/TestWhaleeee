@@ -29,7 +29,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return cb.like(cb.upper(root.get(Document_.topic)), keyword.toUpperCase());
+                return cb.like(cb.upper(root.get(Document_.topic)), keyword.toUpperCase()); // รีเทิร์น specification ของ document ที่ topic เป็นค่าเดียวกับ keyword
 
             }
         };
@@ -41,7 +41,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return cb.like(cb.upper(root.get(Document_.keyWord)), keyword.toUpperCase());
+                return cb.like(cb.upper(root.get(Document_.keyWord)), keyword.toUpperCase()); // รีเทิร์น specification ของ document ที่ keyword เป็นค่าเดียวกับ keyword
 
             }
         };
@@ -53,7 +53,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return cb.like(cb.upper(root.get(Document_.file).get(DocFile_.name)), keyword.toUpperCase());
+                return cb.like(cb.upper(root.get(Document_.file).get(DocFile_.name)), keyword.toUpperCase()); // รีเทิร์น specification ของ document ที่ ชื่อไฟล์ เป็นค่าเดียวกับ keyword
 
             }
         };
@@ -65,7 +65,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return cb.like(cb.upper(root.get(Document_.category).get(Category_.cate)), keyword.toUpperCase());
+                return cb.like(cb.upper(root.get(Document_.category).get(Category_.cate)), keyword.toUpperCase()); //ค้นหาที่ document ที่มี category เป็นค่าเดียวกับ keyword
 
             }
         };
@@ -77,7 +77,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return cb.between(root.get(Document_.dateReceived), start, end);
+                return cb.between(root.get(Document_.dateReceived), start, end); // ค้นหาจากวันที่ ในระหว่างวัน
             }
         };
     }
@@ -87,7 +87,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
-                return cb.between(root.get(Document_.dateWork), start, end);
+                return cb.between(root.get(Document_.dateWork), start, end);// ค้นหาจากวันที่ ในระหว่างวัน
             }
         };
     }
@@ -111,7 +111,7 @@ public class DocumentSpec {
 
             @Override
             public Predicate toPredicate(Root<Document> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.like(root.get(Document_.userr).get(User_.userName), keyword);
+                return cb.like(root.get(Document_.userr).get(User_.userName), keyword); // ค้นหา document ที่เป็น ของ user ตาม keyword
 
             }
         };
