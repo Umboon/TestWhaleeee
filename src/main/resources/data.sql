@@ -3,7 +3,7 @@ Insert into user(id,email,pass_word,status,user_name,enable) values (null,'admin
 
 
 
-
+Insert into category(id,cate)values(null,'ทั่วไป');
 
 
 

@@ -11,7 +11,7 @@ angular.module('record_log').controller('recordlogController', function ($http, 
 
     function getRecordLog() {
         $http.get('/getrecordlog', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
-            for(i = 0 ; i < $(data.content).length ; i++){
+            for(i = 0 ; i < $(data.content).length ; i++){//นี่คือส่วนของการบันทึกวันเวลาการล็อกอินเข้าใช้ระบบของผู้ใช้
                  $scope.recordlogArray[i]= data.content[i];
               $scope.recordlogArray[i].dateLogin = moment(data.content[i].dateLogin).format("DD-MM-YYYY : HH:mm:ss");
             }

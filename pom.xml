@@ -101,7 +101,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments><!--//ให้รองรับภาษาไทย-->
                 </configuration>
                 <dependencies>
                     <dependency>
