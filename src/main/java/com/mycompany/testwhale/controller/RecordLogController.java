@@ -39,4 +39,9 @@ public class RecordLogController {
     public Page<RecordLog> getRecordLog (Pageable pageable){
         return recordLogRepo.findAllByOrderByIdDesc(pageable);
     }
+    
+    @RequestMapping(value = "/gettotolrowrecordlog",method = RequestMethod.GET)
+    private long getTotalRowRecordLog(){
+        return recordLogRepo.count();
+    }
 }

@@ -5,8 +5,10 @@
  */
 package com.mycompany.testwhale.repo;
 
+import com.mycompany.testwhale.model.Category;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.model.User;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,4 +29,6 @@ public interface DocumentRepo extends JpaRepository<Document, Integer>, JpaSpeci
     public Page<Document> findByGroupUserOrGroupUserOrderByIdDesc(String teacher, String publics, Pageable pageable);
     
     public Page<Document> findByTopicLike(String keyword,Pageable pageable);
+    
+    public List<Document> findByCategory(Category category);
 }

@@ -53,7 +53,7 @@ angular.module('view_document').controller('view_documentController', function (
 
             $http.post('/countsearchdocument', $scope.searchData).success(function (data) {
                 totalRow = data;
-                console.log('-------------------------------->'+data);
+//                console.log('-------------------------------->'+data);
                findPage();
               
             });

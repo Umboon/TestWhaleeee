@@ -20,8 +20,6 @@ angular.module('app').controller('homeController', function ($http, $scope) {
     $scope.clickCategory = function (searchCategory) {
         $scope.searchCategory.keyWord = searchCategory.cate;
         $scope.searchCategory.searchBy = "";
-        //console.log($scope.searchCategory.keyWord);
-        //console.log('click' + searchCategory.cate);
         $http.post('/searchbycategory', $scope.searchCategory).success(function (data) {
             location.href = "#/docforcategory";
         });

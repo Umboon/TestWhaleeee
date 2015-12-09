@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" ><span style="color: red">*</span>เลขที่หนังสือ :</label>
                         <div class="col-md-3"><span style="color: red">{{derror.violations.bookNO.message}}</span>
-                            <input type="bookNO" class="form-control" ng-model="document.bookNO" ng-change="derror.violations.bookNO.message = ''">
+                            <input type="bookNO" maxlength="15" class="form-control" ng-model="document.bookNO" ng-change="derror.violations.bookNO.message = ''">
                         </div>
                         <label class="col-md-2 control-label">หมวดงานเอกสาร :</label>
                         <div class="col-md-3">
@@ -70,6 +70,7 @@
                             <div class="col-md-3">
                                 <span style="color: red">{{derror.violations.file.message}}</span>
                                 <input id="filedoc" type="file" class="form-control" file-model="file" custom-on-change ="saveFile">
+                                <!--<ng-click>-->
                             </div>
                         </div>
                     </div>   

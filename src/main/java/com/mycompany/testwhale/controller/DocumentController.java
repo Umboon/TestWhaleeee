@@ -5,6 +5,7 @@
  */
 package com.mycompany.testwhale.controller;
 
+import com.mycompany.testwhale.model.Category;
 import com.mycompany.testwhale.model.Document;
 import com.mycompany.testwhale.model.DocFile;
 import com.mycompany.testwhale.model.SearchData;
@@ -55,7 +56,7 @@ public class DocumentController {
     private DocumentSearchService documentSearchService;
     @Autowired
     private UserRepo userRepo;
-    
+
     private Integer docId;
     private String category;
 
@@ -80,25 +81,23 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "/getdocuments", method = RequestMethod.POST)
-    private Page<Document> getDocument(@RequestBody User user , Pageable pageable) {
+    private Page<Document> getDocument(@RequestBody User user, Pageable pageable) {
 //       return documentRepo.findAll(DocumentSpec.documentDesc(),pageable);
         Page<Document> docs = null;
         //System.out.println("------------------------------------------------------->"+user.getStatus());
-        if("Admin".equals(user.getStatus())){
-        docs = documentRepo.findAllByOrderByIdDesc(pageable);
-        }
-        else if ("Teacher".equals(user.getStatus())) {
+        if ("Admin".equals(user.getStatus())) {
+            docs = documentRepo.findAllByOrderByIdDesc(pageable);
+        } else if ("Teacher".equals(user.getStatus())) {
 
             docs = documentRepo.findByGroupUserOrGroupUserOrderByIdDesc("Public", "Teacher", pageable);
-        }
-        else if("Student".equals(user.getStatus())){
-        docs = documentRepo.findByGroupUserOrderByIdDesc("Public", pageable);
+        } else if ("Student".equals(user.getStatus())) {
+            docs = documentRepo.findByGroupUserOrderByIdDesc("Public", pageable);
         }
         return docs;
     }
-    
-    @RequestMapping(value = "/getdocmanage" , method = RequestMethod.GET)
-    private Page<Document>getDocManage(Pageable pageable){
+
+    @RequestMapping(value = "/getdocmanage", method = RequestMethod.GET)
+    private Page<Document> getDocManage(Pageable pageable) {
         return documentRepo.findAllByOrderByIdDesc(pageable);
     }
 
@@ -120,14 +119,14 @@ public class DocumentController {
     private void setDocumentDetail(@RequestBody Document document) {
         docId = document.getId();
     }
-    
-    @RequestMapping(value = "/getdocmanagedetail",method = RequestMethod.GET)
-    private Document getDocManageDetail(){
+
+    @RequestMapping(value = "/getdocmanagedetail", method = RequestMethod.GET)
+    private Document getDocManageDetail() {
         return documentRepo.findOne(docId);
     }
-    
+
     @RequestMapping(value = "/setdocmanagedetail", method = RequestMethod.POST)
-    private void setDocManageDetail(@RequestBody Document document){
+    private void setDocManageDetail(@RequestBody Document document) {
         docId = document.getId();
     }
 
@@ -145,15 +144,15 @@ public class DocumentController {
         if ("fileName".equals(searchBy)) {// ถ้า searchby มีค่าเท่ากับ fileName
             document = documentSearchService.searchByFileName(keyword, pageable);
         }
-        if("dateReceived".equals(searchBy)){// ถ้า searchby มีค่าเท่ากับ dateReceived
-            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd" , Locale.US); // ทำการเเปลงรูปเเบบ date ให้อยู่ในรูปเเบบที่ database รองรับ Locale บอกว่าเราจะใช้ รูปเเบบของ us
+        if ("dateReceived".equals(searchBy)) {// ถ้า searchby มีค่าเท่ากับ dateReceived
+            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd", Locale.US); // ทำการเเปลงรูปเเบบ date ให้อยู่ในรูปเเบบที่ database รองรับ Locale บอกว่าเราจะใช้ รูปเเบบของ us
             Date date = sim.parse(keyword);
-            document = documentSearchService.searchByDeteIn(date ,date , pageable);
+            document = documentSearchService.searchByDeteIn(date, date, pageable);
         }
-        if("dateWork".equals(searchBy)){
-            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd" , Locale.US);
+        if ("dateWork".equals(searchBy)) {
+            DateFormat sim = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             Date date = sim.parse(keyword);
-            document = documentSearchService.searchByDateWork(date ,date , pageable);
+            document = documentSearchService.searchByDateWork(date, date, pageable);
         }
         return document;
 
@@ -168,11 +167,16 @@ public class DocumentController {
     @RequestMapping(value = "/getdocforcate", method = RequestMethod.GET)
     private Page<Document> getDocForCate(Pageable pageable) {
         return documentSearchService.searchByCateLike(category, pageable);
-       
+
     }
 
     @RequestMapping(value = "/gettotalrow", method = RequestMethod.GET)
     private Long getTotalRow() {
+        return documentRepo.count();
+    }
+    
+    @RequestMapping(value = "/gettotalrowreportup",method = RequestMethod.GET)
+    private long getTotalRowReportUp(){
         return documentRepo.count();
     }
 
@@ -193,33 +197,34 @@ public class DocumentController {
         return count;
     }
 
-    
     //======================================================================================//
-    @RequestMapping(value = "/getuserupload" , method = RequestMethod.GET)
-    private User getUserUpload(){
-    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    return userRepo.findOne(user.getId());
+    @RequestMapping(value = "/getuserupload", method = RequestMethod.GET)
+    private User getUserUpload() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepo.findOne(user.getId());
     }
-    
+
     @RequestMapping(value = "/getuploadhistory")
     private Page<Document> uploadHistory(Pageable pageable) {
-       User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      return documentRepo.findByUserrOrderByIdDesc(user, pageable);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return documentRepo.findByUserrOrderByIdDesc(user, pageable);
     }
-     
+
     //===================pagsearch===================================================================//
-    
-    
     @RequestMapping(value = "/countdocforcate", method = RequestMethod.GET)
-    private Long countDoucumentForCategory (){
+    private Long countDoucumentForCategory() {
         return documentRepo.count(DocumentSpec.docForCategory(category));
     }
-    
-    
+
     //===================pagsearchuserupload===================================================================//
     @RequestMapping(value = "/countdocforuser", method = RequestMethod.GET)
-    private Long countDocumentForUser(){
-         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    private Long countDocumentForUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return documentRepo.count(DocumentSpec.docForUser(user.getUserName()));
+    }
+
+    @RequestMapping(value = "/countdocusecategory", method = RequestMethod.POST)
+    private Long countDocUseCategory(@RequestBody Category category) {
+        return new Long(documentRepo.findByCategory(category).size());
     }
 }

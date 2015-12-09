@@ -7,7 +7,7 @@ angular.module('docforcategory').controller('docforcateController', function ($h
     $scope.documents = {};
     var totalRow = 0;
     $scope.user = {};
-    
+
     getUserUpload();
     function getUserUpload() {
         $http.get('/getuserupload').success(function (data) {
@@ -15,8 +15,6 @@ angular.module('docforcategory').controller('docforcateController', function ($h
             // console.log(data.status+'userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
         });
     }
-
-
 
     $scope.checkViewUser = function (doc) {
         // console.log($scope.documents.content[0] + 'hellooooooooooooooooooooooooo');
@@ -35,20 +33,6 @@ angular.module('docforcategory').controller('docforcateController', function ($h
 
     };
 
-    countDocForCategory();
-    function countDocForCategory() {
-        $http.get('/countdocforcate').success(function (data) {
-            totalRow = data;
-            findPage();
-            if ($scope.page == 0) {
-                $('#prePage , #firstPage').addClass('disabled');
-            }
-            if ($scope.page == totalPage - 1) {
-                $('#nextPage , #finalPage').addClass('disabled');
-            }
-        });
-    }
-
     function getDocuments() {
         $http.get('/getdocforcate', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.documents = data;
@@ -63,8 +47,6 @@ angular.module('docforcategory').controller('docforcateController', function ($h
     $scope.dowload = function (dld) {
         location.href = '/getfile/' + dld.file.id;
     };
-
-
 
     $scope.search = function () {
         $http.post('/searchdocument', $scope.searchData).success(function (data) {
@@ -81,6 +63,21 @@ angular.module('docforcategory').controller('docforcateController', function ($h
         getDocuments();
         findPage();
     };
+
+
+    countDocForCategory();
+    function countDocForCategory() {
+        $http.get('/countdocforcate').success(function (data) {
+            totalRow = data;
+            findPage();
+            if ($scope.page == 0) {
+                $('#prePage , #firstPage').addClass('disabled');
+            }
+            if ($scope.page == totalPage - 1) {
+                $('#nextPage , #finalPage').addClass('disabled');
+            }
+        });
+    }
 
 
     var totalPage = 0;

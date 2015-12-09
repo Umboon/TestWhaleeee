@@ -34,6 +34,7 @@ var app = angular.module('document').controller('documentController', function (
 
     };
 
+    
     if (!!$scope.document.category) {
         getCategory($scope.document.category.id);
     }

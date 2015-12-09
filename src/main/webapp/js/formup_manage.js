@@ -34,9 +34,11 @@ angular.module('formup_manage').controller('formupmanageController', function ($
     };
 
     $scope.selectSizeForm = function () {
+        $scope.page = 0;
         getFormTopic();
-        findPage();
+        getTotalRow();
     };
+
     getTotalRow();
     function getTotalRow() {
         $http.get('/gettotalrowform').success(function (data) {
@@ -50,21 +52,22 @@ angular.module('formup_manage').controller('formupmanageController', function ($
             }
         });
     }
-    ;
+
     function findPage() {
         var result = parseInt(totalRow / $scope.size);
         if ((totalRow % $scope.size) != 0) {
             result++;
         }
         totalPage = result;
-        //  console.log(totalPage + 'totalPage');
     }
 
     $scope.firstPage = function () {
-        $scope.page = 0;
-        getFormTopic();
-        $('#prePage , #firstPage').addClass('disabled');
-        $('#nextPage , #finalPage').removeClass('disabled');
+        if (!$('#prePage').hasClass('disabled')) {
+            $scope.page = 0;
+            getFormTopic();
+            $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage , #finalPage').removeClass('disabled');
+        }
     };
 
     $scope.prePage = function () {
@@ -73,8 +76,9 @@ angular.module('formup_manage').controller('formupmanageController', function ($
             getFormTopic();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-                $('#nextPage , #finalPage').removeClass('disabled');
             }
+            $('#nextPage , #finalPage').removeClass('disabled');
+
         }
     };
 
@@ -84,16 +88,19 @@ angular.module('formup_manage').controller('formupmanageController', function ($
             getFormTopic();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
-                $('#prePage , #firstPage').removeClass('disabled');
             }
+            $('#prePage , #firstPage').removeClass('disabled');
+
         }
     };
 
     $scope.finalPage = function () {
-        $scope.page = totalPage - 1;
-        getFormTopic();
-        $('#nextPage , #finalPage').addClass('disabled');
-        $('#prePage , #firstPage').removeClass('disabled');
+        if (!$('#nextPage').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+            getFormTopic();
+            $('#nextPage , #finalPage').addClass('disabled');
+            $('#prePage , #firstPage').removeClass('disabled');
+        }
     };
 
 
@@ -111,7 +118,7 @@ angular.module('formup_manage').controller('formupmanageController', function ($
 //    };
 
 
-  $('body').css('overflowY','scroll');
+    $('body').css('overflowY', 'scroll');
 
 });
 

@@ -38,20 +38,20 @@ public class FormTopicController {
     @Autowired
     private FormFileRepo formFileRepo;
     
-    @RequestMapping(value = "/saveformtopic" ,method = RequestMethod.POST)
-    private void saveFormTopic(@Validated @RequestBody FormTopic formTopic){
+    @RequestMapping(value = "/saveformtopic", method = RequestMethod.POST)
+    private void saveFormTopic(@Validated @RequestBody FormTopic formTopic) {
         formTopicRepo.save(formTopic);
     }
     
     @RequestMapping(value = "/saveform", method = RequestMethod.POST)
     private FormFile saveForm(MultipartRequest form) throws IOException {
-        System.out.println("------------------------------->"+form.getFile("forms").getContentType());
+        System.out.println("------------------------------->" + form.getFile("forms").getContentType());
         FormFile formfile = new FormFile();
         formfile.setFormName(form.getFile("forms").getOriginalFilename());
         formfile.setMimeType(form.getFile("forms").getContentType());
         formfile.setContent(form.getFile("forms").getBytes());
         return formfile;
-
+        
     }
     
     @RequestMapping(value = "/getfileform/{id}", method = RequestMethod.GET)
@@ -62,22 +62,27 @@ public class FormTopicController {
                 .body(new InputStreamResource(new ByteArrayInputStream(formfile.getContent())));
         return body;
     }
-
     
-    @RequestMapping(value = "/deleteformtopic",method = RequestMethod.POST)
-    private void deleteFormTopic(@RequestBody FormTopic formTopic){
+    @RequestMapping(value = "/deleteformtopic", method = RequestMethod.POST)
+    private void deleteFormTopic(@RequestBody FormTopic formTopic) {
         formTopicRepo.delete(formTopic);
     }
     
     @RequestMapping(value = "/getformtopic", method = RequestMethod.GET)
-    private Page<FormTopic> getFormTopic(Pageable pageable){
+    private Page<FormTopic> getFormTopic(Pageable pageable) {
         return formTopicRepo.findAllByOrderByIdDesc(pageable);
     }
     
-    @RequestMapping(value = "/gettotalrowform",method = RequestMethod.GET)
-    private Long getTotalRowForm(){
+    @RequestMapping(value = "/gettotalrowform", method = RequestMethod.GET)
+    private long getTotalRowForm() {
         return formTopicRepo.count();
     }
     
+    @RequestMapping(value = "/searchformtopicbyname", method = RequestMethod.POST)
+    private Long searchFormTopicByName(@RequestBody String name) {
+        System.out.println("----------------------------------------------------->>"+name);
+        System.out.println("------------------------------------------------>find : "+formTopicRepo.findByFormName(name).size());
+        return new Long(formTopicRepo.findByFormName(name).size());
+    }
     
 }

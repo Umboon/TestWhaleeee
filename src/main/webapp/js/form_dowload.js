@@ -13,16 +13,17 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
             $scope.formfiles = data;
         });
     }
-    
-    $scope.getFormTopic = function (){
+
+    $scope.getFormTopic = function () {
         getFormTopic();
     };
-    
-    $scope.selectSizeForm = function (){
+
+    $scope.selectSizeForm = function () {
+        $scope.page = 0;
         getFormTopic();
-        findPage();
+        getTotalRow();
     };
-    
+
     getTotalRow();
     function getTotalRow() {
         $http.get('/gettotalrowform').success(function (data) {
@@ -36,32 +37,34 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
             }
         });
     }
-    
+
     function findPage() {
         var result = parseInt(totalRow / $scope.size);
         if ((totalRow % $scope.size) != 0) {
             result++;
         }
         totalPage = result;
-    
+
     }
-    
-     $scope.firstPage = function () {
-        $scope.page = 0;
-        getFormTopic();
-        $('#prePage , #firstPage').addClass('disabled');
-        $('#nextPage , #finalPage').removeClass('disabled');
+
+    $scope.firstPage = function () {
+        if (!$('#prePage').hasClass('disabled')) {
+            $scope.page = 0;
+            getFormTopic();
+            $('#prePage , #firstPage').addClass('disabled');
+            $('#nextPage , #finalPage').removeClass('disabled');
+        }
     };
 
     $scope.prePage = function () {
         if (!$('#prePage').hasClass('disabled')) {
             $scope.page--;
             getFormTopic();
-            getTotalRow();
             if ($scope.page == 0) {
                 $('#prePage , #firstPage').addClass('disabled');
-                $('#nextPage , #finalPage').removeClass('disabled');
             }
+            $('#nextPage , #finalPage').removeClass('disabled');
+
         }
     };
 
@@ -71,16 +74,19 @@ angular.module('form_dowload').controller('formdowloadController', function ($ht
             getFormTopic();
             if ($scope.page == totalPage - 1) {
                 $('#nextPage , #finalPage').addClass('disabled');
-                $('#prePage , #firstPage').removeClass('disabled');
             }
+            $('#prePage , #firstPage').removeClass('disabled');
+
         }
     };
 
     $scope.finalPage = function () {
-        $scope.page = totalPage - 1;
-        getFormTopic();
-        $('#nextPage , #finalPage').addClass('disabled');
-        $('#prePage , #firstPage').removeClass('disabled');
+        if (!$('#nextPage').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+            getFormTopic();
+            $('#nextPage , #finalPage').addClass('disabled');
+            $('#prePage , #firstPage').removeClass('disabled');
+        }
     };
 
 

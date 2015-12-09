@@ -1,13 +1,16 @@
 .btn:active{
     position: relative;
     top: 2px;
+    /*ทำปุ่มขยับเวลากด*/
 }
 select.ui-datepicker-year{
     color: black;
+    /*เปลี่ยนสี่ตัวเลขของปีในปฏิทิน*/
 }
 
 #firstPage:hover,#prePage:hover,#nextPage:hover,#finalPage:hover{
     cursor: pointer;
+    /*เวลาใช้เมาส์ชี้ที่แถบเมนูจะเป็นรูปมือแทนเคอร์เซอร์*/
 }
 .form-control{
     background-size: 0 2px,100% 2px;
