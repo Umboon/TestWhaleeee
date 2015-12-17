@@ -27,7 +27,7 @@ public class FormFile implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column
+    @Column(nullable = false)
     @NotBlank(message = "กรุณาเลือกไฟล์")
     private String formName;
 

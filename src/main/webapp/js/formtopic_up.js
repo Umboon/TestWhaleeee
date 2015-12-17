@@ -7,18 +7,17 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
 
     $scope.saveFormTopic = function () {
         $scope.topicform.file = $scope.form;
-        console.log($scope.topicform.file.formName+'...llllllll')
         $http.post('/searchformtopicbyname', $scope.topicform.formName).success(function (dataform) {
             if (dataform == 0 || dataform == undefined) {
-                if ($scope.topicform.file.formName != undefined) {
+                if($scope.topicform.file.formName != undefined){
                     $http.post('/saveformtopic', $scope.topicform).success(function (data) {
-                        getFormTopic();
-                        $scope.clearForm();//เรียกใช้ ฟังก์ชั่น clearForm เพื่อเคลียร์ข้อมูลที่บันทึกไปแล้ว
-                        $("#complete-dialog-saveformtopic").modal('show');//แสดงไดอะล็อก"บันทึกสำเร็จ"         
-                    });
-              }
+                    getFormTopic();
+                    $scope.clearForm();//เรียกใช้ ฟังก์ชั่น clearForm เพื่อเคลียร์ข้อมูลที่บันทึกไปแล้ว
+                    $("#complete-dialog-saveformtopic").modal('show');//แสดงไดอะล็อก"บันทึกสำเร็จ"
+                });
+                }
                 else{
-                   growl("กรุณาเพิ่มไฟล์", 'msg-red', 'top'); 
+                     growl("กรุณาเพิ่มไฟล์ข้อมูล", 'msg-red', 'top');
                 }
             }
             else {
@@ -29,7 +28,8 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
             growl("กรุณากรอกข้อมูลแบบฟอร์ม", 'msg-red', 'top');
         });
 
-//       if (!!$scope.ferror.violations.file) {
+
+//        if (!!$scope.ferror.violations.file) {
 //            $scope.ferror.violations.file.message = "";
 //        }
         $("#formdoc").val("");
