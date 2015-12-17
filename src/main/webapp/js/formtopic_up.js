@@ -7,27 +7,33 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
 
     $scope.saveFormTopic = function () {
         $scope.topicform.file = $scope.form;
-        $http.post('/searchformtopicbyname',$scope.topicform.formName).success(function (dataform){
-            if(dataform == 0 || dataform == undefined){
-                $http.post('/saveformtopic', $scope.topicform).success(function (data) {
-            getFormTopic();
-            $scope.clearForm();//เรียกใช้ ฟังก์ชั่น clearForm เพื่อเคลียร์ข้อมูลที่บันทึกไปแล้ว
-            $("#complete-dialog-saveformtopic").modal('show');//แสดงไดอะล็อก"บันทึกสำเร็จ"
-        });
+        console.log($scope.topicform.file.formName+'...llllllll')
+        $http.post('/searchformtopicbyname', $scope.topicform.formName).success(function (dataform) {
+            if (dataform == 0 || dataform == undefined) {
+                if ($scope.topicform.file.formName != undefined) {
+                    $http.post('/saveformtopic', $scope.topicform).success(function (data) {
+                        getFormTopic();
+                        $scope.clearForm();//เรียกใช้ ฟังก์ชั่น clearForm เพื่อเคลียร์ข้อมูลที่บันทึกไปแล้ว
+                        $("#complete-dialog-saveformtopic").modal('show');//แสดงไดอะล็อก"บันทึกสำเร็จ"         
+                    });
+              }
+                else{
+                   growl("กรุณาเพิ่มไฟล์", 'msg-red', 'top'); 
+                }
             }
-            else{
+            else {
                 growl("ชื่อเเบบฟอร์มซ้ำ", 'msg-red', 'top');
             }
         }).error(function (data) {
             $scope.ferror = data;
             growl("กรุณากรอกข้อมูลแบบฟอร์ม", 'msg-red', 'top');
         });
-       
-        
-//        if (!!$scope.ferror.violations.file) {
+
+//       if (!!$scope.ferror.violations.file) {
 //            $scope.ferror.violations.file.message = "";
 //        }
         $("#formdoc").val("");
+        $scope.form = {};
     };
 
     $scope.formfiles = {};
@@ -43,7 +49,7 @@ var dow = angular.module('formtopic_up').controller('formtopicupController', fun
         $scope.topicform = {};
         //$scope.formfiles = {};
     };
-    
+
     getUserUpload();
     function getUserUpload() {
         $http.get('/getuserupload').success(function (data) {
